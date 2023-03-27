@@ -8,5 +8,11 @@ const authApi = {
       password,
     });
   },
+  register(phone, password) {
+    return mainAxios.post("register", {
+      phone,
+      password,
+    });
+  },
 };
 export default authApi;

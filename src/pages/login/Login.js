@@ -54,7 +54,7 @@ const Login = (props) => {
     <div className="login">
       <div className="login__container">
         <div className="login__title">
-          <h3 className="login__title__sub">Đăng nhập để tiếp tục</h3>
+          <h3 className="login__title__main">Đăng nhập để tiếp tục</h3>
         </div>
         <div className="login__input">
           <InputAuthen

@@ -1,0 +1,44 @@
+@use '../../scss/' as *;
+
+.confirmOTP{
+    @include flex(center,center);
+    height: 100vh;
+    width: 100%;
+    &__container{
+        max-width: 600px;
+        border: 2px solid $primary-color;
+        border-radius: 1rem;
+        padding: 2rem 3rem;
+    }
+}
+.confirmOTP__title__main {
+    text-align: center;
+    color: $text-color;
+    letter-spacing: 1px;
+    font-weight: 600;
+    font-size: 2rem;
+    margin: 0 0 8px;
+}
+
+.confirmOTP__title__sub {
+    font-size: 1rem;
+    font-weight: 400;
+    text-align: center;
+    margin: 0 0 16px;
+    color: $text-muted;
+}
+
+.confirmOTP__resend__link {
+    @include flex(center, center);
+
+    p {
+        margin-right: 10px;
+        font-weight: 300;
+        color: rgb(122, 122, 122)
+    }
+
+    .confirmOTP__resend__link__text {
+        text-decoration-line: underline;
+        color: $primary-color;
+    }
+}
