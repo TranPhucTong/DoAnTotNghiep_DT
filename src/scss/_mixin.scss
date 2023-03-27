@@ -1,0 +1,17 @@
+@mixin flex($align-item, $justify-content) {
+    display: flex;
+    justify-content: $justify-content;
+    align-items: $align-item;
+}
+
+@mixin opacity($name, $valueFrom, $valueTo) {
+    @keyframes #{$name} {
+        from {
+            opacity: $valueFrom
+        }
+
+        to {
+            opacity: $valueTo
+        }
+    }
+}

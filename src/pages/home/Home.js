@@ -11,11 +11,14 @@ import SwiperCore, {
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/swiper-bundle.css";
 import "swiper/swiper-bundle.min.css";
+import { useNavigate } from "react-router-dom";
 
 SwiperCore.use([Navigation, Pagination, Scrollbar, A11y, Autoplay]);
 
 const Home = ({ items }) => {
   const [isOpen, setIsOpen] = useState(false);
+
+  const navigate = useNavigate();
 
   const handleMouseEnter = () => {
     setIsOpen(true);
@@ -23,6 +26,13 @@ const Home = ({ items }) => {
 
   const handleMouseLeave = () => {
     setIsOpen(false);
+  };
+
+  const loginHandle = () => {
+    navigate("/login");
+  };
+  const registerHandle = () => {
+    navigate("/register");
   };
   return (
     <div>
@@ -88,10 +98,16 @@ const Home = ({ items }) => {
             </button>
           </div>
           <div>
-            <button className="bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded mr-2">
+            <button
+              onClick={loginHandle}
+              className="bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded mr-2"
+            >
               Log in
             </button>
-            <button className="bg-gray-800 hover:bg-gray-700 text-white py-2 px-4 rounded">
+            <button
+              onClick={registerHandle}
+              className="bg-gray-800 hover:bg-gray-700 text-white py-2 px-4 rounded"
+            >
               Sign up
             </button>
           </div>

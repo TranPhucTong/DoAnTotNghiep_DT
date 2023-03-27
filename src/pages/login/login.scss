@@ -1,0 +1,119 @@
+@use '../../scss/' as *;
+
+.login{
+    height: 100vh;
+    @include flex(center,center);
+    &__container{
+        padding: 2.4rem 3.2rem;
+        border: 2px solid $primary-color;
+        border-radius: 1rem;
+    }
+}
+.login__link__text {
+    text-decoration: underline;
+    color: $primary-color;
+}
+
+.login__title {
+    width: 100%;
+    @include flex(center, center);
+    flex-direction: column;
+}
+
+.login__input {
+    margin: 30px 0;
+}
+
+.login__title__main {
+    text-align: center;
+    color: $text-color;
+    letter-spacing: 1px;
+    font-weight: 600;
+    font-size: 2.5rem;
+    margin: 0 0 8px;
+}
+
+.login__title__sub {
+    font-size: $font-size-normal;
+    font-weight: 400;
+    text-align: center;
+    margin: 0 0 16px;
+    color: $text-muted;
+}
+
+.checkbox-div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-right: 1rem;
+}
+
+.combo-check {
+    display: flex;
+}
+
+.checkbox {
+    height: 15px;
+    width: 15px;
+    background-color: $primary-color;
+
+    &:checked {
+        filter: hue-rotate(240deg);
+    }
+}
+
+.remember {
+    font-size: 1rem;
+    font-weight: 600;
+    color: $text-color;
+}
+
+
+
+
+
+.login__descript {
+    @include flex(center, center);
+    margin: 20px 0;
+
+    .line {
+        width: 35%;
+        height: 0.7px;
+        background-color: #797C8C;
+    }
+
+    span {
+        color: $text-color;
+        margin: 0 5px;
+        font-weight: 300;
+        font-size: $font-size-normal;
+    }
+}
+
+.login__btn-link {
+    @include flex(center, space-between);
+    margin-bottom: 40px;
+
+}
+
+.login__link {
+    @include flex(center, center);
+
+    p {
+        margin-right: 10px;
+        font-weight: 300;
+        color: rgb(122, 122, 122)
+    }
+}
+
+.button_authen__wrapper {
+    margin-top: 20px;
+}
+
+.login__link__text {
+    text-decoration-line: underline;
+}
+
+// .Toastify__progress-bar-theme--light{
+//     background: $primary-color !important;
+// }
