@@ -1,9 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { login } from "../actions/authAction";
+import RegisterInfo from "../../pages/register-info/RegisterInfo";
+import { login, register, registerInfo } from "../actions/authAction";
 let customer = JSON.parse(localStorage.getItem("customer"));
-if (customer) {
-  customer = customer.customer;
-}
 
 const initialState = customer
   ? { isLoggedIn: true, customer: customer }
@@ -43,8 +41,23 @@ const customerSlice = createSlice({
       state.customer = customer;
       localStorage.setItem("access_token", accessToken);
     },
+    [register.fulfilled]: (state, action) => {
+      console.log(action.payload.data);
+      if (!action.payload.data) return;
+      const { phone } = action.payload.data;
+      state.customer.phone = phone;
+    },
+    [registerInfo.fulfilled]: (state, action) => {
+      if (!action.payload.data.customer) return;
+      const { customer, accessToken } = action.payload.data;
+      state.isLoggedIn = true;
+      state.customer = customer;
+      localStorage.setItem("access_token", accessToken);
+    },
   },
 });
 
-export const customerActions = customerSlice.actions;
+export const selectCustomer = (state) =>
+  state.customer ? state.customer : null;
+export const { setLogin } = customerSlice.actions;
 export default customerSlice;

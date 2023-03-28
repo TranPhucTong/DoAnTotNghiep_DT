@@ -14,5 +14,8 @@ const authApi = {
       password,
     });
   },
+  registerInfo(info) {
+    return mainAxios.post("register-info", info);
+  },
 };
 export default authApi;

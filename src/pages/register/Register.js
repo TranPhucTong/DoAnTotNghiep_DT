@@ -49,8 +49,9 @@ const Register = (props) => {
       toast.error("Nhập mật khẩu không khớp");
       return;
     }
+
     const res = await dispatch(checkIsPhone(username));
-    if (!res.payload.data) {
+    if (res.payload.status === 201) {
       generateRecapcha();
       const appVerifier = window.recaptchaVerifier;
       console.log(`+84${username}`);
@@ -72,9 +73,8 @@ const Register = (props) => {
       .confirm(otp)
       .then(async (result) => {
         const res = await dispatch(register({ username, password }));
-        console.log("res: ", res);
         if (res.payload.status === 200) {
-          navigate("/");
+          navigate("info");
         } else {
           toast.error("Đăng kí thất bại");
         }

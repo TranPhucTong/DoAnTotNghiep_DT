@@ -24,17 +24,14 @@ export const register = createAsyncThunk(
   }
 );
 
-export const registerInfo = createAsyncThunk(
-  "/register/info",
-  async ({ user }) => {
-    try {
-      const response = await authApi.registerInfomation(user);
-      return { data: response.data, status: response.status };
-    } catch (error) {
-      console.log(error);
-    }
+export const registerInfo = createAsyncThunk("/register-info", async (info) => {
+  try {
+    const response = await authApi.registerInfo(info);
+    return { data: response.data, status: response.status };
+  } catch (error) {
+    console.log(error);
   }
-);
+});
 
 export const registerVerify = createAsyncThunk(
   "/register/verify",

@@ -3,6 +3,10 @@
 .input-authen {
     margin: 0 0 16px;
     position: relative;
+    &__gender{
+        display:block;
+        text-align: left;
+    }
 }
 
 .input-authen div {
