@@ -21,9 +21,9 @@ const RegisterInfo = (props) => {
   const sCustomer = useSelector(selectCustomer);
 
   const submitHandle = async () => {
-    console.log(sCustomer.phone);
+    console.log(sCustomer);
     const info = {
-      phone: sCustomer.phone,
+      phone: sCustomer.customer.phone,
       name,
       birthDate: birthDay,
       gender,

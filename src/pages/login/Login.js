@@ -3,9 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import ButtonAuthen from "../../components/button/ButtonAuthen";
 import InputAuthen from "../../components/input/InputAuthen";
-// import { login, profile } from "../../store/userSlice";
 import "./login.scss";
-// import authApi from "../../api/authApi";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import authApi from "../../api/authApi";
@@ -29,7 +27,6 @@ const Login = (props) => {
 
   const submitHandle = async () => {
     const res = await dispatch(login({ username, password }));
-    console.log(res);
     if (res.payload.status === 200) {
       setTimeout(() => {
         navigate("/");

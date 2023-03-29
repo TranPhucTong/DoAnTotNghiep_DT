@@ -72,7 +72,10 @@ const Register = (props) => {
     confirmationResult
       .confirm(otp)
       .then(async (result) => {
+        console.log("xac thuc otp");
         const res = await dispatch(register({ username, password }));
+        console.log("xac thuc otp:", res);
+
         if (res.payload.status === 200) {
           navigate("info");
         } else {
@@ -80,6 +83,7 @@ const Register = (props) => {
         }
       })
       .catch((error) => {
+        console.log(error);
         if (error) {
           toast.error("Mã OTP không đúng");
         }

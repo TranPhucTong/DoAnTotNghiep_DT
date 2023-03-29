@@ -1,6 +1,6 @@
 import { mainAxios } from "./axiosConfig";
 
-const url = "/login";
+const url = "login";
 const authApi = {
   login(phone, password) {
     return mainAxios.post(url, {
