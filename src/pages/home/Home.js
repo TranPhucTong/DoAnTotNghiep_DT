@@ -1,4 +1,10 @@
 import React from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faCoffee,
+  faRightLong,
+  faChevronCircleRight,
+} from "@fortawesome/free-solid-svg-icons";
 import "./style.css";
 import { useState } from "react";
 import SwiperCore, {
@@ -11,7 +17,16 @@ import SwiperCore, {
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/swiper-bundle.css";
 import "swiper/swiper-bundle.min.css";
-
+import Slider1 from "../../components/Slider/Slider1";
+import EmployeeSlider from "../../components/SliderEmployee/EmployeeSlider";
+import Field from "../../components/Field/Field";
+import ButtonHire from "../../components/Button/Button-Hire/ButtonHire";
+import Freelancer from "../../components/Freelancer/Freelancer";
+import Publication from "../../components/Publications/Publications";
+import ReviewSlider from "../../components/SliderCustomer/ReviewSlider ";
+import TypingEffect from "../../components/TypingEffect/TypingEffect";
+import Footer from "../../components/Footer/Footer";
+import logoCompany from "../../images/logoCompany.png";
 SwiperCore.use([Navigation, Pagination, Scrollbar, A11y, Autoplay]);
 
 const Home = ({ items }) => {
@@ -26,12 +41,12 @@ const Home = ({ items }) => {
   };
   return (
     <div>
-      <div className="bg-gray-900 text-white fixed top-0 left-0 right-0 w-full">
+      <div className="bg-gray-900 text-white fixed top-0 left-0 right-0 w-full z-30">
         <div className="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8 flex items-center justify-between">
           <a href="" className="flex items-center">
             <img
-              className="h-8 w-auto mr-2"
-              src="https://cdn.dribbble.com/userupload/2448241/file/original-1b79894ad585eeef18ec5198716059ce.png?compress=1&resize=1024x768"
+              className="h-8 w-auto mr-2 rounded-lg"
+              src={logoCompany}
               alt="Logo"
             />
             <span className="text-xl font-semibold">CodeHire</span>
@@ -97,6 +112,33 @@ const Home = ({ items }) => {
           </div>
         </div>
       </div>
+
+      <div>
+        <Slider1 />
+      </div>
+
+      <div className="container mx-auto mt-8 px-20 mb-8">
+        <EmployeeSlider />
+      </div>
+
+      <div className="container mx-auto mt-20 px-20 mb-8">
+        <Field />
+      </div>
+
+      <div className="container mx-auto mt-20 px-20 mb-8">
+        <Freelancer />
+      </div>
+
+      <div className="container mx-auto mt-20 px-20 mb-8">
+        <Publication />
+      </div>
+
+      <div className="container mx-auto mt-20 px-20 mb-8">
+        <ReviewSlider />
+      </div>
+
+      <Footer/>
+      
     </div>
   );
 };
