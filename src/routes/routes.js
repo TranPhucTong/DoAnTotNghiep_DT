@@ -5,6 +5,7 @@ import PersonalRental from "../pages/freelancer/FreelancerPage";
 import RegisterInfo from "../pages/register-info/RegisterInfo";
 import Register from "../pages/register/Register";
 import FreelancerPage from "../pages/freelancer/FreelancerPage";
+import InfoFreelancer from "../pages/info-freelancer/InfoFreelancer";
 const mainRoutes = [
   {
     path: configRoutes.home,
@@ -25,6 +26,10 @@ const mainRoutes = [
   {
     path: configRoutes.freelancers,
     component: FreelancerPage,
+  },
+  {
+    path: configRoutes.infoFreelancers,
+    component: InfoFreelancer,
   },
 ];
 

@@ -8,6 +8,9 @@ module.exports = {
       colors: {
         primary: "rgb(34, 197, 94)",
       },
+      gridTemplateRows: {
+        "[auto,auto,1fr]": "auto auto 1fr",
+      },
     },
   },
   plugins: [require("@tailwindcss/aspect-ratio")],

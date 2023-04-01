@@ -1,8 +1,6 @@
 import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
-  faCoffee,
-  faRightLong,
   faStar,
   faChevronCircleRight,
 } from "@fortawesome/free-solid-svg-icons";
@@ -55,61 +53,67 @@ export const freelancers = [
   },
 ];
 
-export const FreelancerCard = ({ freelancer }) => (
-  <a
-    href={freelancer.href}
-    className="flex flex-col cursor-pointer border-[1px] rounded-xl border-gray-200 hover:shadow-xl transition-all duration-300 ease-out hover:text-[#00bdd6] shadow-md"
-  >
-    <div className="p-6">
-      <div className="w-full h-[200px] mb-5">
-        <img
-          src={freelancer.imgBG}
-          className="rounded-lg w-full h-full object-cover"
-          alt={freelancer.name}
-        />
-      </div>
+export const FreelancerCard = ({ freelancer }) => {
+  const router = useNavigate();
+  const getFreelancerHandle = () => {
+    router(configRoutes.infoFreelancers);
+  };
+  return (
+    <a
+      onClick={getFreelancerHandle}
+      className="flex flex-col cursor-pointer border-[1px] rounded-xl border-gray-200 hover:shadow-xl transition-all duration-300 ease-out hover:text-[#00bdd6] shadow-md"
+    >
+      <div className="p-6">
+        <div className="w-full h-[200px] mb-5">
+          <img
+            src={freelancer.imgBG}
+            className="rounded-lg w-full h-full object-cover"
+            alt={freelancer.name}
+          />
+        </div>
 
-      <div className="flex items-center gap-2 mb-4">
-        <img
-          src={freelancer.imgAvt}
-          className="w-8 h-8 rounded-full"
-          alt={freelancer.name}
-        />
-        <h2 className="font-bold text-[22px] text-yellow-500">
-          {freelancer.name}
-        </h2>
-      </div>
-      <p className="text-left mb-4">{freelancer.text}</p>
-      <div className="flex justify-between items-center">
-        <div className="flex">
-          <FontAwesomeIcon
-            className="font-semibold cursor-pointer text-green-500"
-            icon={faStar}
+        <div className="flex items-center gap-2 mb-4">
+          <img
+            src={freelancer.imgAvt}
+            className="w-8 h-8 rounded-full"
+            alt={freelancer.name}
           />
-          <FontAwesomeIcon
-            className="font-semibold cursor-pointer text-green-500"
-            icon={faStar}
-          />
-          <FontAwesomeIcon
-            className="font-semibold cursor-pointer text-green-500"
-            icon={faStar}
-          />
-          <FontAwesomeIcon
-            className="font-semibold cursor-pointer text-green-500"
-            icon={faStar}
-          />
-          <FontAwesomeIcon
-            className="font-semibold cursor-pointer text-green-500"
-            icon={faStar}
-          />
+          <h2 className="font-bold text-[22px] text-yellow-500">
+            {freelancer.name}
+          </h2>
         </div>
-        <div className="text-[#00bdd6] font-bold text-xl">
-          {freelancer.price}
+        <p className="text-left mb-4">{freelancer.text}</p>
+        <div className="flex justify-between items-center">
+          <div className="flex">
+            <FontAwesomeIcon
+              className="font-semibold cursor-pointer text-green-500"
+              icon={faStar}
+            />
+            <FontAwesomeIcon
+              className="font-semibold cursor-pointer text-green-500"
+              icon={faStar}
+            />
+            <FontAwesomeIcon
+              className="font-semibold cursor-pointer text-green-500"
+              icon={faStar}
+            />
+            <FontAwesomeIcon
+              className="font-semibold cursor-pointer text-green-500"
+              icon={faStar}
+            />
+            <FontAwesomeIcon
+              className="font-semibold cursor-pointer text-green-500"
+              icon={faStar}
+            />
+          </div>
+          <div className="text-[#00bdd6] font-bold text-xl">
+            {freelancer.price}
+          </div>
         </div>
       </div>
-    </div>
-  </a>
-);
+    </a>
+  );
+};
 
 function Freelancer() {
   const navigate = useNavigate();

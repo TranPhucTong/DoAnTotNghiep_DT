@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { FreelancerCard } from '../Freelancer'
 const freelancers = [
   {
@@ -9,7 +9,7 @@ const freelancers = [
     name: "Tong Taddy",
     text: "Tôi chuyên thiết kế những trang web trẻ trung, hiện đại giao diện thân thiện với người dùng ",
     price: "$230",
-    href: "https://www.facebook.com/profile.php?id=100084368642280",
+  
   },
   {
     id: 2,
@@ -20,7 +20,7 @@ const freelancers = [
     name: "Danh Taddy",
     text: "Nếu bạn thích sự đơn giản tối ưu hãy tìm đến tôi. Tôi sẽ giúp bạn hoàn thiện sản phẩm của mình",
     price: "$130",
-    href: "https://www.facebook.com/profile.php?id=100084368642280",
+  
   },
   {
     id: 3,
@@ -30,7 +30,7 @@ const freelancers = [
     name: "Chanh Taddy",
     text: "Tôi chuyên thiết kế những trang web trẻ trung, hiện đại giao diện thân thiện với người dùng ",
     price: "$230",
-    href: "https://www.facebook.com/profile.php?id=100084368642280",
+  
   },
   {
     id: 4,
@@ -41,7 +41,7 @@ const freelancers = [
     name: "Hoang Taddy",
     text: "Nếu bạn thích sự đơn giản tối ưu hãy tìm đến tôi. Tôi sẽ giúp bạn hoàn thiện sản phẩm của mình",
     price: "$430",
-    href: "https://www.facebook.com/profile.php?id=100084368642280",
+  
   },
   {
     id: 1,
@@ -51,7 +51,7 @@ const freelancers = [
     name: "Tong Taddy",
     text: "Tôi chuyên thiết kế những trang web trẻ trung, hiện đại giao diện thân thiện với người dùng ",
     price: "$230",
-    href: "https://www.facebook.com/profile.php?id=100084368642280",
+  
   },
   {
     id: 2,
@@ -62,7 +62,7 @@ const freelancers = [
     name: "Danh Taddy",
     text: "Nếu bạn thích sự đơn giản tối ưu hãy tìm đến tôi. Tôi sẽ giúp bạn hoàn thiện sản phẩm của mình",
     price: "$130",
-    href: "https://www.facebook.com/profile.php?id=100084368642280",
+  
   },
   {
     id: 3,
@@ -72,7 +72,7 @@ const freelancers = [
     name: "Chanh Taddy",
     text: "Tôi chuyên thiết kế những trang web trẻ trung, hiện đại giao diện thân thiện với người dùng ",
     price: "$230",
-    href: "https://www.facebook.com/profile.php?id=100084368642280",
+  
   },
   {
     id: 4,
@@ -83,7 +83,7 @@ const freelancers = [
     name: "Hoang Taddy",
     text: "Nếu bạn thích sự đơn giản tối ưu hãy tìm đến tôi. Tôi sẽ giúp bạn hoàn thiện sản phẩm của mình",
     price: "$430",
-    href: "https://www.facebook.com/profile.php?id=100084368642280",
+  
   },
   {
     id: 1,
@@ -93,7 +93,7 @@ const freelancers = [
     name: "Tong Taddy",
     text: "Tôi chuyên thiết kế những trang web trẻ trung, hiện đại giao diện thân thiện với người dùng ",
     price: "$230",
-    href: "https://www.facebook.com/profile.php?id=100084368642280",
+  
   },
   {
     id: 2,
@@ -104,7 +104,7 @@ const freelancers = [
     name: "Danh Taddy",
     text: "Nếu bạn thích sự đơn giản tối ưu hãy tìm đến tôi. Tôi sẽ giúp bạn hoàn thiện sản phẩm của mình",
     price: "$130",
-    href: "https://www.facebook.com/profile.php?id=100084368642280",
+  
   },
   {
     id: 3,
@@ -114,7 +114,7 @@ const freelancers = [
     name: "Chanh Taddy",
     text: "Tôi chuyên thiết kế những trang web trẻ trung, hiện đại giao diện thân thiện với người dùng ",
     price: "$230",
-    href: "https://www.facebook.com/profile.php?id=100084368642280",
+  
   },
   {
     id: 4,
@@ -125,7 +125,7 @@ const freelancers = [
     name: "Hoang Taddy",
     text: "Nếu bạn thích sự đơn giản tối ưu hãy tìm đến tôi. Tôi sẽ giúp bạn hoàn thiện sản phẩm của mình",
     price: "$430",
-    href: "https://www.facebook.com/profile.php?id=100084368642280",
+  
   },
 ];
 

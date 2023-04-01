@@ -8,7 +8,8 @@ const FreelancerPage = () => {
   const changeCategoryHandle = (category)=>{
     setCategory(category)
   }
-  const defaultCategory = category ? category : "Tất cả"
+  
+  const defaultCategory = category ? category : "Tất cả";
   return (
     <div className="container my-5 mx-auto px-20">
       <ListCategory onChangeCategory={changeCategoryHandle}/>
@@ -17,7 +18,7 @@ const FreelancerPage = () => {
           <h3 className="text-5xl text-primary mb-4">{defaultCategory}</h3>
           <p className="text-xl font-thin tracking-wide text-gray-500 mb-8">Danh sách Freelancer của mảng {defaultCategory}</p>
        </div>
-        <ListFreelancer/>
+        <ListFreelancer />
       </div>
       <Pagination/>
       <div>
