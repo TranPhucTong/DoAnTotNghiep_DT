@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import ButtonAuthen from "../../components/button/button-authen/ButtonAuthen";
+import ButtonAuthen from "../../components/Button/button-authen/ButtonAuthen";
 import InputAuthen from "../../components/input/InputAuthen";
 import "./login.scss";
 import { ToastContainer, toast } from "react-toastify";

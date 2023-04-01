@@ -7,7 +7,7 @@ import {
   faChevronCircleRight,
 } from "@fortawesome/free-solid-svg-icons";
 import TypingEffect from "../TypingEffect/TypingEffect";
-import ButtonHire from "../button/Button-Hire/ButtonHire";
+import ButtonHire from "../Button/Button-Hire/ButtonHire";
 const freelancers = [
   {
     id: 1,

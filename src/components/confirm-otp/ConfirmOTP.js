@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import ButtonAuthen from "../button/button-authen/ButtonAuthen";
+import ButtonAuthen from "../Button/button-authen/ButtonAuthen";
 import InputAuthen from "../input/InputAuthen";
 import "./confirmOTP.scss";
 

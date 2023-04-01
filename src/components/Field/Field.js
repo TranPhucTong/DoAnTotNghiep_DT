@@ -1,7 +1,7 @@
 import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCoffee, faRightLong } from "@fortawesome/free-solid-svg-icons";
-import ButtonHire from "../button/Button-Hire/ButtonHire";
+import ButtonHire from "../Button/Button-Hire/ButtonHire";
 
 const fields = [
   {
