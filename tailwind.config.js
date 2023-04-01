@@ -4,7 +4,11 @@ module.exports = {
   purge: ["./src/**/*.{js,jsx,ts,tsx}", "./public/index.html"],
   content: [],
   theme: {
-    extend: {},
+    extend: {
+      colors: {
+        primary: "rgb(34, 197, 94)",
+      },
+    },
   },
   plugins: [require("@tailwindcss/aspect-ratio")],
 };

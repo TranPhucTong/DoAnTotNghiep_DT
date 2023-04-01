@@ -6,7 +6,7 @@ const Layout = (props) => {
   return (
     <div>
       <Header />
-      <div className="layout-main__children ">{props.children}</div>
+      <div className="mt-[88px]">{props.children}</div>
       <Footer />
     </div>
   );

@@ -14,7 +14,7 @@ const Header = () => {
   return (
     <div className="bg-gray-900 text-white fixed top-0 left-0 right-0 w-full z-30">
       <div className="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8 flex items-center justify-between">
-        <a href="" className="flex items-center">
+        <a href="/" className="flex items-center">
           <img
             className="h-8 w-auto mr-2 rounded-lg"
             src={logoCompany}

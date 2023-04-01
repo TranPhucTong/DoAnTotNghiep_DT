@@ -8,7 +8,9 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import TypingEffect from "../TypingEffect/TypingEffect";
 import ButtonHire from "../Button/Button-Hire/ButtonHire";
-const freelancers = [
+import configRoutes from "../../config/configRouter";
+import { useNavigate } from "react-router";
+export const freelancers = [
   {
     id: 1,
     imgBG: "https://qn.iuh.edu.vn/uploads/2021/04/CNTT.gif",
@@ -53,7 +55,7 @@ const freelancers = [
   },
 ];
 
-const FreelancerCard = ({ freelancer }) => (
+export const FreelancerCard = ({ freelancer }) => (
   <a
     href={freelancer.href}
     className="flex flex-col cursor-pointer border-[1px] rounded-xl border-gray-200 hover:shadow-xl transition-all duration-300 ease-out hover:text-[#00bdd6] shadow-md"
@@ -110,6 +112,8 @@ const FreelancerCard = ({ freelancer }) => (
 );
 
 function Freelancer() {
+  const navigate = useNavigate();
+
   return (
     <div>
       <h1 className="text-3xl font-bold mb-4">
@@ -132,7 +136,12 @@ function Freelancer() {
         ))}
       </div>
       <div className=" father flex pr-3 mb-6 justify-end cursor-pointer items-center hover:underline hover:text-blue-500 underline-thick">
-        <p className="mr-2 font-semibold text-lg">Xem thêm </p>
+        <p
+          className="mr-2 font-semibold text-lg"
+          onClick={() => navigate(configRoutes.freelancers)}
+        >
+          Xem thêm
+        </p>
         <FontAwesomeIcon
           icon={faChevronCircleRight}
           className="icon text-green-500 text-xl  font-bold cursor-pointer"
