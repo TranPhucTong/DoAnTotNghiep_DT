@@ -4,6 +4,8 @@ import listProject from "../../assests/imgs";
 import ListProjectPhoto from "./list-project-photo/ListProjectPhoto";
 import Breadcrumb from "./breadcrumb/Breadcrumb";
 import ProductInfo from "./product-info/ProductInfo";
+import { useSelector } from "react-redux";
+import { selectEmployee } from "../../reducers/slices/employeeSlice";
 const product = {
   name: "Danh",
   gmail: "thdanh2001@gmail.com",
@@ -61,15 +63,15 @@ const product = {
 
 
 export default function InfoFreelancer() {
- 
+ const sEmployee = useSelector(selectEmployee);
   return (
     <div className="bg-white">
       <div className="pt-6">
-       <Breadcrumb product={product}/>
-        <ListProjectPhoto images={product.images} />
+       {/* <Breadcrumb product={product}/> */}
+        <ListProjectPhoto images={sEmployee.spotlight} />
 
         {/* Product info */}
-       <ProductInfo product={product}/>
+       <ProductInfo employee={sEmployee}/>
       </div>
     </div>
   );

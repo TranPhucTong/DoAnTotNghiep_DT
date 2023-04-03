@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faStar,
@@ -8,6 +8,10 @@ import TypingEffect from "../TypingEffect/TypingEffect";
 import ButtonHire from "../Button/Button-Hire/ButtonHire";
 import configRoutes from "../../config/configRouter";
 import { useNavigate } from "react-router";
+import { useDispatch, useSelector } from "react-redux";
+import { getListEmployee } from "../../reducers/actions/employeeAction";
+import { changeEmployee, listEmployee } from "../../reducers/slices/employeeSlice";
+
 export const freelancers = [
   {
     id: 1,
@@ -53,20 +57,25 @@ export const freelancers = [
   },
 ];
 
-export const FreelancerCard = ({ freelancer }) => {
+export const FreelancerCard = ({ freelancer, onChangeFreelancer }) => {
   const router = useNavigate();
-  const getFreelancerHandle = () => {
+  const dispatch = useDispatch();
+  const changeSelectFreelanceHandle = (freelancer) => {
+    dispatch(changeEmployee(freelancer));
+  };
+  const getFreelancerHandle = (freelancer) => {
+    changeSelectFreelanceHandle(freelancer);
     router(configRoutes.infoFreelancers);
   };
   return (
     <a
-      onClick={getFreelancerHandle}
+      onClick={() => getFreelancerHandle(freelancer)}
       className="flex flex-col cursor-pointer border-[1px] rounded-xl border-gray-200 hover:shadow-xl transition-all duration-300 ease-out hover:text-[#00bdd6] shadow-md"
     >
       <div className="p-6">
         <div className="w-full h-[200px] mb-5">
           <img
-            src={freelancer.imgBG}
+            src={freelancer.background}
             className="rounded-lg w-full h-full object-cover"
             alt={freelancer.name}
           />
@@ -74,7 +83,7 @@ export const FreelancerCard = ({ freelancer }) => {
 
         <div className="flex items-center gap-2 mb-4">
           <img
-            src={freelancer.imgAvt}
+            src={freelancer.avatar}
             className="w-8 h-8 rounded-full"
             alt={freelancer.name}
           />
@@ -82,7 +91,7 @@ export const FreelancerCard = ({ freelancer }) => {
             {freelancer.name}
           </h2>
         </div>
-        <p className="text-left mb-4">{freelancer.text}</p>
+        <p className="text-left mb-4">{freelancer.introduce}</p>
         <div className="flex justify-between items-center">
           <div className="flex">
             <FontAwesomeIcon
@@ -107,7 +116,7 @@ export const FreelancerCard = ({ freelancer }) => {
             />
           </div>
           <div className="text-[#00bdd6] font-bold text-xl">
-            {freelancer.price}
+            {freelancer.rentFrom}
           </div>
         </div>
       </div>
@@ -117,6 +126,11 @@ export const FreelancerCard = ({ freelancer }) => {
 
 function Freelancer() {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const listFreelancer = useSelector(listEmployee);
+  useEffect(() => {
+    dispatch(getListEmployee());
+  }, []);
 
   return (
     <div>
@@ -133,7 +147,7 @@ function Freelancer() {
         />
       </p>
       <div className="grid grid-cols-4 grid-rows-1 gap-10 mb-8">
-        {freelancers.map((freelancer) => (
+        {listFreelancer.map((freelancer) => (
           <div key={freelancer.id} className="col-span-1 row-span-1">
             <FreelancerCard freelancer={freelancer} />
           </div>

@@ -7,15 +7,14 @@ const reviews = { href: "#", average: 4, totalCount: 117 };
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
-const ProductInfo = ({product}) => {
-     const [selectedColor, setSelectedColor] = useState(product.colors[0]);
-  const [selectedSize, setSelectedSize] = useState(product.sizes[2]);
+const ProductInfo = ({employee}) => {
+    console.log(employee);
 
   return (
     <div className="mx-auto max-w-2xl px-4 pb-16 pt-10 sm:px-6 lg:grid lg:max-w-7xl lg:grid-cols-3 lg:grid-rows-[auto,auto,1fr] lg:gap-x-8 lg:px-8 lg:pb-24 lg:pt-16">
           <div className="lg:col-span-2 lg:border-r lg:border-gray-200 lg:pr-8">
             <h1 className="text-left text-2xl font-bold tracking-tight text-gray-900 sm:text-3xl">
-              {product.name}
+              {employee.name}
             </h1>
           </div>
 
@@ -25,12 +24,12 @@ const ProductInfo = ({product}) => {
                 <img className = 'rounded-full h-24 w-2h-24' src="https://scontent-sin6-2.xx.fbcdn.net/v/t39.30808-6/322249286_708446770664814_2655483604596819168_n.jpg?_nc_cat=109&ccb=1-7&_nc_sid=09cbfe&_nc_ohc=dHE2ogRZlJIAX_kmxxC&_nc_ht=scontent-sin6-2.xx&oh=00_AfBvhO7ctGjgnACWSe-TQoQrR9v6PToG3eYYpGoIqxBapw&oe=64287B3C" alt="" /> 
             </div>
             <p className="text-left text-xl tracking-tight text-gray-900 mb-2">
-              {product.gmail}
+              {employee.gmail}
             </p>
             <p className="text-left text-xl tracking-tight text-gray-900 mb-2">
-              {product.age}t
+              {employee.age}t
             </p><p className="text-left text-xl tracking-tight text-gray-900 mb-2">
-            {product.price} - ?
+            {employee.rentFrom} - {employee.rentTo}
             </p>
 
 
@@ -47,13 +46,13 @@ const ProductInfo = ({product}) => {
                     />
                   ))}
                 </div>
-                <p className="sr-only">{reviews.average} out of 5 stars</p>
-                <a
+                <p className="sr-only">{employee.reviews} out of 5 stars</p>
+                {/* <a
                   href={reviews.href}
                   className="ml-3 text-sm font-medium text-indigo-600 hover:text-indigo-500"
                 >
                   {reviews.totalCount} reviews
-                </a>
+                </a> */}
               </div>
             </div>
 
@@ -75,7 +74,7 @@ const ProductInfo = ({product}) => {
 
               <div className="space-y-6">
                 <p className="text-left text-base text-gray-900">
-                  {product.description}
+                  {employee.introduce}
                 </p>
               </div>
             </div>
@@ -85,7 +84,7 @@ const ProductInfo = ({product}) => {
 
               <div className="mt-4 ">
                 <ul role="list" className="list-disc space-y-2 pl-4 text-sm">
-                  {product.highlights.map((highlight) => (
+                  {employee.skill.map((highlight) => (
                     <li key={highlight} className="text-gray-400">
                       <span className="text-gray-600">{highlight}</span>
                     </li>

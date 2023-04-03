@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { FreelancerCard } from '../Freelancer'
+import { useDispatch, useSelector } from 'react-redux';
+import { listEmployee } from '../../../reducers/slices/employeeSlice';
 const freelancers = [
   {
     id: 1,
@@ -130,11 +132,13 @@ const freelancers = [
 ];
 
 const ListFreelancer = () => {
+  const listFreelancer = useSelector(listEmployee);
+ 
   return (
    <div className="grid grid-cols-4 grid-rows-1 gap-10 mb-8">
-        {freelancers.map((freelancer) => (
+        {listFreelancer.map((freelancer) => (
           <div key={freelancer.id} className="col-span-1 row-span-1">
-            <FreelancerCard freelancer={freelancer} />
+            <FreelancerCard freelancer={freelancer}/>
           </div>
         ))}
       </div>
