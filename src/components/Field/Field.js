@@ -3,6 +3,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCoffee, faRightLong } from "@fortawesome/free-solid-svg-icons";
 import ButtonHire from "../button/Button-Hire/ButtonHire";
 import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { changeRoutesss } from "../../reducers/slices/routeSlice";
 
 const fields = [
   {
@@ -72,8 +74,10 @@ const FieldsCard = ({ field }) => (
 );
 
 function Field() {
+  const dispatch = useDispatch();
   const navigate = useNavigate();
   const hireTeamHanlde = () => {
+    dispatch(changeRoutesss(false));
     navigate("/hireTeam");
   };
   return (

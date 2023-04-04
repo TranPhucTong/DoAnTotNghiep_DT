@@ -10,8 +10,11 @@ import HireTeamWorkStart from "../pages/hire-team/HireTeam-WorkStart";
 import HireTeamWorkWeek from "../pages/hire-team/HireTeam-WorkWeek";
 import Home from "../pages/home/Home";
 import Login from "../pages/login/Login";
+import PersonalRental from "../pages/freelancer/FreelancerPage";
 import RegisterInfo from "../pages/register-info/RegisterInfo";
 import Register from "../pages/register/Register";
+import FreelancerPage from "../pages/freelancer/FreelancerPage";
+import InfoFreelancer from "../pages/info-freelancer/InfoFreelancer";
 const mainRoutes = [
   {
     path: configRoutes.home,
@@ -28,6 +31,21 @@ const mainRoutes = [
   {
     path: configRoutes.registerInfo,
     component: RegisterInfo,
+  },
+  {
+    path: configRoutes.freelancers,
+    component: FreelancerPage,
+  },
+  {
+    path: configRoutes.infoFreelancers,
+    component: InfoFreelancer,
+  },
+];
+
+export const secondRoutes = [
+  {
+    path: configRoutes.home,
+    component: Home,
   },
   {
     path: configRoutes.hireTeam,

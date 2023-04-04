@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import logo from "../../images/logo.png";
 import TypingEffect from "../../components/TypingEffect/TypingEffect";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -10,10 +10,15 @@ import {
   faChevronCircleRight,
 } from "@fortawesome/free-solid-svg-icons";
 import { useNavigate } from "react-router-dom";
+import { routeState } from "../../reducers/slices/routeSlice";
+import { updateRequire } from "../../reducers/slices/hireTeamSlice";
 
 const HireTeam = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch()
   const hireTeamSizeHanlde = () => {
+    dispatch(updateRequire(selectedAnswer));
+    
     navigate("/hireTeam/quiz/size-company");
   };
   const [selectedAnswer, setSelectedAnswer] = useState(null);

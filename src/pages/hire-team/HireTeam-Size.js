@@ -5,6 +5,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useNavigate } from "react-router-dom";
 import { faRightLong, faLeftLong } from "@fortawesome/free-solid-svg-icons";
 import ButtonHireTeam from "../../components/button/buttonHireTeam/ButtonHireTeam";
+import { updateRequire2 } from "../../reducers/slices/hireTeamSlice";
+import { useDispatch } from "react-redux";
 
 const HireTeamSize = () => {
   const [selectedAnswer, setSelectedAnswer] = useState(null);
@@ -17,10 +19,13 @@ const HireTeamSize = () => {
     "Hơn 500 nhân sự",
   ];
   const navigate = useNavigate();
+   const dispatch = useDispatch();
   const hireTeam = () => {
     navigate("/hireTeam");
   };
   const workLength = () => {
+    dispatch(updateRequire2(selectedAnswer));
+  
     navigate("/hireTeam/quiz/work-length");
   };
 

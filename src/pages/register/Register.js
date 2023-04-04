@@ -102,7 +102,7 @@ const Register = (props) => {
   return (
     <>
       <ToastContainer />
-      {!confirmOTP ? (
+      {confirmOTP ? (
         <div className="login">
           <div className="login__container">
             <div className="login__title">

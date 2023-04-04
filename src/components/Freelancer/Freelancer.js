@@ -1,14 +1,18 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
-  faCoffee,
-  faRightLong,
   faStar,
   faChevronCircleRight,
 } from "@fortawesome/free-solid-svg-icons";
 import TypingEffect from "../TypingEffect/TypingEffect";
 import ButtonHire from "../button/Button-Hire/ButtonHire";
-const freelancers = [
+import configRoutes from "../../config/configRouter";
+import { useNavigate } from "react-router";
+import { useDispatch, useSelector } from "react-redux";
+import { getListEmployee } from "../../reducers/actions/employeeAction";
+import { changeEmployee, listEmployee } from "../../reducers/slices/employeeSlice";
+
+export const freelancers = [
   {
     id: 1,
     imgBG: "https://qn.iuh.edu.vn/uploads/2021/04/CNTT.gif",
@@ -53,63 +57,82 @@ const freelancers = [
   },
 ];
 
-const FreelancerCard = ({ freelancer }) => (
-  <a
-    href={freelancer.href}
-    className="flex flex-col cursor-pointer border-[1px] rounded-xl border-gray-200 hover:shadow-xl transition-all duration-300 ease-out hover:text-[#00bdd6] shadow-md"
-  >
-    <div className="p-6">
-      <div className="w-full h-[200px] mb-5">
-        <img
-          src={freelancer.imgBG}
-          className="rounded-lg w-full h-full object-cover"
-          alt={freelancer.name}
-        />
-      </div>
+export const FreelancerCard = ({ freelancer, onChangeFreelancer }) => {
+  const router = useNavigate();
+  const dispatch = useDispatch();
+  const changeSelectFreelanceHandle = (freelancer) => {
+    dispatch(changeEmployee(freelancer));
+  };
+  const getFreelancerHandle = (freelancer) => {
+    changeSelectFreelanceHandle(freelancer);
+    router(configRoutes.infoFreelancers);
+  };
+  return (
+    <a
+      onClick={() => getFreelancerHandle(freelancer)}
+      className="flex flex-col cursor-pointer border-[1px] rounded-xl border-gray-200 hover:shadow-xl transition-all duration-300 ease-out hover:text-[#00bdd6] shadow-md"
+    >
+      <div className="p-6">
+        <div className="w-full h-[200px] mb-5">
+          <img
+            src={freelancer.background}
+            className="rounded-lg w-full h-full object-cover"
+            alt={freelancer.name}
+          />
+        </div>
 
-      <div className="flex items-center gap-2 mb-4">
-        <img
-          src={freelancer.imgAvt}
-          className="w-8 h-8 rounded-full"
-          alt={freelancer.name}
-        />
-        <h2 className="font-bold text-[22px] text-yellow-500">
-          {freelancer.name}
-        </h2>
-      </div>
-      <p className="text-left mb-4">{freelancer.text}</p>
-      <div className="flex justify-between items-center">
-        <div className="flex">
-          <FontAwesomeIcon
-            className="font-semibold cursor-pointer text-green-500"
-            icon={faStar}
+        <div className="flex items-center gap-2 mb-4">
+          <img
+            src={freelancer.avatar}
+            className="w-8 h-8 rounded-full"
+            alt={freelancer.name}
           />
-          <FontAwesomeIcon
-            className="font-semibold cursor-pointer text-green-500"
-            icon={faStar}
-          />
-          <FontAwesomeIcon
-            className="font-semibold cursor-pointer text-green-500"
-            icon={faStar}
-          />
-          <FontAwesomeIcon
-            className="font-semibold cursor-pointer text-green-500"
-            icon={faStar}
-          />
-          <FontAwesomeIcon
-            className="font-semibold cursor-pointer text-green-500"
-            icon={faStar}
-          />
+          <h2 className="font-bold text-[22px] text-yellow-500">
+            {freelancer.name}
+          </h2>
         </div>
-        <div className="text-[#00bdd6] font-bold text-xl">
-          {freelancer.price}
+        <p className="text-left mb-4">{freelancer.introduce}</p>
+        <div className="flex justify-between items-center">
+          <div className="flex">
+            <FontAwesomeIcon
+              className="font-semibold cursor-pointer text-green-500"
+              icon={faStar}
+            />
+            <FontAwesomeIcon
+              className="font-semibold cursor-pointer text-green-500"
+              icon={faStar}
+            />
+            <FontAwesomeIcon
+              className="font-semibold cursor-pointer text-green-500"
+              icon={faStar}
+            />
+            <FontAwesomeIcon
+              className="font-semibold cursor-pointer text-green-500"
+              icon={faStar}
+            />
+            <FontAwesomeIcon
+              className="font-semibold cursor-pointer text-green-500"
+              icon={faStar}
+            />
+          </div>
+          <div className="text-[#00bdd6] font-bold text-xl">
+            {freelancer.rentFrom}
+          </div>
         </div>
       </div>
-    </div>
-  </a>
-);
+    </a>
+  );
+};
 
 function Freelancer() {
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const listFreelancer = useSelector(listEmployee);
+  console.log(listFreelancer);
+  useEffect(() => {
+    dispatch(getListEmployee());
+  }, []);
+
   return (
     <div>
       <h1 className="text-3xl font-bold mb-4">
@@ -125,14 +148,19 @@ function Freelancer() {
         />
       </p>
       <div className="grid grid-cols-4 grid-rows-1 gap-10 mb-8">
-        {freelancers.map((freelancer) => (
+        {listFreelancer.map((freelancer) => (
           <div key={freelancer.id} className="col-span-1 row-span-1">
             <FreelancerCard freelancer={freelancer} />
           </div>
         ))}
       </div>
       <div className=" father flex pr-3 mb-6 justify-end cursor-pointer items-center hover:underline hover:text-blue-500 underline-thick">
-        <p className="mr-2 font-semibold text-lg">Xem thêm </p>
+        <p
+          className="mr-2 font-semibold text-lg"
+          onClick={() => navigate(configRoutes.freelancers)}
+        >
+          Xem thêm
+        </p>
         <FontAwesomeIcon
           icon={faChevronCircleRight}
           className="icon text-green-500 text-xl  font-bold cursor-pointer"
