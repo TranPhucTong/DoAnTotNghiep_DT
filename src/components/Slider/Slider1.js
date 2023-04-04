@@ -6,12 +6,17 @@ import img3 from "../../images/illustration-1.png";
 import group from "../../images/groupIT.png";
 import love from "../../images/Love.png";
 import programer from "../../images/PngItem2.png";
+import { useNavigate } from "react-router-dom";
 
 import "./Slider1.css";
 import TypingEffect from "../TypingEffect/TypingEffect";
 
 
 const Slider1 = () => {
+  const navigate = useNavigate();
+  const hireTeamHanlde = () => {
+    navigate("/hireTeam");
+  };
   useEffect(() => {
     new Swiper(".swiper-container", {
       loop: true,
@@ -63,6 +68,7 @@ const Slider1 = () => {
               <button
                 className=" mt-8 px-7 py-4 bg-gray-800 hover:bg-[#10a37f]  items-center justify-center text-white rounded-xl font-semibold 
               hover:motion-safe:scale-110  ease-linear  transition-all duration-300"
+                onClick={hireTeamHanlde}
               >
                 Thuê đội ngũ
               </button>

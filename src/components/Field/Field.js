@@ -2,6 +2,7 @@ import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCoffee, faRightLong } from "@fortawesome/free-solid-svg-icons";
 import ButtonHire from "../button/Button-Hire/ButtonHire";
+import { useNavigate } from "react-router-dom";
 
 const fields = [
   {
@@ -71,6 +72,10 @@ const FieldsCard = ({ field }) => (
 );
 
 function Field() {
+  const navigate = useNavigate();
+  const hireTeamHanlde = () => {
+    navigate("/hireTeam");
+  };
   return (
     <div>
       <h1 className="text-3xl font-bold mb-8">Đa dạng lĩnh vực</h1>
@@ -81,7 +86,10 @@ function Field() {
           </div>
         ))}
       </div>
-      <ButtonHire text="Thuê đội ngũ của bạn ngay bây giờ" />
+      <ButtonHire
+        text="Thuê đội ngũ của bạn ngay bây giờ"
+        onClick={hireTeamHanlde}
+      />
     </div>
   );
 }
