@@ -15,6 +15,7 @@ import RegisterInfo from "../pages/register-info/RegisterInfo";
 import Register from "../pages/register/Register";
 import FreelancerPage from "../pages/freelancer/FreelancerPage";
 import InfoFreelancer from "../pages/info-freelancer/InfoFreelancer";
+import HomeAdmin from "../pages/home-admin/HomeAdmin";
 const mainRoutes = [
   {
     path: configRoutes.home,
@@ -40,49 +41,62 @@ const mainRoutes = [
     path: configRoutes.infoFreelancers,
     component: InfoFreelancer,
   },
-];
-
-export const secondRoutes = [
   {
-    path: configRoutes.home,
-    component: Home,
+    path: configRoutes.homeAdmin,
+    component: HomeAdmin,
   },
   {
     path: configRoutes.hireTeam,
+    isLayout: false,
     component: HireTeam,
   },
   {
     path: configRoutes.hiretemaSize,
+    isLayout: false,
     component: HireTeamSize,
   },
   {
     path: configRoutes.hireteamWorkLength,
+    isLayout: false,
     component: HireTeamLength,
   },
   {
     path: configRoutes.hireteamWorkSkill,
+    isLayout: false,
     component: HireTeamSkill,
   },
   {
     path: configRoutes.hireteamWorkWage,
+    isLayout: false,
     component: HireTeamWage,
   },
   {
     path: configRoutes.hireteamWorkForm,
+    isLayout: false,
     component: HireTeamWorkForm,
   },
   {
     path: configRoutes.hireteamWorkStart,
+    isLayout: false,
     component: HireTeamWorkStart,
   },
   {
     path: configRoutes.hireteamWorkWeek,
+    isLayout: false,
     component: HireTeamWorkWeek,
   },
   {
     path: configRoutes.hireteamCustomInfo,
+    isLayout: false,
     component: HireTeamInfo,
   },
+];
+
+export const secondRoutes = [
+  // {
+  //   path: configRoutes.home,
+  //   component: Home,
+  // },
 ];
 
 export default mainRoutes;

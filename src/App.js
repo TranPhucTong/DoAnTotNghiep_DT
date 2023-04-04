@@ -8,8 +8,8 @@ import { useSelector } from "react-redux";
 import { routeState } from "./reducers/slices/routeSlice";
 
 function App() {
-  const isMainRoute = useSelector(routeState);
-console.log(isMainRoute);
+  const isMainRoute = true;
+  console.log(isMainRoute);
   return (
     <div className="App">
       <Helmet>
@@ -19,40 +19,31 @@ console.log(isMainRoute);
         <meta name="description" content="Helmet application" />
       </Helmet>
       <Routes>
-        {isMainRoute? 
-        mainRoutes.map((route, index) => {
-          const Page = route.component;
-          return (
-            <Route
-              key={index}
-              path={route.path}
-              element={
-                <Layout>
-                  <Page />
-                </Layout>
-              }
-            ></Route>
-          );
-        })
-        : 
-         secondRoutes.map((route, index) => {
-          const Page = route.component;
-          return (
-            <Route
-              key={index}
-              path={route.path}
-              element={
-                
-                  <Page />
-               
-              }
-            ></Route>
-          );
-        })
-        }
-        
-
-       
+        {isMainRoute
+          ? mainRoutes.map((route, index) => {
+              const Page = route.component;
+              return (
+                <Route
+                  key={index}
+                  path={route.path}
+                  element={
+                    !route.isLayout ? (
+                      <Layout>
+                        <Page />
+                      </Layout>
+                    ) : (
+                      <Page />
+                    )
+                  }
+                ></Route>
+              );
+            })
+          : secondRoutes.map((route, index) => {
+              const Page = route.component;
+              return (
+                <Route key={index} path={route.path} element={<Page />}></Route>
+              );
+            })}
       </Routes>
     </div>
   );

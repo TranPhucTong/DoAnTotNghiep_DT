@@ -21,15 +21,15 @@ const ProductInfo = ({employee}) => {
           {/* Options */}
           <div className="mt-4 lg:row-span-3 lg:mt-0 ">
             <div className="flex justify-center items-center mb-5">
-                <img className = 'rounded-full h-24 w-2h-24' src="https://scontent-sin6-2.xx.fbcdn.net/v/t39.30808-6/322249286_708446770664814_2655483604596819168_n.jpg?_nc_cat=109&ccb=1-7&_nc_sid=09cbfe&_nc_ohc=dHE2ogRZlJIAX_kmxxC&_nc_ht=scontent-sin6-2.xx&oh=00_AfBvhO7ctGjgnACWSe-TQoQrR9v6PToG3eYYpGoIqxBapw&oe=64287B3C" alt="" /> 
+                <img className = 'rounded-full h-24 w-2h-24' src={employee.avatar} alt="" /> 
             </div>
             <p className="text-left text-xl tracking-tight text-gray-900 mb-2">
-              {employee.gmail}
+              Gmail: {employee.gmail}
             </p>
             <p className="text-left text-xl tracking-tight text-gray-900 mb-2">
-              {employee.age}t
+              Tuổi: {employee.age}t
             </p><p className="text-left text-xl tracking-tight text-gray-900 mb-2">
-            {employee.rentFrom} - {employee.rentTo}
+            Giá: {employee.rentFrom} - {employee.rentTo}
             </p>
 
 
