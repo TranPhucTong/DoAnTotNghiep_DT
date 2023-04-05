@@ -27,7 +27,7 @@ function App() {
                   key={index}
                   path={route.path}
                   element={
-                    !route.isLayout ? (
+                    route.isLayout ? (
                       <Layout>
                         <Page />
                       </Layout>

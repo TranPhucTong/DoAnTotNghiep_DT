@@ -15,6 +15,7 @@ const configRoutes = {
   freelancers: "/freelancers",
   infoFreelancers: "/freelancers/info",
   homeAdmin: "/admin/home",
+  adminLogin: "/admin/login",
 };
 
 export default configRoutes;

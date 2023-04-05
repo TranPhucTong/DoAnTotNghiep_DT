@@ -16,6 +16,7 @@ import Register from "../pages/register/Register";
 import FreelancerPage from "../pages/freelancer/FreelancerPage";
 import InfoFreelancer from "../pages/info-freelancer/InfoFreelancer";
 import HomeAdmin from "../pages/home-admin/HomeAdmin";
+import AdminLogin from "../pages/admin-login/AdminLogin";
 const mainRoutes = [
   {
     path: configRoutes.home,
@@ -89,6 +90,11 @@ const mainRoutes = [
     path: configRoutes.hireteamCustomInfo,
     isLayout: false,
     component: HireTeamInfo,
+  },
+  {
+    path: configRoutes.adminLogin,
+    isLayout: false,
+    component: AdminLogin,
   },
 ];
 
