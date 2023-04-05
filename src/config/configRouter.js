@@ -11,9 +11,10 @@ const configRoutes = {
   hireteamWorkStart: "/hireTeam/quiz/work-start",
   hireteamWorkForm: "/hireTeam/quiz/work-form",
   hireteamWorkWage: "/hireTeam/quiz/work-wage",
-  hireteamCustomInfo:  "/hireTeam/quiz/info",
+  hireteamCustomInfo: "/hireTeam/quiz/info",
   freelancers: "/freelancers",
   infoFreelancers: "/freelancers/info",
+  homeAdmin: "/admin/home",
 };
 
 export default configRoutes;
