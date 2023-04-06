@@ -35,13 +35,12 @@ const Home = ({ items }) => {
   const [isOpen, setIsOpen] = useState(false);
   console.log("home");
   const isMainRoute = useSelector(routeState);
-  const dispatch = useDispatch()
-  useEffect(()=>{
-    if(!isMainRoute){
-dispatch(changeRoutesss(true))
+  const dispatch = useDispatch();
+  useEffect(() => {
+    if (!isMainRoute) {
+      dispatch(changeRoutesss(true));
     }
-  },[])
-
+  }, []);
 
   const handleMouseEnter = () => {
     setIsOpen(true);

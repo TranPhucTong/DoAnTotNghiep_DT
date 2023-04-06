@@ -7,6 +7,7 @@ const routeSlice = createSlice({
   reducers: {
     changeRoutesss: (state,action) =>{
       state.isMainRoute = action.payload;
+      console.log(action.payload);
     }
   }
 });

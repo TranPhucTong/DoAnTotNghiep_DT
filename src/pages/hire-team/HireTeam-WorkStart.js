@@ -7,8 +7,11 @@ import {
   faRightLong,
   faLeftLong,
 } from "@fortawesome/free-solid-svg-icons";
+import { useDispatch } from "react-redux";
+import { updateRequire6 } from "../../reducers/slices/hireTeamSlice";
 
 const HireTeamWorkStart = () => {
+  const dispatch = useDispatch();
   const [date, setDate] = useState("");
 
   const handleDateChange = (event) => {
@@ -16,7 +19,9 @@ const HireTeamWorkStart = () => {
   };
 
   const handleSaveDate = () => {
+    dispatch(updateRequire6(date));
     console.log(`Selected date is: ${date}`);
+
     navigate("/hireTeam/quiz/work-form");
     // Hoặc có thể thực hiện lưu giá trị date vào state của component cha ở đây
   };

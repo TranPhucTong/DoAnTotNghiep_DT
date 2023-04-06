@@ -4,8 +4,11 @@ import TypingEffect from "../../components/TypingEffect/TypingEffect";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useNavigate } from "react-router-dom";
 import { faRightLong, faLeftLong } from "@fortawesome/free-solid-svg-icons";
+import { useDispatch } from "react-redux";
+import { updateRequire5 } from "../../reducers/slices/hireTeamSlice";
 
 const HireTeamSkill = () => {
+  const dispatch = useDispatch();
   const [selectedAnswer, setSelectedAnswer] = useState(null);
   const answers = ["ReactJs", "Angular", "ReactNative", "Flutter", "Ruby", "C++"];
   const navigate = useNavigate();
@@ -13,6 +16,7 @@ const HireTeamSkill = () => {
     navigate("/hireTeam/quiz/work-week");
   };
   const workLength = () => {
+    dispatch(updateRequire5(selectedAnswer))
     navigate("/hireTeam/quiz/work-start");
   };
 

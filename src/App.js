@@ -9,7 +9,7 @@ import { routeState } from "./reducers/slices/routeSlice";
 
 function App() {
   const isMainRoute = useSelector(routeState);
-console.log(isMainRoute);
+  console.log(isMainRoute);
   return (
     <div className="App">
       <Helmet>
