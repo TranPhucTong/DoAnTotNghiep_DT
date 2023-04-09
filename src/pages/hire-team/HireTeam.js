@@ -16,7 +16,8 @@ import { hireTeam, updateRequire } from "../../reducers/slices/hireTeamSlice";
 const HireTeam = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const isMainRoute = useSelector(routeState);
+  const isSecondRoute = useSelector(routeState);
+  console.log(isSecondRoute);
   const hireTeamSizeHanlde = () => {
     dispatch(updateRequire(selectedAnswer));
     navigate("/hireTeam/quiz/size-company");

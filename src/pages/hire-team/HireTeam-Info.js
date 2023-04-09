@@ -49,7 +49,7 @@ const HireTeamInfo = () => {
   const navigate = useNavigate();
   const handleCloseNotification = () => {
     setShowNotification(false);
-    navigate("/");
+    navigate("/admin/home");
   };
 
   const handleSubmit = (e) => {
