@@ -4,8 +4,11 @@ import TypingEffect from "../../components/TypingEffect/TypingEffect";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useNavigate } from "react-router-dom";
 import { faRightLong, faLeftLong } from "@fortawesome/free-solid-svg-icons";
+import { useDispatch } from "react-redux";
+import { updateRequire7 } from "../../reducers/slices/hireTeamSlice";
 
 const HireTeamWorkForm = () => {
+  const dispatch = useDispatch();
   const [selectedAnswer, setSelectedAnswer] = useState(null);
   const answers = [
     "Trực tiếp tại công ty",
@@ -16,6 +19,7 @@ const HireTeamWorkForm = () => {
     navigate("/hireTeam/quiz/work-start");
   };
   const workLength = () => {
+    dispatch(updateRequire7(selectedAnswer));
     navigate("/hireTeam/quiz/work-wage");
   };
 

@@ -6,10 +6,10 @@ import { Helmet } from "react-helmet";
 import Layout from "./layout/Layout";
 import { useSelector } from "react-redux";
 import { routeState } from "./reducers/slices/routeSlice";
+import { useEffect, useState } from "react";
 
 function App() {
   const isMainRoute = true;
-  console.log(isMainRoute);
   return (
     <div className="App">
       <Helmet>

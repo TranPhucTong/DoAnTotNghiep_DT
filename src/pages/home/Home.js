@@ -34,14 +34,13 @@ SwiperCore.use([Navigation, Pagination, Scrollbar, A11y, Autoplay]);
 const Home = ({ items }) => {
   const [isOpen, setIsOpen] = useState(false);
   console.log("home");
-  const isMainRoute = useSelector(routeState);
-  const dispatch = useDispatch()
-  useEffect(()=>{
-    if(!isMainRoute){
-dispatch(changeRoutesss(true))
-    }
-  },[])
-
+  const isSecondRoute = useSelector(routeState);
+  const dispatch = useDispatch();
+  // useEffect(() => {
+  //   if (isSecondRoute == true) {
+  //     dispatch(changeRoutesss(false));
+  //   }
+  // }, []);
 
   const handleMouseEnter = () => {
     setIsOpen(true);

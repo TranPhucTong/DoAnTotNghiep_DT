@@ -4,8 +4,11 @@ import TypingEffect from "../../components/TypingEffect/TypingEffect";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useNavigate } from "react-router-dom";
 import { faRightLong, faLeftLong } from "@fortawesome/free-solid-svg-icons";
+import { useDispatch } from "react-redux";
+import { updateRequire4 } from "../../reducers/slices/hireTeamSlice";
 
 const HireTeamWorkWeek = () => {
+  const dispatch = useDispatch();
   const [selectedAnswer, setSelectedAnswer] = useState(null);
   const answers = ["Full Time (Thứ 2-Thứ 6)", "PartTime", "Hourly"];
   const navigate = useNavigate();
@@ -13,6 +16,7 @@ const HireTeamWorkWeek = () => {
     navigate("/hireTeam/quiz/work-length");
   };
   const workLength = () => {
+    dispatch(updateRequire4(selectedAnswer))
     navigate("/hireTeam/quiz/work-skill");
   };
 

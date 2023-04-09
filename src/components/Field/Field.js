@@ -1,10 +1,10 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCoffee, faRightLong } from "@fortawesome/free-solid-svg-icons";
 import ButtonHire from "../button/Button-Hire/ButtonHire";
 import { useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
-import { changeRoutesss } from "../../reducers/slices/routeSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { changeRoutesss, routeState } from "../../reducers/slices/routeSlice";
 
 const fields = [
   {
@@ -76,8 +76,10 @@ const FieldsCard = ({ field }) => (
 function Field() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  
+
   const hireTeamHanlde = () => {
-    dispatch(changeRoutesss(false));
+    dispatch(changeRoutesss(true));
     navigate("/hireTeam");
   };
   return (

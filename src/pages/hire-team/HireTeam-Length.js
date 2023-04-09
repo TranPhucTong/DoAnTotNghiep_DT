@@ -4,8 +4,11 @@ import TypingEffect from "../../components/TypingEffect/TypingEffect";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useNavigate } from "react-router-dom";
 import { faRightLong, faLeftLong } from "@fortawesome/free-solid-svg-icons";
+import { useDispatch } from "react-redux";
+import { updateRequire3 } from "../../reducers/slices/hireTeamSlice";
 
 const HireTeamLength = () => {
+  const dispatch = useDispatch();
   const [selectedAnswer, setSelectedAnswer] = useState(null);
   const answers = [
     "1 tháng",
@@ -20,6 +23,7 @@ const HireTeamLength = () => {
     navigate("/hireTeam/quiz/size-company");
   };
   const workLength = () => {
+    dispatch(updateRequire3(selectedAnswer));
     navigate("/hireTeam/quiz/work-week");
   };
 

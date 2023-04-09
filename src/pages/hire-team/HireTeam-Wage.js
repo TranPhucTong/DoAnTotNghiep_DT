@@ -4,8 +4,11 @@ import TypingEffect from "../../components/TypingEffect/TypingEffect";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useNavigate } from "react-router-dom";
 import { faRightLong, faLeftLong } from "@fortawesome/free-solid-svg-icons";
+import { useDispatch } from "react-redux";
+import { updateRequire8 } from "../../reducers/slices/hireTeamSlice";
 
 const HireTeamWage = () => {
+  const dispatch = useDispatch();
   const [selectedAnswer, setSelectedAnswer] = useState(null);
   const answers = ["Ít hơn 100.000VNĐ/giờ/người", "100.000VNĐ-200.000VNĐ/giờ/người","Trên 200.000VNĐ/giờ/người"];
   const navigate = useNavigate();
@@ -13,6 +16,7 @@ const HireTeamWage = () => {
     navigate("/hireTeam/quiz/work-form");
   };
   const workLength = () => {
+    dispatch(updateRequire8(selectedAnswer));
     navigate("/hireTeam/quiz/info");
   };
 
