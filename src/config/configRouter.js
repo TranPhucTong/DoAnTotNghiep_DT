@@ -17,6 +17,7 @@ const configRoutes = {
   homeAdmin: "/admin/home",
   adminLogin: "/admin/login",
   adminHome: "/admin/home",
+  employeeHome: "/employee/home",
 };
 
 export default configRoutes;

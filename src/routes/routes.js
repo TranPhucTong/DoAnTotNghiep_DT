@@ -17,6 +17,7 @@ import FreelancerPage from "../pages/freelancer/FreelancerPage";
 import InfoFreelancer from "../pages/info-freelancer/InfoFreelancer";
 import HomeAdmin from "../pages/home-admin/HomeAdmin";
 import AdminLogin from "../pages/admin-login/AdminLogin";
+import EmployeeHome from "../pages/employee-home/EmployeeHome";
 const mainRoutes = [
   {
     path: configRoutes.home,
@@ -45,7 +46,7 @@ const mainRoutes = [
   {
     path: configRoutes.freelancers,
     component: FreelancerPage,
-    isLayout: false,
+    isLayout: true,
     layout: "customer",
   },
   {
@@ -62,55 +63,55 @@ const mainRoutes = [
   },
   {
     path: configRoutes.hireTeam,
-    isLayout: true,
+    isLayout: false,
     component: HireTeam,
     layout: "customer",
   },
   {
     path: configRoutes.hiretemaSize,
-    isLayout: true,
+    isLayout: false,
     component: HireTeamSize,
     layout: "customer",
   },
   {
     path: configRoutes.hireteamWorkLength,
-    isLayout: true,
+    isLayout: false,
     component: HireTeamLength,
     layout: "customer",
   },
   {
     path: configRoutes.hireteamWorkSkill,
-    isLayout: true,
+    isLayout: false,
     component: HireTeamSkill,
     layout: "customer",
   },
   {
     path: configRoutes.hireteamWorkWage,
-    isLayout: true,
+    isLayout: false,
     component: HireTeamWage,
     layout: "customer",
   },
   {
     path: configRoutes.hireteamWorkForm,
-    isLayout: true,
+    isLayout: false,
     component: HireTeamWorkForm,
     layout: "customer",
   },
   {
     path: configRoutes.hireteamWorkStart,
-    isLayout: true,
+    isLayout: false,
     component: HireTeamWorkStart,
     layout: "customer",
   },
   {
     path: configRoutes.hireteamWorkWeek,
-    isLayout: true,
+    isLayout: false,
     component: HireTeamWorkWeek,
     layout: "customer",
   },
   {
     path: configRoutes.hireteamCustomInfo,
-    isLayout: true,
+    isLayout: false,
     component: HireTeamInfo,
     layout: "customer",
   },
@@ -135,4 +136,10 @@ export const secondRoutes = [
   // },
 ];
 
+export const employeeRoutes = [
+  {
+    path: configRoutes.employeeHome,
+    component: EmployeeHome,
+  },
+];
 export default mainRoutes;

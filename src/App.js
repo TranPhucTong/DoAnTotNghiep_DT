@@ -1,15 +1,17 @@
 import logo from "./logo.svg";
 import "./App.css";
 import { Route, Routes } from "react-router-dom";
-import mainRoutes, { secondRoutes } from "./routes/routes";
+import mainRoutes, { employeeRoutes, secondRoutes } from "./routes/routes";
 import { Helmet } from "react-helmet";
 import Layout from "./layout/Layout";
 import { useSelector } from "react-redux";
 import { routeState } from "./reducers/slices/routeSlice";
 import { useEffect, useState } from "react";
+import LayoutEmployee from "./layout/layout-employee/LayoutEmployee";
 
 function App() {
   const isMainRoute = true;
+  const isEmplopyeeRoute = true;
   return (
     <div className="App">
       <Helmet>
@@ -44,6 +46,22 @@ function App() {
                 <Route key={index} path={route.path} element={<Page />}></Route>
               );
             })}
+
+        {isEmplopyeeRoute &&
+          employeeRoutes.map((route, index) => {
+            const Page = route.component;
+            return (
+              <Route
+                key={index}
+                path={route.path}
+                element={
+                  <LayoutEmployee>
+                    <Page />
+                  </LayoutEmployee>
+                }
+              ></Route>
+            );
+          })}
       </Routes>
     </div>
   );
