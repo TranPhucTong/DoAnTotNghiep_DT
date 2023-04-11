@@ -7,28 +7,28 @@ const listField = [
     title: "Lập trình website Cân cả Front-end, và Back-end",
   },
   {
-    value: "web",
-    label: "Web",
+    value: "app",
+    label: "App",
     title: "Lập trình website Cân cả Front-end, và Back-end",
   },
   {
-    value: "web",
-    label: "Web",
+    value: "game",
+    label: "Game",
     title: "Lập trình website Cân cả Front-end, và Back-end",
   },
   {
-    value: "web",
-    label: "Web",
+    value: "khdl",
+    label: "Khoa học dữ liệu",
     title: "Lập trình website Cân cả Front-end, và Back-end",
   },
   {
-    value: "web",
-    label: "Web",
+    value: "ai",
+    label: "AI",
     title: "Lập trình website Cân cả Front-end, và Back-end",
   },
   {
-    value: "web",
-    label: "Web",
+    value: "network",
+    label: "An ninh mạng",
     title: "Lập trình website Cân cả Front-end, và Back-end",
   },
 ];

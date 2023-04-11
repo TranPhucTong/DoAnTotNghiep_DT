@@ -21,7 +21,7 @@ const LayoutEmployee = ({ children }) => {
         )}
         <NavEmployee isActive={isActive} onChangeActive={changeActiveHandle} />
       </div>
-      <div className="flex-1 h-full">{children}</div>
+      <div className="flex-1 h-screen overflow-y-scroll py-10 ">{children}</div>
     </div>
   );
 };
