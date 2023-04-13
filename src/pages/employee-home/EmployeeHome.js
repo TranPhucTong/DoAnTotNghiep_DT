@@ -9,6 +9,13 @@ import RangeSlider from "../../components/range-slider/RangeSlider";
 const EmployeeHome = () => {
   const [rentFrom, setRentFrom] = useState();
   const [rentTo, setRentTo] = useState();
+  const changeRentFromHandle = (value) => {
+    setRentFrom(value);
+  };
+
+  const changeRentToHandle = (value) => {
+    setRentTo(value);
+  };
   return (
     <div className="h-full w-full">
       {/* Title */}
@@ -29,7 +36,11 @@ const EmployeeHome = () => {
       <div className="flex justify-between items-center px-10">
         <div className="w-1/6 flex flex-col justify-center items-center">
           <h4 className="text-slate-500 text-base mb-5">Ảnh đại diện</h4>
-          <img src={avt} alt="avt" className="h-20 w-20 rounded-full " />
+          <img
+            src={avt}
+            alt="avt"
+            className="h-20 w-20 rounded-full cursor-pointer hover:opacity-50 transition-all"
+          />
           <div className="flex justify-center items-center mt-4">
             <p className="text-[#00BDD6] text-xs mr-2 font-bold">4.4 / 5</p>
             <FontAwesomeIcon icon={faStar} className="text-[#00BDD6] text-xs" />
@@ -67,13 +78,58 @@ const EmployeeHome = () => {
         </div>
       </div>
       {/* Update Info */}
-      <h2 className="text-left text-[#00BDD6] text-2xl uppercase m-10 font-bold">
-        Cập nhật thông tin
-      </h2>
-      <div className="w-3/5">
-        <div>
-          <h4>Giá</h4>
-          <RangeSlider className="w-40 h-3" defaultValue={[0, 100]} />
+      <div className="py-10">
+        <h2 className="text-left text-[#00BDD6] text-2xl uppercase m-10 font-bold">
+          Cập nhật thông tin
+        </h2>
+        <div className="w-3/5 mx-auto">
+          <div className="flex justify-center items-center px-10">
+            <h4 className="text-slate-400 text-lg w-1/12 text-left">Giá: </h4>
+            <div className="flex-1 flex justify-center items-center">
+              <RangeSlider
+                className="w-full h-2 mx-6"
+                defaultValue={[0, 100]}
+                onChangeFrom={changeRentFromHandle}
+                onChangeTo={changeRentToHandle}
+              />
+            </div>
+            <div className="flex justify-center items-center w-1/6">
+              <p className="text-sm">
+                ${rentFrom} - ${rentTo}
+              </p>
+            </div>
+          </div>
+          <div className="px-10 pt-10">
+            <h4 className="text-slate-400 text-lg text-left ">
+              Giới thiệu bản thân:
+            </h4>
+            <textarea className="border-2 w-full rounded-lg my-5 border-neutral-500 p-5"></textarea>
+          </div>
+          <div className="px-10 pt-10">
+            <h4 className="text-slate-400 text-lg text-left ">Các sản phẩm:</h4>
+            <div className="flex justify-center items-center my-5">
+              <img
+                className="w-1/4 mx-2 rounded-sm hover:opacity-50 transition-all cursor-pointer"
+                alt="img"
+                src="https://images.unsplash.com/photo-1547658719-da2b51169166?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=464&q=80"
+              />
+              <img
+                className="w-1/4 mx-2 rounded-sm hover:opacity-50 transition-all cursor-pointer"
+                alt="img"
+                src="https://images.unsplash.com/photo-1547658719-da2b51169166?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=464&q=80"
+              />
+              <img
+                className="w-1/4 mx-2 rounded-sm hover:opacity-50 transition-all cursor-pointer"
+                alt="img"
+                src="https://images.unsplash.com/photo-1547658719-da2b51169166?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=464&q=80"
+              />
+              <img
+                className="w-1/4 mx-2 rounded-sm hover:opacity-50 transition-all cursor-pointer"
+                alt="img"
+                src="https://images.unsplash.com/photo-1547658719-da2b51169166?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=464&q=80"
+              />
+            </div>
+          </div>
         </div>
       </div>
     </div>

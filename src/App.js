@@ -8,6 +8,7 @@ import { useSelector } from "react-redux";
 import { routeState } from "./reducers/slices/routeSlice";
 import { useEffect, useState } from "react";
 import LayoutEmployee from "./layout/layout-employee/LayoutEmployee";
+import { ToastContainer } from "react-toastify";
 
 function App() {
   const isMainRoute = true;
@@ -63,6 +64,7 @@ function App() {
             );
           })}
       </Routes>
+      <ToastContainer />
     </div>
   );
 }

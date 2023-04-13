@@ -13,6 +13,18 @@ export const login = createAsyncThunk(
   }
 );
 
+export const loginAdmin = createAsyncThunk(
+  "/loginAdmin",
+  async ({ username, password }) => {
+    try {
+      const res = await authApi.loginAdmin(username, password);
+      return { data: res.data, status: res.status };
+    } catch (error) {
+      return error.response;
+    }
+  }
+);
+
 export const register = createAsyncThunk(
   "/register",
   async ({ username, password }) => {

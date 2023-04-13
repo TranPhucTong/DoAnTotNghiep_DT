@@ -8,6 +8,12 @@ const authApi = {
       password,
     });
   },
+  loginAdmin(username, password) {
+    return mainAxios.post(`${url}/admin`, {
+      username,
+      password,
+    });
+  },
   register(phone, password) {
     return mainAxios.post("register", {
       phone,

@@ -8,19 +8,23 @@ const RangeSlider = (
   return (
     <ReactSlider
       {..._props}
-      renderThumb={(props, state) => (
+      renderThumb={(props, state) => {
+        _props.onChangeFrom(state.value[0])
+        _props.onChangeTo(state.value[1])
+        console.log("state: ",state);
+        return (
         <div
           {...props}
           className={cn({
             "h-full": !isVertical,
             "w-full": isVertical,
-            "aspect-square rounded-full bg-indigo-500 text-xs text-white flex items-center justify-center cursor-grab":
+            "aspect-square rounded-full h-4 w-4 bg-white border-[#00BDD6] border-2 text-xs text-white flex items-center justify-center cursor-grab -translate-y-1":
               true,
           })}
         >
-          {state.valueNow}
+          {/* {state.valueNow} */}
         </div>
-      )}
+      )}}
       renderTrack={(props, state) => {
         const points = Array.isArray(state.value) ? state.value.length : null;
         const isMulti = points && points > 0;
@@ -30,11 +34,11 @@ const RangeSlider = (
           <div
             {...props}
             className={cn({
-              "h-1/4 top-1/2 -translate-y-1/2": !isVertical,
-              "w-1/4 left-1/2 -translate-x-1/2": isVertical,
+              "h-2/4 top-1/2 -translate-y-1/2": !isVertical,
+              "w-2/4 left-1/2 -translate-x-1/2": isVertical,
               "rounded-full": true,
-              "bg-indigo-500": isMulti ? !isFirst || !isLast : isFirst,
-              "!bg-gray-200": isMulti ? isFirst || isLast : isLast,
+              "bg-[#00BDD6]": isMulti ? !isFirst || !isLast : isFirst,
+              "!bg-[#A6F5FF]": isMulti ? isFirst || isLast : isLast,
             })}
           ></div>
         );
