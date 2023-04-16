@@ -8,3 +8,27 @@ export const getListEmployee = createAsyncThunk("/employees", async () => {
     return error.response;
   }
 });
+
+export const getProfileEmployee = createAsyncThunk(
+  "/employees/profile",
+  async () => {
+    try {
+      const res = await employeeApi.getProfile();
+      return { data: res.data, status: res.status };
+    } catch (error) {
+      return error.response;
+    }
+  }
+);
+
+export const updateProfileEmployee = createAsyncThunk(
+  "/employees/register-profile",
+  async (profile) => {
+    try {
+      const res = await employeeApi.updateInfo(profile);
+      return { data: res.data, status: res.status };
+    } catch (error) {
+      return error.response;
+    }
+  }
+);

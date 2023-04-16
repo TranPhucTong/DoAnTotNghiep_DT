@@ -1,11 +1,10 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { loginAdmin } from "../actions/authAction";
 import {
-  login,
-  loginAdmin,
-  register,
-  registerInfo,
-} from "../actions/authAction";
-import { getListEmployee } from "../actions/employeeAction";
+  getListEmployee,
+  getProfileEmployee,
+  updateProfileEmployee,
+} from "../actions/employeeAction";
 let employee = {
   id: "",
   name: "",
@@ -44,11 +43,13 @@ const employeeSlice = createSlice({
       if (!action.payload.data) return;
       state.listEmployee = action.payload.data;
     },
-    [loginAdmin.fulfilled]: (state, action) => {
+    [getProfileEmployee.fulfilled]: (state, action) => {
       if (!action.payload.data) return;
-      const { accessToken, employee } = action.payload.data;
-      state.employee = employee;
-      localStorage.setItem("access_token", accessToken);
+      state.employee = action.payload.data;
+    },
+    [updateProfileEmployee.fulfilled]: (state, action) => {
+      if (!action.payload.data) return;
+      state.employee = action.payload.data;
     },
   },
 });
