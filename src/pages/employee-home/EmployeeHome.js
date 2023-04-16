@@ -6,9 +6,13 @@ import { faStar } from "@fortawesome/free-solid-svg-icons";
 import ReactSlider, { ReactSliderProps } from "react-slider";
 import cn from "classnames";
 import RangeSlider from "../../components/range-slider/RangeSlider";
+import { useSelector } from "react-redux";
+import { selectEmployee } from "../../reducers/slices/employeeSlice";
+import { formatBirthDate } from "../../utils/convertDate";
 const EmployeeHome = () => {
-  const [rentFrom, setRentFrom] = useState();
-  const [rentTo, setRentTo] = useState();
+  const employee = useSelector(selectEmployee);
+  const [rentFrom, setRentFrom] = useState(employee.rent_from);
+  const [rentTo, setRentTo] = useState(employee.rent_to);
   const changeRentFromHandle = (value) => {
     setRentFrom(value);
   };
@@ -37,7 +41,7 @@ const EmployeeHome = () => {
         <div className="w-1/6 flex flex-col justify-center items-center">
           <h4 className="text-slate-500 text-base mb-5">Ảnh đại diện</h4>
           <img
-            src={avt}
+            src={employee.avatar}
             alt="avt"
             className="h-20 w-20 rounded-full cursor-pointer hover:opacity-50 transition-all"
           />
@@ -49,15 +53,15 @@ const EmployeeHome = () => {
         <div className="w-5/12 pl-20">
           <div className="flex my-2">
             <span className="text-slate-500 text-base mr-2">Họ tên:</span>
-            <p className="text-base">Tông</p>
+            <p className="text-base">{employee.name}</p>
           </div>
           <div className="flex my-2">
             <span className="text-slate-500 text-base mr-2">Sinh nhật:</span>
-            <p>07/03/2001</p>
+            <p>{formatBirthDate(employee.birthDate)}</p>
           </div>
           <div className="flex my-2">
             <span className="text-slate-500 text-base mr-2">Giới tính:</span>
-            <p>Nam</p>
+            <p>{employee.gender}</p>
           </div>
         </div>
         <div className="w-5/12">
@@ -69,11 +73,11 @@ const EmployeeHome = () => {
             <span className="text-slate-500 text-base mr-2">
               Số điện thoại:
             </span>
-            <p>0965624881</p>
+            <p>{employee.phone}</p>
           </div>
           <div className="flex my-2">
             <span className="text-slate-500 text-base mr-2">Email:</span>
-            <p>tong@gmail.com</p>
+            <p>{employee.gmail}</p>
           </div>
         </div>
       </div>
@@ -89,6 +93,7 @@ const EmployeeHome = () => {
               <RangeSlider
                 className="w-full h-2 mx-6"
                 defaultValue={[0, 100]}
+                value={[rentFrom, rentTo]}
                 onChangeFrom={changeRentFromHandle}
                 onChangeTo={changeRentToHandle}
               />
@@ -103,7 +108,10 @@ const EmployeeHome = () => {
             <h4 className="text-slate-400 text-lg text-left ">
               Giới thiệu bản thân:
             </h4>
-            <textarea className="border-2 w-full rounded-lg my-5 border-neutral-500 p-5"></textarea>
+            <textarea
+              className="border-2 w-full rounded-lg my-5 border-neutral-500 p-5"
+              value={employee.introduce}
+            ></textarea>
           </div>
           <div className="px-10 pt-10">
             <h4 className="text-slate-400 text-lg text-left ">Các sản phẩm:</h4>

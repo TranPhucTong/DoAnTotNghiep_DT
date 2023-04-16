@@ -10,7 +10,12 @@ import {
   faFolder,
 } from "@fortawesome/free-solid-svg-icons";
 import "./nav.scss";
+import { useSelector } from "react-redux";
+import { selectAccountEmployee, selectEmployee } from "../../../reducers/slices/employeeSlice";
 const NavEmployee = ({ onChangeActive, isActive }) => {
+  const employee = useSelector(selectEmployee);
+  const accountEmployee = useSelector(selectAccountEmployee);
+
   return (
     <>
       {/* Header */}
@@ -32,13 +37,13 @@ const NavEmployee = ({ onChangeActive, isActive }) => {
       <div className="my-8 flex items-center">
         <img
           className="border-2 border-[#71C38C] w-[44px] rounded-full hover:cursor-pointer"
-          src={avt}
+          src={employee.avatar}
           alt=""
         />
         {!isActive && (
           <div className="ml-5">
-            <p className="text-white text-left text-base leading-4">Tong</p>
-            <p className="text-[#B8C0FA] text-base ">username</p>
+            <p className="text-white text-left text-base leading-4">{employee.name}</p>
+            <p className="text-[#B8C0FA] text-base ">{accountEmployee}</p>
           </div>
         )}
       </div>

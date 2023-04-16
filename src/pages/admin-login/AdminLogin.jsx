@@ -7,6 +7,7 @@ import { loginAdmin } from "../../reducers/actions/authAction";
 import configRoutes from "../../config/configRouter";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import { setAccount } from "../../reducers/slices/employeeSlice";
 const AdminLogin = () => {
   const [username, setUsername] = useState();
   const [password, setPassword] = useState();
@@ -23,6 +24,7 @@ const AdminLogin = () => {
   const submitHandle = async () => {
     try {
       const res = await dispatch(loginAdmin({ username, password }));
+      dispatch(setAccount(username))
       res.payload.status === 201
         ? navigate(configRoutes.employeeHome)
         : toast.error(res.payload.data);

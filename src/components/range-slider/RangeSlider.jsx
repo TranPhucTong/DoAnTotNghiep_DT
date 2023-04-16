@@ -11,13 +11,11 @@ const RangeSlider = (
       renderThumb={(props, state) => {
         _props.onChangeFrom(state.value[0])
         _props.onChangeTo(state.value[1])
-        console.log("state: ",state);
+      
         return (
         <div
           {...props}
           className={cn({
-            "h-full": !isVertical,
-            "w-full": isVertical,
             "aspect-square rounded-full h-4 w-4 bg-white border-[#00BDD6] border-2 text-xs text-white flex items-center justify-center cursor-grab -translate-y-1":
               true,
           })}

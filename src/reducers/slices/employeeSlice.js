@@ -22,7 +22,7 @@ let employee = {
   avatar: "",
 };
 
-const initialState = { employee, listEmployee: [] };
+const initialState = { employee, listEmployee: [], account: "" };
 
 const employeeSlice = createSlice({
   name: "employee",
@@ -32,6 +32,11 @@ const employeeSlice = createSlice({
       console.log(action.payload);
       if (!action.payload) return;
       state.employee = action.payload;
+    },
+    setAccount: (state, action) => {
+      console.log(action.payload);
+      if (!action.payload) return;
+      state.account = action.payload;
     },
   },
   extraReducers: {
@@ -52,5 +57,7 @@ export const listEmployee = (state) =>
   state.employee.listEmployee ? state.employee.listEmployee : null;
 export const selectEmployee = (state) =>
   state.employee.employee ? state.employee.employee : null;
-export const { changeEmployee } = employeeSlice.actions;
+export const selectAccountEmployee = (state) =>
+  state.employee.account ? state.employee.account : null;
+export const { changeEmployee, setAccount } = employeeSlice.actions;
 export default employeeSlice;
