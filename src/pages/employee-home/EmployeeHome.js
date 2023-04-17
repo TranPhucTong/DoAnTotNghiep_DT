@@ -1,15 +1,12 @@
 import React, { useEffect, useRef, useState } from "react";
 import ListField from "../../components/list-field/ListField";
-import avt from "../../images/avt.png";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faStar } from "@fortawesome/free-solid-svg-icons";
-import ReactSlider, { ReactSliderProps } from "react-slider";
-import cn from "classnames";
+import { faStar, faPlus } from "@fortawesome/free-solid-svg-icons";
 import RangeSlider from "../../components/range-slider/RangeSlider";
 import { useDispatch, useSelector } from "react-redux";
 import { selectEmployee } from "../../reducers/slices/employeeSlice";
 import { formatBirthDate } from "../../utils/convertDate";
-import { getProfileEmployee } from "../../reducers/actions/employeeAction";
+import { getProfileEmployee, updateSpotlightEmployee } from "../../reducers/actions/employeeAction";
 import { updateProfileEmployee } from "../../reducers/actions/employeeAction";
 const EmployeeHome = () => {
   // Redux
@@ -22,11 +19,23 @@ const EmployeeHome = () => {
   const [avatar, setAvatar] = useState(employee.avatar);
   const [type, setType] = useState();
   const [fileName, setFileName] = useState();
+  const [spotlight,setSpotlight] = useState();
+  const [selectSpotlight, setSelectSpotlight] = useState();
   //Ref
   const inputRef = useRef();
+  const inputSpotlightRef = useRef();
   //
   useEffect(() => {
     !employee.id && dispatch(getProfileEmployee());
+
+    const updateStateSpotlight = () => {
+      let arr = [];
+      employee.spotlight.forEach((item) => {
+        arr.push({ value: item });
+      });
+      setSpotlight(arr);
+    };
+    // !spotlight && employee.spotlight && updateStateSpotlight();
   }, []);
 
   const changeRentFromHandle = (value) => {
@@ -40,6 +49,30 @@ const EmployeeHome = () => {
   const changeIntroduceHandle = (value) => {
     setIntruduce(value);
   };
+
+  const changeSpotlightHandle = (e)=>{
+    console.log(selectSpotlight);
+    const name = e.target.files[0].name;
+    const lastDot = name.lastIndexOf(".");
+    const fileName = name.substring(0, lastDot);
+    const type = name.substring(lastDot + 1);
+    
+    let value;
+    const reader = new FileReader();
+    reader.readAsDataURL(e.target.files[0]);
+    reader.onloadend = () => {
+      value = reader.result;
+       const spotlightChange = {
+         fileName,
+         type,
+         value,
+       };
+       spotlight[selectSpotlight] = spotlightChange;
+       setSpotlight(spotlight);
+       console.log("spotlight: ",spotlight);
+    };
+   
+  }
 
   const changeAvatarHandle = (e) => {
     const name = e.target.files[0].name;
@@ -64,7 +97,16 @@ const EmployeeHome = () => {
       fileName,
       type,
     };
-    console.log("profile: ", profile);
+    dispatch(updateSpotlightEmployee(spotlight));
+    if (
+      rentFrom === employee.rent_from ||
+      rentTo === employee.rent_to ||
+      introduce === employee.introduce ||
+      avatar === employee.avatar
+    ) {
+      return;
+    }
+    console.log("call");
     dispatch(updateProfileEmployee(profile));
   };
 
@@ -92,7 +134,7 @@ const EmployeeHome = () => {
             src={avatar ? avatar : employee.avatar}
             onClick={() => inputRef.current.click()}
             alt="avt"
-            className="h-20 w-20 rounded-full cursor-pointer hover:opacity-50 transition-all"
+            className="object-cover h-20 w-20 rounded-full cursor-pointer hover:opacity-50 transition-all"
           />
           <input
             type="file"
@@ -175,15 +217,37 @@ const EmployeeHome = () => {
           <div className="px-10 pt-10">
             <h4 className="text-slate-400 text-lg text-left ">Các sản phẩm:</h4>
             <div className="grid grid-cols-4 gap-4 my-5">
-              {employee.spotlight ? (
-                employee.spotlight.map((item, id) => {
-                  return (
-                    <img
-                      key={id}
-                      className=" mx-2 rounded-lg min-h-[200px] hover:opacity-50 transition-all cursor-pointer"
-                      alt="img"
-                      src={item}
-                    />
+              <input
+                type="file"
+                className="hidden w-0 h-0"
+                ref={inputSpotlightRef}
+                onChange={changeSpotlightHandle}
+              />
+              {spotlight ? (
+                spotlight.map((item, id) => {
+                  return item.value ? (
+                    <>
+                      <img
+                        key={id}
+                        className=" mx-2 rounded-lg min-h-[200px] hover:opacity-50 transition-all cursor-pointer"
+                        alt="img"
+                        src={item.value}
+                        onClick={() => {
+                          inputSpotlightRef.current.click();
+                          setSelectSpotlight(id);
+                        }}
+                      />
+                    </>
+                  ) : (
+                    <div
+                      onClick={() => {
+                        inputSpotlightRef.current.click();
+                        setSelectSpotlight(id);
+                      }}
+                      className="hover:opacity-50 cursor-pointer flex justify-center items-center border border-2 rounded-lg border-blue-300"
+                    >
+                      <FontAwesomeIcon icon={faPlus} className="text-xl" />
+                    </div>
                   );
                 })
               ) : (

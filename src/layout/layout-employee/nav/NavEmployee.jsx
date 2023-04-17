@@ -36,7 +36,7 @@ const NavEmployee = ({ onChangeActive, isActive }) => {
       {/* profile */}
       <div className="my-8 flex items-center">
         <img
-          className="border-2 border-[#71C38C] w-[44px] rounded-full hover:cursor-pointer"
+          className="object-cover border-2 border-[#71C38C] w-10 h-10 rounded-full hover:cursor-pointer"
           src={employee.avatar}
           alt=""
         />

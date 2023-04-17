@@ -4,6 +4,7 @@ import {
   getListEmployee,
   getProfileEmployee,
   updateProfileEmployee,
+  updateSpotlightEmployee,
 } from "../actions/employeeAction";
 let employee = {
   id: "",
@@ -50,6 +51,10 @@ const employeeSlice = createSlice({
     [updateProfileEmployee.fulfilled]: (state, action) => {
       if (!action.payload.data) return;
       state.employee = action.payload.data;
+    },
+    [updateSpotlightEmployee.fulfilled]: (state, action) => {
+      if (!action.payload.data) return;
+      state.employee.spotlight = action.payload.data;
     },
   },
 });

@@ -32,3 +32,15 @@ export const updateProfileEmployee = createAsyncThunk(
     }
   }
 );
+
+export const updateSpotlightEmployee = createAsyncThunk(
+  "/employees/update-spotlight",
+  async (spotlight) => {
+    try {
+      const res = await employeeApi.updateSpotlight(spotlight);
+      return { data: res.data, status: res.status };
+    } catch (error) {
+      return error.response;
+    }
+  }
+);

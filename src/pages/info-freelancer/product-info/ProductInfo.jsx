@@ -21,7 +21,7 @@ const ProductInfo = ({employee}) => {
           {/* Options */}
           <div className="mt-4 lg:row-span-3 lg:mt-0 ">
             <div className="flex justify-center items-center mb-5">
-                <img className = 'rounded-full h-24 w-2h-24' src={employee.avatar} alt="" /> 
+                <img className = 'rounded-full h-24 w-24 object-cover' src={employee.avatar} alt="" /> 
             </div>
             <p className="text-left text-xl tracking-tight text-gray-900 mb-2">
               Gmail: {employee.gmail}

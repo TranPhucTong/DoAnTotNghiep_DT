@@ -11,12 +11,8 @@ const employeeApi = {
   updateInfo(profile) {
     return mainAxios.post(`${url}/register-profile`, { profile });
   },
-  // updateAvatar(data) {
-  //   return mainAxios.post(`${url}/register-profile/avatar`, {
-  //     avatar: data.avatar,
-  //     type: data.type,
-  //     fileName: data.fileName,
-  //   });
-  // },
+  updateSpotlight(spotlight) {
+    return mainAxios.post(`${url}/update-spotlight`, { spotlight });
+  },
 };
 export default employeeApi;
