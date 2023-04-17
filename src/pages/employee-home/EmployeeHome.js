@@ -97,7 +97,7 @@ const EmployeeHome = () => {
       fileName,
       type,
     };
-    dispatch(updateSpotlightEmployee(spotlight));
+    // dispatch(updateSpotlightEmployee(spotlight));
     if (
       rentFrom === employee.rent_from ||
       rentTo === employee.rent_to ||
