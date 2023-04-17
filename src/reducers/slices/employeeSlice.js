@@ -44,6 +44,12 @@ const employeeSlice = createSlice({
       if (!action.payload.data) return;
       state.listEmployee = action.payload.data;
     },
+    [loginAdmin.fulfilled]: (state, action) => {
+      if (!action.payload.data) return;
+      const { accessToken, employee } = action.payload.data;
+      state.employee = employee;
+      localStorage.setItem("access_token", accessToken);
+    },
     [getProfileEmployee.fulfilled]: (state, action) => {
       if (!action.payload.data) return;
       state.employee = action.payload.data;
