@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-const initialState = {isSecondRoute: false};
+const initialState = {isSecondRoute: true};
 const routeSlice = createSlice({
   name: "route",
   initialState: initialState,

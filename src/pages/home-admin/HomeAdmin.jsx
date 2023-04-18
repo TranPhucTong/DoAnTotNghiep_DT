@@ -11,46 +11,104 @@ import {
   faBars,
   faBell,
   faMaximize,
+  faSearch,
+  faList,
+  faBorderAll,
+  faPlus,
+  faPenToSquare,
+  faTrash,
 } from "@fortawesome/free-solid-svg-icons";
 import logo from "../../images/logoCompany.png";
+import ListEmployees from "../../components/admin/ListEmployees";
+import { Switch } from "@headlessui/react";
+import { Link, Route, Routes, useNavigate } from "react-router-dom";
+import CreatEmployee from "../../components/admin/CreatEmployee";
+import imgDashIcon1 from "../../images/icon/dash-icon-01.svg";
+import imgDashIcon2 from "../../images/icon/dash-icon-02.svg";
+import imgDashIcon3 from "../../images/icon/dash-icon-03.svg";
+import imgDashIcon4 from "../../images/icon/dash-icon-04.svg";
+import { PieChart, Pie, Tooltip } from "recharts";
+import { Chart } from "react-google-charts";
+
 const HomeAdmin = () => {
   const [open, setOpen] = useState(true);
   const [submenuOpen, setSubmenuOpen] = useState(false);
+  const columns = [
+    {
+      id: 1,
+      title: "Employees",
+      count: "1000",
+      img: imgDashIcon1,
+    },
+    {
+      id: 2,
+      title: "Awards",
+      count: "50+",
+      img: imgDashIcon2,
+    },
+    {
+      id: 3,
+      title: "Departments",
+      count: "30+",
+      img: imgDashIcon3,
+    },
+    {
+      id: 4,
+      title: "Revenue",
+      count: "$505",
+      img: imgDashIcon4,
+    },
+  ];
   const Menus = [
-    // { title: "Dashboard" },
-    // { title: "Pages" },
-    // { title: "Media", spacing: true },
     {
       title: "Employees",
       submenu: true,
-      submenuItems: [
-        { title: "Creat Employee" },
-        { title: "List Employees" },
-        // { title: "Submenu 3" },
-      ],
+      submenuItems: [{ title: "Creat Employee" }, { title: "List Employees" }],
     },
-    // {
-    //   title: "Customers",
-    //   submenu: true,
-    //   submenuItems: [
-    //     { title: "Creat Customer" },
-    //     { title: "List Customers" },
-    //     // { title: "Submenu 3" },
-    //   ],
-    // },
-    // { title: "Analytics" },
-    // { title: "Inbox" },
-    // { title: "Profile", spacing: true },
-    // { title: "Setting" },
-    // { title: "Logout" },
   ];
+
+  const data = [
+    ["Task", "Hours per Day"],
+    ["Work", 11],
+    ["Eat", 2],
+    ["Commute", 2],
+    ["Watch TV", 2],
+    ["Sleep", 7],
+  ];
+  const dataCol = [
+    ["Element", "Density", { role: "style" }],
+    ["Copper", 8.94, "#b87333"], // RGB value
+    ["Silver", 10.49, "silver"], // English color name
+    ["Gold", 19.3, "gold"],
+    ["Platinum", 21.45, "color: #e5e4e2"], // CSS-style declaration
+  ];
+
+  const options = {
+    title: "My Daily Activities",
+  };
+
   const [bars, setBars] = useState(false);
+  const [cremployee, setCrEmployee] = useState(false);
   const handleBar = () => {
     setBars(!bars);
   };
 
+  const createEm = () => {
+    setCrEmployee(true);
+  };
+
+  const navigate = useNavigate();
+  const handleMenuClick = (title) => {
+    if (title === "Creat Employee") {
+      navigate("/admin/create-employees");
+    } else if (title === "List Employees") {
+      navigate("/admin/list-employees");
+    }
+  };
+
   return (
-    <div className="bg-gray-500 h-[100vh]">
+    <div className="bg-[#f7f7fa] h-[100vh]">
+      {/* Header  */}
       <div class="fixed top-0 bg-white left-0 right-0 z-[999] flex h-header items-center justify-between bg-light">
         <div class="header-logo order-2 lg:order-1 flex-1 lg:flex-none px-0 lg:px-5 flex w-auto lg:w-sidebar justify-start transition-all duration-200 ease-in-out">
           <img
@@ -61,9 +119,12 @@ const HomeAdmin = () => {
           <div className="flex justify-center items-center">
             <h3 className="text-3xl font-semibold">CodeHire</h3>
           </div>
-          <div class="grow-0 lg:grow flex justify-center items-center ml-8 order-1 lg:order-2 mx-5 lg:mx-0">
+          <div
+            onClick={() => setOpen(!open)}
+            class="grow-0 lg:grow flex justify-center items-center ml-8 order-1 lg:order-2 mx-5 lg:mx-0"
+          >
             <button class="btn px-4 py-2 ml-6 text-white font-semibold bg-blue-500 icon primary rounded-lg">
-              <FontAwesomeIcon onClick={() => setOpen(!open)} icon={faBars} />
+              <FontAwesomeIcon icon={faBars} />
             </button>
           </div>
         </div>
@@ -75,7 +136,10 @@ const HomeAdmin = () => {
             <FontAwesomeIcon icon={faMaximize} />
           </button>
 
-          <div class="h-full flex items-center cursor-pointer group">
+          <div
+            onClick={handleBar}
+            class="h-full flex items-center cursor-pointer group"
+          >
             <div class="w-[40px] h-[40px] rounded-full p-[0.125rem] border-2 border-secondary mr-0 md:mr-2 group-hover:border-primary transition duration-200 ease-in-out">
               <img
                 class="w-full rounded-full"
@@ -88,7 +152,7 @@ const HomeAdmin = () => {
               <p class="text-active text-xs font-medium">Administrator</p>
             </div>
             <span class="hidden lg:block">
-              <FontAwesomeIcon onClick={handleBar} icon={faChevronDown} />
+              <FontAwesomeIcon icon={faChevronDown} />
             </span>
           </div>
           <div
@@ -123,44 +187,19 @@ const HomeAdmin = () => {
           </div>
         </div>
       </div>
-      {/* <div class="sidebar z-[999]" style="overflow-y: overlay"> 
-            
-      </div> */}
-      <div className="flex mt-20 text-left ">
+
+      {/* Content  */}
+      <div className="flex mt-[90px] text-left ">
         <div
-          className={`bg-white h-screen p-5 pt-8 ${
+          className={`bg-white h-screen fixed p-5 ${
             open ? "w-[360px]" : "w-20"
           } duration-300 relative`}
         >
-          {/* <FontAwesomeIcon
-            icon={faArrowLeft}
-            onClick={() => setOpen(!open)}
-            className={`bg-white border border-dark-purple cursor-pointer px-[6px] py-[5px] text-dark-purple text-xl rounded-full absolute -right-4 duration-500 top-9 ${
-              !open && "rotate-180"
-            }`}
-          /> */}
-          {/* <div className="inline-flex">
-            <FontAwesomeIcon
-              className={`bg-white text-blue-500 text-3xl rounded-full mr-2 cursor-pointer block float-left duration-500 w-10 h-10 ${
-                !open && "rotate-[360deg]"
-              }`}
-              icon={faCode}
-            />
-            <h1
-              className={`text-white mt-1 origin-left font-medium text-2xl ${
-                !open && "scale-0"
-              } `}
-            >
-              Code Hire
-            </h1>
-          </div> */}
-          {/* <div className="flex items-center rounded-md">
-          <FontAwesomeIcon className="text-white" icon={faUserTie} />
-        </div> */}
           <ul className="pt-2">
             {Menus.map((menu, index) => (
               <>
                 <li
+                  onClick={() => setSubmenuOpen(!submenuOpen)}
                   key={index}
                   className={`text-gray-600 text-sm flex items-center ease-linear transition-colors duration-200 gap-x-4 cursor-pointer p-2 hover:bg-blue-500 hover:text-white rounded-md`}
                 >
@@ -168,7 +207,7 @@ const HomeAdmin = () => {
                     <FontAwesomeIcon icon={faUserTie} />
                   </span>
                   <span
-                    className={`text-base font-medium flex-1 ${
+                    className={`text-xl font-semibold flex-1 ${
                       !open && "hidden"
                     }`}
                   >
@@ -179,7 +218,6 @@ const HomeAdmin = () => {
                       className={`${submenuOpen && "rotate-180"} ${
                         !open && "hidden"
                       }`}
-                      onClick={() => setSubmenuOpen(!submenuOpen)}
                       icon={faChevronDown}
                     />
                   )}
@@ -188,8 +226,10 @@ const HomeAdmin = () => {
                   <ul>
                     {menu.submenuItems.map((submenuItem, index) => (
                       <li
+                        tabIndex="0"
                         key={index}
-                        className="text-gray-600 px-5 text-base flex items-center gap-x-4 cursor-pointer p-2 hover:bg-light-white rounded-md"
+                        onClick={() => handleMenuClick(submenuItem.title)}
+                        className="text-gray-600 w-full bg-white px-5 text-base flex items-center gap-x-4 cursor-pointer p-2 hover:bg-gray-200 transition-all ease-in duration-200 hover:text-gray-600 rounded-md focus:outline-none focus:bg-blue-500 focus:text-white"
                       >
                         {submenuItem.title}
                       </li>
@@ -200,14 +240,72 @@ const HomeAdmin = () => {
             ))}
           </ul>
         </div>
-        <div className="p-7 bg-gray-400 w-full">
-          <h1 className="text-2xl font-semibold">Home Page</h1>
+
+        <div class="p-6 w-full bg-[#f7f7fa] min-h-screen-except-header">
+          <h3 class="text-2xl font-medium pb-8">Welcome Admin!</h3>
+          <div class="row flex items-center box-border mb-8">
+            {columns.map((column, index) => (
+              <div
+                key={index}
+                class="columns-3xs w-full bg-white rounded-lg box-border p-6 mr-6"
+              >
+                <div class="item flex items-center justify-between">
+                  <div class="text">
+                    <h6 class="top text-fs14 text-footer">{column.title}</h6>
+                    <h3 class="bottom text-fs22 font-semibold">
+                      {column.count}
+                    </h3>
+                  </div>
+                  <div class="border rounded-lg bg-[#edf4ff]">
+                    <img className="" src={column.img} alt="" />
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          <div class="row flex items-center justify-between mb-8">
+            <div class="columns-lg bg-white rounded-lg box-border p-6 mr-6">
+              <div class="item">
+                <div class="top flex items-center justify-between pb-3">
+                  <h5 class="text-xl font-semibold">Number of Employees</h5>
+                  <i class="fa-solid fa-ellipsis-vertical w-6 h-8 leading-8 bg-lightgray rounded-md text-center cursor-pointer"></i>
+                </div>
+                <div class="bottom">
+                  <Chart
+                    chartType="PieChart"
+                    data={data}
+                    options={options}
+                    width={"100%"}
+                    height={"400px"}
+                  />
+                </div>
+              </div>
+            </div>
+            <div class="columns-lg bg-white rounded-lg box-border p-6 mr-6">
+              <div class="item">
+                <div class="top flex items-center justify-between pb-3">
+                  <h5 class="text-xl font-semibold">Overview</h5>
+                  <i class="fa-solid fa-ellipsis-vertical w-6 h-8 leading-8 bg-lightgray rounded-md text-center cursor-pointer"></i>
+                </div>
+                <div class="bottom">
+                  <Chart
+                    chartType="ColumnChart"
+                    width="100%"
+                    height="400px"
+                    data={dataCol}
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
+
+      {/* Footer */}
       <div class="footer bg-light text-footer ml-[30%] translate-x-[-20%] text-sm leading-5 py-4">
         <div class="container ml-20">
           <span>COPYRIGHTS </span>
-          <i class="fa-regular fa-copyright"></i>
           <span> 2022 DREAMGUYS.</span>
         </div>
       </div>

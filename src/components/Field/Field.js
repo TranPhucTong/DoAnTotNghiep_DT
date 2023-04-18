@@ -79,7 +79,6 @@ function Field() {
   
 
   const hireTeamHanlde = () => {
-    dispatch(changeRoutesss(true));
     navigate("/hireTeam");
   };
   return (

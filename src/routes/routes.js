@@ -16,6 +16,8 @@ import Register from "../pages/register/Register";
 import FreelancerPage from "../pages/freelancer/FreelancerPage";
 import InfoFreelancer from "../pages/info-freelancer/InfoFreelancer";
 import HomeAdmin from "../pages/home-admin/HomeAdmin";
+import ListEmployees from "../components/admin/ListEmployees";
+import CreatEmployee from "../components/admin/CreatEmployee";
 const mainRoutes = [
   {
     path: configRoutes.home,
@@ -41,11 +43,11 @@ const mainRoutes = [
     path: configRoutes.infoFreelancers,
     component: InfoFreelancer,
   },
-  {
-    path: configRoutes.homeAdmin,
-    isLayout: true,
-    component: HomeAdmin,
-  },
+  // {
+  //   path: configRoutes.homeAdmin,
+  //   isLayout: true,
+  //   component: HomeAdmin,
+  // },
   {
     path: configRoutes.hireTeam,
     isLayout: true,
@@ -91,13 +93,26 @@ const mainRoutes = [
     isLayout: true,
     component: HireTeamInfo,
   },
+  {
+    path: configRoutes.homeAdmin,
+    isLayout: true,
+    component: HomeAdmin,
+  },
 ];
 
-export const secondRoutes = [
-  // {
-  //   path: configRoutes.home,
-  //   component: Home,
-  // },
+export const adminRoutes = [
+  {
+    path: configRoutes.adminListEmployees,
+    component: ListEmployees,
+  },
+  {
+    path: configRoutes.adminCreateEmployees,
+    component: CreatEmployee,
+  },
+];
+
+export const threeRoutes = [
+  
 ];
 
 export default mainRoutes;

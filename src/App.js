@@ -1,15 +1,27 @@
 import logo from "./logo.svg";
 import "./App.css";
 import { Route, Routes } from "react-router-dom";
-import mainRoutes, { secondRoutes } from "./routes/routes";
+import mainRoutes, { adminRoutes, secondRoutes } from "./routes/routes";
 import { Helmet } from "react-helmet";
 import Layout from "./layout/Layout";
 import { useSelector } from "react-redux";
 import { routeState } from "./reducers/slices/routeSlice";
 import { useEffect, useState } from "react";
+import LayoutAdmin from "./layout/layout-admin/LayoutAdmin";
+import { ClipLoader, RingLoader } from "react-spinners";
 
 function App() {
   const isMainRoute = true;
+  const isAdminRoute = true;
+
+  // const [loading, setLoading] = useState(false); // Hiệu ứng Loading
+  // useEffect(() => {
+  //   setLoading(true);
+  //   setTimeout(() => {
+  //     setLoading(false);
+  //   }, 2000)
+  // }, []);
+
   return (
     <div className="App">
       <Helmet>
@@ -18,9 +30,18 @@ function App() {
         <link rel="canonical" href="http://mysite.com/example" />
         <meta name="description" content="Helmet application" />
       </Helmet>
-      <Routes>
-        {isMainRoute
-          ? mainRoutes.map((route, index) => {
+      {/* Hiệu ứng Loading */}
+      {/* {loading ? (
+        <RingLoader
+          className="h-full top-[350px] left-1/2 transform -translate-x-1/2 -translate-y-1/2"
+          color={"#3b82f6"}
+          loading={loading}
+          size={100}
+        />
+      ) : ( */}
+        <Routes>
+          {isMainRoute &&
+            mainRoutes.map((route, index) => {
               const Page = route.component;
               return (
                 <Route
@@ -37,14 +58,24 @@ function App() {
                   }
                 ></Route>
               );
-            })
-          : secondRoutes.map((route, index) => {
+            })}
+          {isAdminRoute &&
+            adminRoutes.map((route, index) => {
               const Page = route.component;
               return (
-                <Route key={index} path={route.path} element={<Page />}></Route>
+                <Route
+                  key={index}
+                  path={route.path}
+                  element={
+                    <LayoutAdmin>
+                      <Page />
+                    </LayoutAdmin>
+                  }
+                ></Route>
               );
             })}
-      </Routes>
+        </Routes>
+      {/* )} */}
     </div>
   );
 }
