@@ -27,6 +27,7 @@ import imgDashIcon1 from "../../images/icon/dash-icon-01.svg";
 import imgDashIcon2 from "../../images/icon/dash-icon-02.svg";
 import imgDashIcon3 from "../../images/icon/dash-icon-03.svg";
 import imgDashIcon4 from "../../images/icon/dash-icon-04.svg";
+import avtFB from "../../images/AVTFB.png"
 import { PieChart, Pie, Tooltip } from "recharts";
 import { Chart } from "react-google-charts";
 
@@ -141,11 +142,7 @@ const HomeAdmin = () => {
             class="h-full flex items-center cursor-pointer group"
           >
             <div class="w-[40px] h-[40px] rounded-full p-[0.125rem] border-2 border-secondary mr-0 md:mr-2 group-hover:border-primary transition duration-200 ease-in-out">
-              <img
-                class="w-full rounded-full"
-                src="https://scontent.fsgn19-1.fna.fbcdn.net/v/t39.30808-6/337145845_1179316779393527_5171054869994625444_n.jpg?_nc_cat=103&ccb=1-7&_nc_sid=09cbfe&_nc_ohc=dGFHlbHly-YAX8_lDwe&_nc_ht=scontent.fsgn19-1.fna&oh=00_AfD7M2OZbyD_7o3sQwUI0YnRMp9f_DY7yhMS_VjwGkyxFA&oe=643664BD"
-                alt=""
-              />
+              <img class="w-full rounded-full" src={avtFB} alt="" />
             </div>
             <div class="mr-2 hidden text-left lg:block">
               <p class="text-dark text-sm font-medium">Tran Phuc Tong</p>
@@ -163,11 +160,7 @@ const HomeAdmin = () => {
             }`}
           >
             <div class="flex items-center gap-2 bg-[#f9f9f9] px-4 py-2">
-              <img
-                class="w-[40px] h-[40px] rounded-full"
-                src="https://scontent.fsgn19-1.fna.fbcdn.net/v/t39.30808-6/337145845_1179316779393527_5171054869994625444_n.jpg?_nc_cat=103&ccb=1-7&_nc_sid=09cbfe&_nc_ohc=dGFHlbHly-YAX8_lDwe&_nc_ht=scontent.fsgn19-1.fna&oh=00_AfD7M2OZbyD_7o3sQwUI0YnRMp9f_DY7yhMS_VjwGkyxFA&oe=643664BD"
-                alt=""
-              />
+              <img class="w-[40px] h-[40px] rounded-full" src={avtFB} alt="" />
               <div class="grow">
                 <p class="text-dark text-base font-medium">Tran Phuc Tong</p>
                 <p class="text-sidebar text-sm">Administrator</p>
