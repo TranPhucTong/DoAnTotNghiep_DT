@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
+import employeeApi from "../../api/employeeApi";
+import employeeApii from "../../api/employeeApii";
 
 const CreatEmployee = (props) => {
   const [name, setName] = useState("");
@@ -34,9 +36,23 @@ const CreatEmployee = (props) => {
     }
   }, [name, email, phone, gender, birthday, team]);
   const navigate = useNavigate();
-  const Click = () => {
-    alert("tạo thành công!");
-    navigate("/admin/list-employees");
+  const Click = async () => {
+  
+    const employee = {
+        "email": "chg@gmail.com",
+        "password": "111111",
+        "name": "Chanh",
+        "phone": "0337175348",
+        "birthDate": "09/02/2001",
+        "gender": "nam",
+        "type": "team"
+    }
+
+    // const response = await employeeApii.createEmployee(employee);
+    // console.log(response);  
+    const response = await employeeApii.getEmplees();
+    console.log(response);
+    // navigate("/admin/list-employees");
   };
   return (
     <div class="p-6 w-full  min-h-screen-except-header">
@@ -48,7 +64,7 @@ const CreatEmployee = (props) => {
         <span>Create Employee</span>
       </h4>
       {isUname ? (
-        <form class="mt-6 bg-white shadow-xl rounded-lg p-8 pt-10">
+        <div class="mt-6 bg-white shadow-xl rounded-lg p-8 pt-10">
           <div class="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-12">
             {/* name  */}
             <div class="h-[2.875rem] relative flex items-center border border-solid focus-within:border-blue-500 transition-all ease-linear  border-gray-200 rounded-lg">
@@ -144,11 +160,12 @@ const CreatEmployee = (props) => {
             onClick={Click}
             type="submit"
             class={`bg-blue-500 px-8 py-2 text-white font-semibold rounded-lg mt-12 hover:bg-blue-600 transition-colors ease-linear 
-          ${isFormComplete ? "" : "opacity-50 pointer-events-none"}`}
+          ${!isFormComplete ? "" : "opacity-50 pointer-events-none"}`
+        }
           >
             Hoàn thành
           </button>
-        </form>
+        </div>
       ) : (
         <div className="w-full flex justify-center items-center">
           <form class="mt-6 w-[50%] bg-white shadow-xl rounded-lg p-8 pt-10">
