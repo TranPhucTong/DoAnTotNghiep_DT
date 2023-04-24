@@ -2,13 +2,13 @@ import React, { useState } from 'react'
 import { RadioGroup } from "@headlessui/react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faStar } from "@fortawesome/free-solid-svg-icons";
+import { dateToAge } from '../../../utils/convert';
 const reviews = { href: "#", average: 4, totalCount: 117 };
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
 const ProductInfo = ({employee}) => {
-    console.log(employee);
 
   return (
     <div className="mx-auto max-w-2xl px-4 pb-16 pt-10 sm:px-6 lg:grid lg:max-w-7xl lg:grid-cols-3 lg:grid-rows-[auto,auto,1fr] lg:gap-x-8 lg:px-8 lg:pb-24 lg:pt-16">
@@ -21,15 +21,15 @@ const ProductInfo = ({employee}) => {
           {/* Options */}
           <div className="mt-4 lg:row-span-3 lg:mt-0 ">
             <div className="flex justify-center items-center mb-5">
-                <img className = 'rounded-full h-24 w-2h-24' src={employee.avatar} alt="" /> 
+                <img className = 'rounded-full h-24 w-24' src={employee.avatar} alt="" /> 
             </div>
             <p className="text-left text-xl tracking-tight text-gray-900 mb-2">
-              Gmail: {employee.gmail}
+              Email: {employee.email}
             </p>
             <p className="text-left text-xl tracking-tight text-gray-900 mb-2">
-              Tuổi: {employee.age}t
+              Tuổi: {dateToAge(employee.birthDate)}t
             </p><p className="text-left text-xl tracking-tight text-gray-900 mb-2">
-            Giá: {employee.rentFrom} - {employee.rentTo}
+            Giá: {employee.rent_from} - {employee.rent_to}
             </p>
 
 
@@ -84,7 +84,7 @@ const ProductInfo = ({employee}) => {
 
               <div className="mt-4 ">
                 <ul role="list" className="list-disc space-y-2 pl-4 text-sm">
-                  {employee.skill.map((highlight) => (
+                  {employee.field.map((highlight) => (
                     <li key={highlight} className="text-gray-400">
                       <span className="text-gray-600">{highlight}</span>
                     </li>

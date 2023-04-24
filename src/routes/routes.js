@@ -43,11 +43,6 @@ const mainRoutes = [
     path: configRoutes.infoFreelancers,
     component: InfoFreelancer,
   },
-  // {
-  //   path: configRoutes.homeAdmin,
-  //   isLayout: true,
-  //   component: HomeAdmin,
-  // },
   {
     path: configRoutes.hireTeam,
     isLayout: true,

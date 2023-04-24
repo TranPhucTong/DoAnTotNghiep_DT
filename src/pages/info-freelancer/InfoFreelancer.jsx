@@ -1,11 +1,13 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import listProject from "../../assests/imgs";
 import ListProjectPhoto from "./list-project-photo/ListProjectPhoto";
 import Breadcrumb from "./breadcrumb/Breadcrumb";
 import ProductInfo from "./product-info/ProductInfo";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { selectEmployee } from "../../reducers/slices/employeeSlice";
+import { useParams } from "react-router";
+import { getListEmployeeByPhone } from "../../reducers/actions/employeeAction";
 const product = {
   name: "Danh",
   gmail: "thdanh2001@gmail.com",
@@ -50,29 +52,34 @@ const product = {
     { name: "3XL", inStock: true },
   ],
   description:
-    'Tôi chuyên thiết kế những trang web trẻ trung, hiện đại giao diện thân thiện với người dùng',
-  highlights: [
-    "HTML",
-    "React",
-    "SCSS",
-    "NodeJs",
-  ],
+    "Tôi chuyên thiết kế những trang web trẻ trung, hiện đại giao diện thân thiện với người dùng",
+  highlights: ["HTML", "React", "SCSS", "NodeJs"],
   details:
     'The 6-Pack includes two black, two white, and two heather gray Basic Tees. Sign up for our subscription service and be the first to get new, exciting colors, like our upcoming "Charcoal Gray" limited release.',
 };
 
-
 export default function InfoFreelancer() {
- const sEmployee = useSelector(selectEmployee);
-  return (
+  let { id } = useParams();
+  console.log("id: ", id);
+  const sEmployee = useSelector(selectEmployee);
+  const dispatch = useDispatch();
+  useEffect(() => {
+    if (!sEmployee.phone) {
+      dispatch(getListEmployeeByPhone(id));
+    }
+  }, []);
+  console.log("sEmployee: ", sEmployee);
+  return sEmployee.phone ? (
     <div className="bg-white">
       <div className="pt-6">
-       {/* <Breadcrumb product={product}/> */}
+        {/* <Breadcrumb product={product}/> */}
         <ListProjectPhoto images={sEmployee.spotlight} />
 
         {/* Product info */}
-       <ProductInfo employee={sEmployee}/>
+        <ProductInfo employee={sEmployee} />
       </div>
     </div>
+  ) : (
+    <></>
   );
 }

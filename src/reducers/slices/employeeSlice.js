@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { login, register, registerInfo } from "../actions/authAction";
-import { getListEmployee } from "../actions/employeeAction";
+import { getListEmployee, getListEmployeeByPhone, getListEmployeeByType } from "../actions/employeeAction";
 let employee = {
   id: "",
   name: "",
@@ -32,8 +32,15 @@ const employeeSlice = createSlice({
   extraReducers: {
     [getListEmployee.fulfilled]: (state, action) => {
       if (!action.payload.data) return;
-
       state.listEmployee = action.payload.data;
+    },
+    [getListEmployeeByType.fulfilled]: (state, action) => {
+      if (!action.payload.data) return;
+      state.listEmployee = action.payload.data;
+    },
+    [getListEmployeeByPhone.fulfilled]: (state, action) => {
+      if (!action.payload.data) return;
+      state.employee = action.payload.data;
     },
   },
 });

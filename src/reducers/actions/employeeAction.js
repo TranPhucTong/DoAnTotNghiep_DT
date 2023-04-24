@@ -8,3 +8,25 @@ export const getListEmployee = createAsyncThunk("/employees", async () => {
     return error.response;
   }
 });
+
+export const getListEmployeeByType = createAsyncThunk("/employees/type", async (type) => {
+  try {
+    const res = await employeeApi.getListEmployeeByType(type);
+    return { data: res.data, status: res.status };
+  } catch (error) {
+    return error.response;
+  }
+});
+
+
+export const getListEmployeeByPhone = createAsyncThunk(
+  "/employees/phone",
+  async (phone) => {
+    try {
+      const res = await employeeApi.getEmployeeByPhone(phone);
+      return { data: res.data, status: res.status };
+    } catch (error) {
+      return error.response;
+    }
+  }
+);

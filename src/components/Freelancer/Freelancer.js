@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faStar,
@@ -9,8 +9,15 @@ import ButtonHire from "../button/Button-Hire/ButtonHire";
 import configRoutes from "../../config/configRouter";
 import { useNavigate } from "react-router";
 import { useDispatch, useSelector } from "react-redux";
-import { getListEmployee } from "../../reducers/actions/employeeAction";
-import { changeEmployee, listEmployee } from "../../reducers/slices/employeeSlice";
+import {
+  getListEmployee,
+  getListEmployeeByType,
+} from "../../reducers/actions/employeeAction";
+import {
+  changeEmployee,
+  listEmployee,
+} from "../../reducers/slices/employeeSlice";
+import { Link } from "react-router-dom";
 
 export const freelancers = [
   {
@@ -61,21 +68,27 @@ export const FreelancerCard = ({ freelancer, onChangeFreelancer }) => {
   const router = useNavigate();
   const dispatch = useDispatch();
   const changeSelectFreelanceHandle = (freelancer) => {
+    console.log(freelancer);
     dispatch(changeEmployee(freelancer));
   };
   const getFreelancerHandle = (freelancer) => {
     changeSelectFreelanceHandle(freelancer);
-    router(configRoutes.infoFreelancers);
+    // router(configRoutes.infoFreelancers);
   };
   return (
-    <a
+    <Link
+      to={`/freelancers/info/${freelancer.phone}`}
       onClick={() => getFreelancerHandle(freelancer)}
       className="flex flex-col cursor-pointer border-[1px] rounded-xl border-gray-200 hover:shadow-xl transition-all duration-300 ease-out hover:text-[#00bdd6] shadow-md"
     >
       <div className="p-6">
         <div className="w-full h-[200px] mb-5">
           <img
-            src={freelancer.background}
+            src={
+              freelancer.background
+                ? freelancer.background
+                : "https://cdn.dribbble.com/users/1797155/screenshots/5018207/malware-attack.gif"
+            }
             className="rounded-lg w-full h-full object-cover"
             alt={freelancer.name}
           />
@@ -120,7 +133,7 @@ export const FreelancerCard = ({ freelancer, onChangeFreelancer }) => {
           </div>
         </div>
       </div>
-    </a>
+    </Link>
   );
 };
 
@@ -128,9 +141,14 @@ function Freelancer() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const listFreelancer = useSelector(listEmployee);
-  console.log(listFreelancer);
+  let listRender = listFreelancer;
+  if (listFreelancer.length) {
+    listRender = listFreelancer.slice(0, 4);
+  }
   useEffect(() => {
-    dispatch(getListEmployee());
+    if (!listFreelancer.length) {
+      dispatch(getListEmployeeByType("freelancer"));
+    }
   }, []);
 
   return (
@@ -148,7 +166,7 @@ function Freelancer() {
         />
       </p>
       <div className="grid grid-cols-4 grid-rows-1 gap-10 mb-8">
-        {listFreelancer.map((freelancer) => (
+        {listRender.map((freelancer) => (
           <div key={freelancer.id} className="col-span-1 row-span-1">
             <FreelancerCard freelancer={freelancer} />
           </div>

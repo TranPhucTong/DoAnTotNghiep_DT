@@ -13,7 +13,7 @@ const configRoutes = {
   hireteamWorkWage: "/hireTeam/quiz/work-wage",
   hireteamCustomInfo: "/hireTeam/quiz/info",
   freelancers: "/freelancers",
-  infoFreelancers: "/freelancers/info",
+  infoFreelancers: "/freelancers/info/:id",
   homeAdmin: "/admin/home",
   adminListEmployees: "/admin/list-employees",
   adminCreateEmployees: "/admin/create-employees",
