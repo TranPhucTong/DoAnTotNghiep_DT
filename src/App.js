@@ -8,7 +8,7 @@ import { useSelector } from "react-redux";
 import { routeState } from "./reducers/slices/routeSlice";
 import { useEffect, useState } from "react";
 import LayoutAdmin from "./layout/layout-admin/LayoutAdmin";
-import { ClipLoader, RingLoader } from "react-spinners";
+// import { ClipLoader, RingLoader } from "react-spinners";
 
 function App() {
   const isMainRoute = true;

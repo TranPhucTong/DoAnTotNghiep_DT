@@ -2,13 +2,16 @@ import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
+import employeeApi from "../../api/employeeApi";
+import employeeApii from "../../api/employeeApii";
+import { useLocation } from "react-router-dom";
 
 const CreatEmployee = (props) => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [gender, setGender] = useState("");
   const [birthday, setBirthday] = useState("");
-  const [team, setTeam] = useState("");
+  const [position, setPosition] = useState("");
   const [isFormComplete, setIsFormComplete] = useState(false);
   const [isCompleteCre, setIsCompleteCre] = useState(false);
   const [isUname, setIsUname] = useState(false);
@@ -28,22 +31,34 @@ const CreatEmployee = (props) => {
       email !== "" &&
       gender !== "" &&
       birthday !== "" &&
-      team !== ""
+      position !== ""
     ) {
       setIsFormComplete(true);
     } else {
       setIsFormComplete(false);
     }
-    if (phone !== "" && type !== "" && password !== "") {
+    if (phone !== "" && password !== "") {
       setIsCompleteCre(true);
     } else {
       setIsCompleteCre(false);
     }
-  }, [name, email, gender, birthday, team, phone, type, password]);
+  }, [name, email, gender, birthday, position, phone, type, password]);
   const navigate = useNavigate();
-  const Click = () => {
-    alert("tạo thành công!");
-    navigate("/admin/list-employees");
+  const clickCreateEmployee = async () => {
+    const employee = {
+      email: email,
+      password: password,
+      name: name,
+      phone: phone,
+      birthDate: birthday,
+      gender: gender,
+      type: "team",
+    };
+
+    const response = await employeeApii.createEmployee(employee);
+    console.log(response);
+    console.log(name);
+    navigate("/admin/list-employees")
   };
   return (
     <div class="p-6 w-full  min-h-screen-except-header">
@@ -52,10 +67,12 @@ const CreatEmployee = (props) => {
           !isUname ? "text-center" : " "
         }`}
       >
-        <span>Create Employee</span>
+        <span className="text-2xl font-extrabold text-blue-500">
+          Tạo nhân viên mới
+        </span>
       </h4>
       {isUname ? (
-        <form class="mt-6 bg-white shadow-xl rounded-lg p-8 pt-10">
+        <div class="mt-6 bg-white shadow-xl rounded-lg p-8 pt-10">
           <div class="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-12">
             {/* name  */}
             <div class="h-[2.875rem] relative flex items-center border border-solid focus-within:border-blue-500 transition-all ease-linear  border-gray-200 rounded-lg">
@@ -82,8 +99,8 @@ const CreatEmployee = (props) => {
                 onChange={(e) => setGender(e.target.value)}
               >
                 <option value="">Vui lòng chọn</option>
-                <option value="male">Male</option>
-                <option value="female">Female</option>
+                <option value="Nam">Nam</option>
+                <option value="Nu">Nữ</option>
               </select>
             </div>
 
@@ -115,27 +132,26 @@ const CreatEmployee = (props) => {
               />
             </div>
 
-            {/* Team */}
+            {/* Position */}
             <div class="h-[2.875rem] relative flex items-center justify-center border border-solid focus-within:border-blue-500 transition-all ease-linear border-gray-200 rounded-lg">
               <label className="absolute -top-1/4 left-2 px-2 bg-white text-blue-500 text-sm">
-                Nhóm làm việc
+                Chức vụ
               </label>
               <select
                 className="text-sm w-full border border-none outline-none px-4 py-2 mb-0"
                 formControlName="gender"
-                value={team}
-                onChange={(e) => setTeam(e.target.value)}
+                value={position}
+                onChange={(e) => setPosition(e.target.value)}
               >
                 <option value="">Vui lòng chọn</option>
-                <option value="angular">Angular</option>
-                <option value="reactJs">ReactJs</option>
-                <option value="legato">Legato</option>
+                <option value="leader">Trưởng nhóm</option>
+                <option value="coder">Nhân viên lập trình</option>
               </select>
             </div>
           </div>
           <div className="w-full flex justify-end">
             <button
-              onClick={Click}
+              onClick={clickCreateEmployee}
               type="submit"
               class={`bg-blue-500 px-8 py-2 text-white font-semibold rounded-lg mt-12 hover:bg-blue-600 transition-colors ease-linear 
           ${isFormComplete ? "" : "opacity-50 pointer-events-none"}`}
@@ -143,22 +159,27 @@ const CreatEmployee = (props) => {
               Hoàn thành
             </button>
           </div>
-        </form>
+        </div>
       ) : (
         <div className="w-full flex justify-center items-center">
           <form class="mt-6 w-[50%] bg-white shadow-xl rounded-lg p-8 pt-10">
+            <div className="text-left mb-4 italic text-green-500 font-bold">
+              *Tạo tài khoản làm việc cho nhân viên
+            </div>
             <div className="mb-4">
               <label
                 className="block text-gray-700 font-medium mb-2"
                 htmlFor="phone"
               >
-                Điện thoại
+                Tài khoản
               </label>
               <input
-                className="border border-gray-400 p-2 w-full"
+                className="border shadow focus:shadow-blue-500 focus:shadow-sm focus:border-blue-500 focus:outline-none ease-linear duration-100 transition-colors border-gray-400 rounded-xl p-2 w-full"
                 type="phone"
+                placeholder="Xin mời nhập số điện thoại"
                 id="phone"
                 name="phone"
+                defaultValue={phone}
                 value={phone}
                 onChange={(e) => {
                   setPhone(e.target.value);
@@ -175,9 +196,10 @@ const CreatEmployee = (props) => {
               </label>
               <div className="relative flex items-center">
                 <input
-                  className="border border-gray-400 p-2 w-full pr-10"
+                  className="border shadow focus:shadow-blue-500 focus:shadow-sm focus:border-blue-500 focus:outline-none ease-linear duration-100 transition-colors border-gray-400 rounded-xl p-2 w-full"
                   type={showPassword ? "text" : "password"}
                   id="password"
+                  placeholder="Nhập mật khẩu"
                   name="password"
                   value={password}
                   onChange={(e) => {
@@ -188,19 +210,34 @@ const CreatEmployee = (props) => {
                 {showPassword ? (
                   <FontAwesomeIcon
                     icon={faEyeSlash}
-                    className="w-6 h-6 absolute right-6 text-gray-400 cursor-pointer"
                     onClick={toggleShowPassword}
+                    // Thêm lớp CSS cho biểu tượng FontAwesomeIcon
+                    className={`w-6 h-6 absolute right-6 cursor-pointer ${
+                      password.length > 0 ? "text-blue-500" : "text-gray-400"
+                    } ${
+                      password.length > 0
+                        ? "focus:text-blue-500"
+                        : "focus:text-gray-400"
+                    }`}
                   />
                 ) : (
                   <FontAwesomeIcon
                     icon={faEye}
-                    className="w-6 h-6 absolute right-6 text-gray-400 cursor-pointer"
                     onClick={toggleShowPassword}
+                    // Thêm lớp CSS cho biểu tượng FontAwesomeIcon
+                    className={`w-6 h-6 absolute right-6 cursor-pointer ${
+                      password.length > 0 ? "text-blue-500" : "text-gray-400"
+                    } ${
+                      password.length > 0
+                        ? "focus:text-blue-500"
+                        : "focus:text-gray-400"
+                    }`}
                   />
                 )}
               </div>
             </div>
-            <div className="mb-4">
+
+            {/* <div className="mb-4">
               <label
                 className="block text-gray-700 font-medium mb-2"
                 htmlFor="role"
@@ -221,7 +258,7 @@ const CreatEmployee = (props) => {
                 <option value="employee">Nhân viên đội ngũ</option>
                 <option value="freelancer">Nhân viên tự do</option>
               </select>
-            </div>
+            </div> */}
             <div className="text-center">
               <button
                 onClick={handleUname}
