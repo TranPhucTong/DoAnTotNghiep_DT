@@ -10,6 +10,7 @@ import configRoutes from "../../config/configRouter";
 import { useNavigate } from "react-router";
 import { useDispatch, useSelector } from "react-redux";
 import {
+  getFreelancerByPage,
   getListEmployee,
   getListEmployeeByType,
 } from "../../reducers/actions/employeeAction";
@@ -147,7 +148,7 @@ function Freelancer() {
   }
   useEffect(() => {
     if (!listFreelancer.length) {
-      dispatch(getListEmployeeByType("freelancer"));
+      dispatch(getFreelancerByPage(1));
     }
   }, []);
 

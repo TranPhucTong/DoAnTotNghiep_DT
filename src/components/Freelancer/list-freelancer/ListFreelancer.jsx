@@ -131,9 +131,7 @@ const freelancers = [
   },
 ];
 
-const ListFreelancer = () => {
-  const listFreelancer = useSelector(listEmployee);
- 
+const ListFreelancer = ({listFreelancer}) => {
   return (
    <div className="grid grid-cols-4 grid-rows-1 gap-10 mb-8">
         {listFreelancer.map((freelancer) => (

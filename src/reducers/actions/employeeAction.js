@@ -9,15 +9,29 @@ export const getListEmployee = createAsyncThunk("/employees", async () => {
   }
 });
 
-export const getListEmployeeByType = createAsyncThunk("/employees/type", async (type) => {
-  try {
-    const res = await employeeApi.getListEmployeeByType(type);
-    return { data: res.data, status: res.status };
-  } catch (error) {
-    return error.response;
+export const getListEmployeeByType = createAsyncThunk(
+  "/employees/type",
+  async (type) => {
+    try {
+      const res = await employeeApi.getListEmployeeByType(type);
+      return { data: res.data, status: res.status };
+    } catch (error) {
+      return error.response;
+    }
   }
-});
+);
 
+export const getFreelancerByPage = createAsyncThunk(
+  "/employees/freelancer/page",
+  async (page) => {
+    try {
+      const res = await employeeApi.getFreelancerByPage(page);
+      return { data: res.data, status: res.status };
+    } catch (error) {
+      return error.response;
+    }
+  }
+);
 
 export const getListEmployeeByPhone = createAsyncThunk(
   "/employees/phone",

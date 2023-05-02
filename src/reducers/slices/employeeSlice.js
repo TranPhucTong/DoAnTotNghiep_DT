@@ -1,6 +1,11 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { login, register, registerInfo } from "../actions/authAction";
-import { getListEmployee, getListEmployeeByPhone, getListEmployeeByType } from "../actions/employeeAction";
+import {
+  getFreelancerByPage,
+  getListEmployee,
+  getListEmployeeByPhone,
+  getListEmployeeByType,
+} from "../actions/employeeAction";
 let employee = {
   id: "",
   name: "",
@@ -17,7 +22,12 @@ let employee = {
   avatar: "",
 };
 
-const initialState = { employee, listEmployee: [] };
+const initialState = {
+  employee,
+  listEmployee: [],
+  totalPage: 0,
+  pageSelect: 0,
+};
 
 const employeeSlice = createSlice({
   name: "employee",
@@ -42,12 +52,18 @@ const employeeSlice = createSlice({
       if (!action.payload.data) return;
       state.employee = action.payload.data;
     },
+    [getFreelancerByPage.fulfilled]: (state, action) => {
+      if (!action.payload.data) return;
+      const { totalPage, results } = action.payload.data;
+      state.listEmployee = results.results;
+      state.totalPage = totalPage;
+    },
   },
 });
 
-export const listEmployee = (state) =>
-  state.employee.listEmployee ? state.employee.listEmployee : null;
+export const listEmployee = (state) => state.employee.listEmployee;
 export const selectEmployee = (state) =>
   state.employee.employee ? state.employee.employee : null;
+export const totalPage = (state) => state.employee.totalPage;
 export const { changeEmployee } = employeeSlice.actions;
 export default employeeSlice;

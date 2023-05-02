@@ -33,7 +33,6 @@ SwiperCore.use([Navigation, Pagination, Scrollbar, A11y, Autoplay]);
 
 const Home = ({ items }) => {
   const [isOpen, setIsOpen] = useState(false);
-  console.log("home");
   const isSecondRoute = useSelector(routeState);
   const dispatch = useDispatch();
   // useEffect(() => {
