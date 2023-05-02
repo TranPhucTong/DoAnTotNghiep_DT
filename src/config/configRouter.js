@@ -17,6 +17,9 @@ const configRoutes = {
   homeAdmin: "/admin/home",
   adminListEmployees: "/admin/list-employees",
   adminCreateEmployees: "/admin/create-employees",
+  adminCreateTeam: "/admin/create-team",
+  adminListTeam: "/admin/list-team",
+  adminUpdateEmployees : "/admin/update-employees"
 };
 
 export default configRoutes;
