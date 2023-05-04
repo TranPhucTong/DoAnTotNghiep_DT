@@ -29,7 +29,7 @@ const ProductInfo = ({employee}) => {
             <p className="text-left text-xl tracking-tight text-gray-900 mb-2">
               Tuổi: {dateToAge(employee.birthDate)}t
             </p><p className="text-left text-xl tracking-tight text-gray-900 mb-2">
-            Giá: {employee.rent_from} - {employee.rent_to}
+            Giá: {employee.rent_from}$ - {employee.rent_to}$
             </p>
 
 
@@ -80,11 +80,11 @@ const ProductInfo = ({employee}) => {
             </div>
 
             <div className="mt-10 text-left">
-              <h3 className="text-sm font-medium text-gray-900">Công nghệ</h3>
+              <h3 className="text-sm font-medium text-gray-900">Công nghệ:</h3>
 
               <div className="mt-4 ">
                 <ul role="list" className="list-disc space-y-2 pl-4 text-sm">
-                  {employee.field.map((highlight) => (
+                  {employee.skill.map((highlight) => (
                     <li key={highlight} className="text-gray-400">
                       <span className="text-gray-600">{highlight}</span>
                     </li>
