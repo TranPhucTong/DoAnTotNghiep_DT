@@ -8,7 +8,7 @@ const reviews = { href: "#", average: 4, totalCount: 117 };
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
-const ProductInfo = ({employee}) => {
+const ProductInfo = ({employee, onOpen }) => {
 
   return (
     <div className="mx-auto max-w-2xl px-4 pb-16 pt-10 sm:px-6 lg:grid lg:max-w-7xl lg:grid-cols-3 lg:grid-rows-[auto,auto,1fr] lg:gap-x-8 lg:px-8 lg:pb-24 lg:pt-16">
@@ -29,11 +29,9 @@ const ProductInfo = ({employee}) => {
             <p className="text-left text-xl tracking-tight text-gray-900 mb-2">
               Tuổi: {dateToAge(employee.birthDate)}t
             </p><p className="text-left text-xl tracking-tight text-gray-900 mb-2">
-            Giá: {employee.rent_from}$ - {employee.rent_to}$
+            Giá: {employee.rent_from}$ - {employee.rent_to}$ /dự án
             </p>
-
-
-            
+      
             {/* Reviews */}
             <div className="my-3 ">
               <h3 className="sr-only">Reviews</h3>
@@ -56,15 +54,15 @@ const ProductInfo = ({employee}) => {
               </div>
             </div>
 
-            <form className="mt-10">
+            <div className="mt-10">
 
               <button
-                type="submit"
+              onClick = {()=>onOpen(true)}
                 className="mt-10 flex w-full items-center justify-center rounded-md border border-transparent bg-blue-500 px-8 py-3 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
               >
                 Thuê
               </button>
-            </form>
+            </div>
           </div>
 
           <div className="py-10 lg:col-span-2 lg:col-start-1 lg:border-r lg:border-gray-200 lg:pb-16 lg:pr-8 lg:pt-6">
@@ -93,13 +91,7 @@ const ProductInfo = ({employee}) => {
               </div>
             </div>
 
-            {/* <div className="mt-10 text-left">
-              <h2 className="text-sm font-medium text-gray-900">Details</h2>
-
-              <div className="mt-4 space-y-6">
-                <p className="text-sm text-gray-600">{product.details}</p>
-              </div>
-            </div> */}
+            
           </div>
         </div>
   )

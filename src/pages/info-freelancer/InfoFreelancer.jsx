@@ -7,9 +7,11 @@ import { useDispatch, useSelector } from "react-redux";
 import { selectEmployee } from "../../reducers/slices/employeeSlice";
 import { useParams } from "react-router";
 import { getListEmployeeByPhone } from "../../reducers/actions/employeeAction";
+import HireModel from "../../components/modals/hire-model/HireModel";
 
 export default function InfoFreelancer() {
   let { id } = useParams();
+  const [open, setOpen] = useState(false)
 
   const sEmployee = useSelector(selectEmployee);
   const dispatch = useDispatch();
@@ -24,8 +26,9 @@ export default function InfoFreelancer() {
         <ListProjectPhoto images={sEmployee.spotlight} />
 
         {/* Product info */}
-        <ProductInfo employee={sEmployee} />
+        <ProductInfo employee={sEmployee} onOpen ={setOpen}/>
       </div>
+      <HireModel open={open} onOpen ={setOpen} employee={sEmployee}/>
     </div>
   ) : (
     <></>
