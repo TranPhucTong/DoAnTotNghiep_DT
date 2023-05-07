@@ -4,6 +4,7 @@ import employeeSlice from "../reducers/slices/employeeSlice";
 import routeSlice from "../reducers/slices/routeSlice";
 import hireTeamSlice from "../reducers/slices/hireTeamSlice";
 import updateEmployeeSlice from "../reducers/slices/updateEmployeeSlice";
+import updateTeamSlice from "../reducers/slices/updateTeamSlice";
 const store = configureStore({
   reducer: {
     customer: customerSlice.reducer,
@@ -11,6 +12,7 @@ const store = configureStore({
     route: routeSlice.reducer,
     hireTeam: hireTeamSlice.reducer,
     updateEmployee: updateEmployeeSlice.reducer,
+    updateTeam : updateTeamSlice.reducer,
   },
 });
 export default store;

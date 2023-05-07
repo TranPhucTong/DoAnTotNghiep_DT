@@ -24,12 +24,12 @@ const HireTeam = () => {
   };
   const [selectedAnswer, setSelectedAnswer] = useState(null);
   const answers = [
-    "Lập trình web",
-    "Ứng dụng di dộng",
-    "Lập trình game",
-    "Khoa học dữ liệu",
-    "Trí tuệ nhân tạo",
-    "An ninh mạng",
+    { value: "web", content: "Lập trình web" },
+    { value: "app", content: "Ứng dụng di dộng" },
+    { value: "game", content: "Lập trình game" },
+    { value: "khdl", content: "Khoa học dữ liệu" },
+    { value: "ai", content: "Trí tuệ nhân tạo" },
+    { value: "network", content: "An ninh mạng" },
   ];
 
   const handleSubmit = (event) => {
@@ -54,12 +54,12 @@ const HireTeam = () => {
                   type="radio"
                   className="form-radio h-5 w-5 text-blue-600"
                   name="answer"
-                  value={answer}
-                  onChange={() =>setSelectedAnswer(answer)}
-                  checked={selectedAnswer === answer}
+                  value={answer.value}
+                  onChange={() =>setSelectedAnswer(answer.value)}
+                  checked={selectedAnswer === answer.value}
                 />
                 <span className="ml-4 text-gray-700 text-xl font-semibold">
-                  {answer}
+                  {answer.content}
                 </span>
               </label>
             ))}

@@ -1,16 +1,22 @@
 import React, { useEffect, useState } from "react";
-import employeeApii from "../../api/employeeApii";
-import Select from "react-select";
 import axios from "axios";
+import employeeApii from "../../api/employeeApii";
+import { useSelector } from "react-redux";
+import { updateTeam } from "../../reducers/slices/updateTeamSlice";
+import teamWorkApi from "../../api/teamWorkApi";
+import { useNavigate } from "react-router-dom";
 
-const CreateTeam = () => {
-  const [nameTeam, setNameTeam] = useState("");
-  const [field, setField] = useState("");
-  const [leader, setLeader] = useState("");
-  const [typeWork, setTypeWork] = useState("");
-  const [total, setToTal] = useState();
+const UpdateTeam = () => {
+  const transiData = useSelector(updateTeam);
+  const idTeam = transiData.id;
+  const [nameTeam, setNameTeam] = useState(transiData.nameTeam);
+  const [field, setField] = useState(transiData.field);
+  const [leader, setLeader] = useState(transiData.leader._id);
+  const [typeWork, setTypeWork] = useState(transiData.typeWork);
+  const [total, setToTal] = useState(transiData.total);
   const [dataAxiosLeader, setDataAxiosLeader] = useState([]);
   const [isFormComplete, setIsFormComplete] = useState(false);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -23,8 +29,7 @@ const CreateTeam = () => {
       field !== "" &&
       leader !== "" &&
       typeWork !== "" &&
-      total !== "" &&
-      selectedEmployees !== ""
+      total !== ""
     ) {
       setIsFormComplete(true);
     } else {
@@ -32,48 +37,51 @@ const CreateTeam = () => {
     }
   });
 
-  const [selectedEmployees, setSelectedEmployees] = useState([]);
-
-  const options = dataAxiosLeader.map((employee) => ({
-    value: employee._id,
-    label: employee.name,
-  }));
-
-  const handleSelectChange = (selected) => {
-    setSelectedEmployees(selected.map((employee) => employee.value));
-  };
-
-  const clickCreateTeam = async () => {
-    const res = await axios
-      .post("https://doan-be-git-dev-danh-lofi.vercel.app/teams", {
-        field: field,
-        name: nameTeam,
-        leader: leader,
-        typeWork: typeWork,
-        totalEmployee: total,
-        members: selectedEmployees,
-      })
-      .then((response) => {
-        console.log("Tạo thành công" + response);
-        alert("Tạo thành công");
+  const clickUpdateTeam = async () => {
+    const teamUpdate = {
+      id: idTeam,
+      name: nameTeam,
+      field: field,
+      totalEmployee: total,
+      typeWork: typeWork,
+      leader: leader,
+    };
+    const response = await teamWorkApi
+      .updateTeam(teamUpdate)
+      .then((res) => {
+        alert("Cập nhật thành công" + res);
       })
       .catch((error) => {
-        console.log("Tạo không thành công" + error);
-        alert("Không thành công");
+        alert("Cập nhật không thành công" + error);
       });
-    console.log(res);
-    setNameTeam("");
-    setLeader("");
-    setField("");
-    setTypeWork("");
-    setToTal("");
-    setSelectedEmployees("");
-  };
+    console.log(response);
 
+    navigate("/admin/list-team");
+  };
+  //  const clickUpdateTeam = async () => {
+  //    const res = await axios
+  //      .patch("https://doan-be-git-dev-danh-lofi.vercel.app/teams", {
+  //        id: idTeam,
+  //        name: nameTeam,
+  //        field: field,
+  //        totalEmployee: total,
+  //        typeWork: typeWork,
+  //        leader: leader,
+  //      })
+  //      .then((response) => {
+  //        console.log("Cập nhật thành công" + response);
+  //        alert("Cập nhật thành công");
+  //      })
+  //      .catch((error) => {
+  //        console.log("Cập nhật không thành công" + error);
+  //        alert("Cập nhật không thành công");
+  //      });
+  //    console.log(res);
+  //  };
   return (
     <div class="p-6 w-full  min-h-screen-except-header">
       <span className="text-2xl font-extrabold text-blue-500">
-        Tạo nhóm mới
+        Cập nhật đội ngũ
       </span>
       <div class="mt-6 bg-white shadow-xl rounded-lg p-8 pt-10">
         <div class="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-12">
@@ -121,10 +129,11 @@ const CreateTeam = () => {
               formControlName="leader"
               value={leader}
               onChange={(e) => setLeader(e.target.value)}
+              defaultValue={leader}
             >
               <option value="">Vui lòng chọn</option>
               {dataAxiosLeader.map((leader, index) => (
-                <option key={index} value={leader._id}>
+                <option key={leader._id} value={leader._id}>
                   {leader.name}
                 </option>
               ))}
@@ -161,27 +170,16 @@ const CreateTeam = () => {
               onChange={(e) => setToTal(e.target.value)}
             />
           </div>
-
-          <Select
-            class="h-[2.875rem] relative flex items-center justify-center border border-solid focus-within:border-blue-500 transition-all ease-linear border-gray-200 rounded-lg"
-            options={options}
-            isMulti
-            value={options.filter((option) =>
-              selectedEmployees.includes(option.value)
-            )}
-            onChange={handleSelectChange}
-            placeholder="Chọn nhân viên"
-          />
         </div>
         <div className="w-full flex justify-end">
           <button
-            onClick={clickCreateTeam}
             type="submit"
+            onClick={clickUpdateTeam}
             class={`bg-blue-500 px-8 py-2 text-white font-semibold rounded-lg mt-12 hover:bg-blue-600 transition-colors ease-linear 
         
             ${isFormComplete ? "" : "opacity-50 pointer-events-none"}  `}
           >
-            Tạo mới
+            Cập nhật
           </button>
         </div>
       </div>
@@ -189,4 +187,4 @@ const CreateTeam = () => {
   );
 };
 
-export default CreateTeam;
+export default UpdateTeam;

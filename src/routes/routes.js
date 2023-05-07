@@ -21,6 +21,7 @@ import CreatEmployee from "../components/admin/CreatEmployee";
 import CreateTeam from "../components/admin/CreateTeam";
 import ListTeam from "../components/admin/ListTeam";
 import UpdateEmployees from "../components/admin/UpdateEmployees";
+import UpdateTeam from "../components/admin/UpdateTeam";
 const mainRoutes = [
   {
     path: configRoutes.home,
@@ -127,6 +128,10 @@ export const adminRoutes = [
   {
     path: configRoutes.adminUpdateEmployees,
     component: UpdateEmployees,
+  },
+  {
+    path: configRoutes.adminUpdateTeam,
+    component: UpdateTeam,
   },
 ];
 
