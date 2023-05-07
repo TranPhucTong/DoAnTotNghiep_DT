@@ -58,10 +58,15 @@ const ListEmployees = () => {
   }, [type]);
 
   const clickDeleteEmployee = async (phone) => {
-    const respon = await employeeApii.deleteEmloyee(phone);
-    setDataAxios(dataAxios.filter((employee) => employee.phone !== phone));
-    console.log(respon);
+    try {
+      const respon = await employeeApii.deleteEmloyee(phone);
+      setDataAxios(dataAxios.filter((employee) => employee.phone !== phone));
+      console.log(respon);
+    } catch (erorr) {
+      console.log("Lỗi :" + erorr);
+    }
   };
+
   const clickSearchEmployee = async (phone) => {
     if (!phone) {
       setDataAxios(tempDataAxios);
@@ -71,13 +76,13 @@ const ListEmployees = () => {
       const res = await employeeApii.searchEmployee(phone);
       if (res.data === null) {
         setDataAxios(tempDataAxios);
-        // alert("không tìm thây");
         setIsNotFould(true);
         setIsTranPage(false);
       } else {
         setDataAxios([res.data]);
         setIsNotFould(false);
         setIsTranPage(true);
+        setCurrentPage(1);
       }
     }
   };
@@ -289,9 +294,9 @@ const ListEmployees = () => {
                   <th className=" px-[16px] py-[20px] text-left min-w-[80px]">
                     Ngày sinh
                   </th>
-                  <th className=" px-[16px] py-[20px] text-left min-w-[80px]">
+                  {/* <th className=" px-[16px] py-[20px] text-left min-w-[80px]">
                     Nhóm làm việc
-                  </th>
+                  </th> */}
                   <th className=" px-[16px] py-[20px] text-left min-w-[80px]">
                     Số điện thoại
                   </th>
@@ -339,9 +344,9 @@ const ListEmployees = () => {
                       <td className=" px-[16px] py-[20px] text-left min-w-[80px]">
                         {new Date(dt.birthDate).toLocaleDateString("en-US")}
                       </td>
-                      <td className=" px-[16px] py-[20px] text-left min-w-[80px] uppercase">
+                      {/* <td className=" px-[16px] py-[20px] text-left min-w-[80px] uppercase">
                         {dt.type}
-                      </td>
+                      </td> */}
                       <td className=" px-[16px] py-[20px] text-left min-w-[80px]">
                         <span class="w-max inline-block">{dt.phone}</span>
                       </td>

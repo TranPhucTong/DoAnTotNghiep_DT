@@ -3,6 +3,7 @@ import { useSelector } from 'react-redux';
 import { updateEmployee } from '../../reducers/slices/updateEmployeeSlice';
 import employeeApii from '../../api/employeeApii';
 import { useNavigate } from 'react-router-dom';
+import teamWorkApi from '../../api/teamWorkApi';
 
 
 const UpdateEmployees = () => {
@@ -16,7 +17,7 @@ const UpdateEmployees = () => {
     new Date(transiData.birthday).toLocaleDateString("en-CA")
   );
 
-  const [position, setPosition] = useState("");
+  // const [position, setPosition] = useState("");
   const [isFormComplete, setIsFormComplete] = useState(false);
 
   const navigate = useNavigate();
@@ -47,6 +48,8 @@ const UpdateEmployees = () => {
      console.log(employeeUpdate.id);
      navigate("/admin/list-employees");
   }
+
+  
 
 
   return (

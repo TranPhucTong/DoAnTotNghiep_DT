@@ -11,8 +11,8 @@ const HireTeamWorkForm = () => {
   const dispatch = useDispatch();
   const [selectedAnswer, setSelectedAnswer] = useState(null);
   const answers = [
-    "Trực tiếp tại công ty",
-    "Từ xa"
+    { value: "direct", content: "Trực tiếp tại công ty" },
+    { value: "remote", content: "Từ xa" },
   ];
   const navigate = useNavigate();
   const hireTeam = () => {
@@ -45,12 +45,12 @@ const HireTeamWorkForm = () => {
                   type="radio"
                   className="form-radio h-5 w-5 text-blue-600"
                   name="answer"
-                  value={answer}
-                  onChange={() => setSelectedAnswer(answer)}
-                  checked={selectedAnswer === answer}
+                  value={answer.value}
+                  onChange={() => setSelectedAnswer(answer.value)}
+                  checked={selectedAnswer === answer.value}
                 />
                 <span className="ml-4 text-gray-700 text-xl font-semibold">
-                  {answer}
+                  {answer.content}
                 </span>
               </label>
             ))}

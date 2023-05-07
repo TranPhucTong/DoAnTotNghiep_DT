@@ -11,13 +11,13 @@ const CreatEmployee = (props) => {
   const [email, setEmail] = useState("");
   const [gender, setGender] = useState("");
   const [birthday, setBirthday] = useState("");
-  const [position, setPosition] = useState("");
   const [isFormComplete, setIsFormComplete] = useState(false);
   const [isCompleteCre, setIsCompleteCre] = useState(false);
   const [isUname, setIsUname] = useState(false);
   const [phone, setPhone] = useState("");
   const [password, setPassWord] = useState("");
-  const [type, setType] = useState("");
+  // const [type, setType] = useState("");
+  // const [position, setPosition] = useState("");
   const handleUname = () => {
     setIsUname(true);
   };
@@ -26,13 +26,7 @@ const CreatEmployee = (props) => {
     setShowPassword(!showPassword);
   };
   useEffect(() => {
-    if (
-      name !== "" &&
-      email !== "" &&
-      gender !== "" &&
-      birthday !== "" &&
-      position !== ""
-    ) {
+    if (name !== "" && email !== "" && gender !== "" && birthday !== "") {
       setIsFormComplete(true);
     } else {
       setIsFormComplete(false);
@@ -42,7 +36,7 @@ const CreatEmployee = (props) => {
     } else {
       setIsCompleteCre(false);
     }
-  }, [name, email, gender, birthday, position, phone, type, password]);
+  }, [name, email, gender, birthday, phone, password]);
   const navigate = useNavigate();
   const clickCreateEmployee = async () => {
     const employee = {
@@ -58,7 +52,7 @@ const CreatEmployee = (props) => {
     const response = await employeeApii.createEmployee(employee);
     console.log(response);
     console.log(name);
-    navigate("/admin/list-employees")
+    navigate("/admin/list-employees");
   };
   return (
     <div class="p-6 w-full  min-h-screen-except-header">
@@ -130,23 +124,6 @@ const CreatEmployee = (props) => {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
               />
-            </div>
-
-            {/* Position */}
-            <div class="h-[2.875rem] relative flex items-center justify-center border border-solid focus-within:border-blue-500 transition-all ease-linear border-gray-200 rounded-lg">
-              <label className="absolute -top-1/4 left-2 px-2 bg-white text-blue-500 text-sm">
-                Chức vụ
-              </label>
-              <select
-                className="text-sm w-full border border-none outline-none px-4 py-2 mb-0"
-                formControlName="gender"
-                value={position}
-                onChange={(e) => setPosition(e.target.value)}
-              >
-                <option value="">Vui lòng chọn</option>
-                <option value="leader">Trưởng nhóm</option>
-                <option value="coder">Nhân viên lập trình</option>
-              </select>
             </div>
           </div>
           <div className="w-full flex justify-end">
