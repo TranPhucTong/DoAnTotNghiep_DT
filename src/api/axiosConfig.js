@@ -19,6 +19,7 @@ mainAxios.interceptors.response.use(
   (error) => {
     console.error(`Error status: ${error.response.status}`);
     console.error(`Error message: ${error.message}`);
+    localStorage.removeItem("access_token");
     return Promise.reject(error);
   }
 );

@@ -1,8 +1,19 @@
-import React from "react";
+import React, { useState } from "react";
 import logoCompany from "../../images/logoCompany.png";
 import { useNavigate } from "react-router";
-
+import Tippy from "@tippyjs/react";
+import "tippy.js/dist/tippy.css";
+import "tippy.js/dist/backdrop.css";
+import "tippy.js/animations/shift-away.css";
+import "tippy.js/themes/light.css";
+import { useSelector } from "react-redux";
+import {
+  isLoggedIn,
+  selectCustomer,
+} from "../../reducers/slices/customerSlice";
 const Header = () => {
+  const isLogin = useSelector(isLoggedIn);
+  const customer = useSelector(selectCustomer);
   const navigate = useNavigate();
 
   const loginHandle = () => {
@@ -73,23 +84,55 @@ const Header = () => {
             Search
           </button>
         </div>
-        <div>
-          <button
-            onClick={loginHandle}
-            className="bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded mr-2"
+        {!isLogin ? (
+          <div>
+            <button
+              onClick={loginHandle}
+              className="bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded mr-2"
+            >
+              Đăng nhập
+            </button>
+            <button
+              onClick={registerHandle}
+              className="bg-gray-800 hover:bg-gray-700 text-white py-2 px-4 rounded"
+            >
+              Đăng kí
+            </button>
+          </div>
+        ) : (
+          // <div>
+          //   <p>Thanh Danh</p>
+          // </div>
+          <Tippy
+            interactive={true}
+            hideOnClick={false}
+            trigger="mouseenter focus"
+            animation="shift-away"
+            theme="light"
+            content={<Popover />}
           >
-            Log in
-          </button>
-          <button
-            onClick={registerHandle}
-            className="bg-gray-800 hover:bg-gray-700 text-white py-2 px-4 rounded"
-          >
-            Sign up
-          </button>
-        </div>
+            <p>{customer.name}</p>
+          </Tippy>
+        )}
       </div>
     </div>
   );
 };
 
 export default Header;
+
+const Popover = () => {
+  return (
+    <ul className="px-2 pr-12">
+      <li className="my-4 text-base text-black hover:text-blue-600 hover:font-bold cursor-pointer transition-all">
+        Tài khoản
+      </li>
+      <li className="my-4 text-base text-black hover:text-blue-600 hover:font-bold cursor-pointer transition-all">
+        Đơn thuê
+      </li>
+      <li className="my-4 text-base text-black hover:text-blue-600 hover:font-bold cursor-pointer transition-all">
+        Đăng xuất
+      </li>
+    </ul>
+  );
+};

@@ -1,14 +1,12 @@
 import { createSlice } from "@reduxjs/toolkit";
-import RegisterInfo from "../../pages/register-info/RegisterInfo";
 import { login, register, registerInfo } from "../actions/authAction";
+import { getCustomer } from "../actions/customerAction";
 let customer = {
   phone: "",
   name: "",
 };
 
-const initialState = customer
-  ? { isLoggedIn: true, customer: customer }
-  : { isLoggedIn: false, customer: null };
+const initialState = { isLoggedIn: false, customer: null };
 
 const customerSlice = createSlice({
   name: "customer",
@@ -44,12 +42,18 @@ const customerSlice = createSlice({
       state.customer = customer;
       localStorage.setItem("access_token", accessToken);
     },
-    [register.fulfilled]: (state, action) => {
+    [login.fulfilled]: (state, action) => {
+      if (!action.payload.data.customer) return;
+      const { accessToken, customer } = action.payload.data;
+      state.isLoggedIn = true;
+      state.customer = customer;
+      localStorage.setItem("access_token", accessToken);
+    },
+    [getCustomer.fulfilled]: (state, action) => {
       if (!action.payload.data) return;
-      const phone = action.payload.data.phone;
-      console.log("action.payload.data.phone: ", action.payload.data.phone);
-      console.log("phone: ", phone);
-      state.customer.phone = phone;
+      const customer = action.payload.data;
+      state.customer = customer;
+      state.isLoggedIn = true;
     },
     [registerInfo.fulfilled]: (state, action) => {
       if (!action.payload.data) return;
@@ -62,6 +66,8 @@ const customerSlice = createSlice({
 });
 
 export const selectCustomer = (state) =>
-  state.customer ? state.customer : null;
+  state.customer.customer ? state.customer.customer : null;
+
+export const isLoggedIn = (state) => state.customer.isLoggedIn;
 export const { setLogin } = customerSlice.actions;
 export default customerSlice;

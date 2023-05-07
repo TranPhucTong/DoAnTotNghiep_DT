@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import ButtonAuthen from "../../components/button/button-authen/ButtonAuthen";
 import InputAuthen from "../../components/input/InputAuthen";
 import "./login.scss";
@@ -8,6 +8,9 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import authApi from "../../api/authApi";
 import { login } from "../../reducers/actions/authAction";
+import { selectCustomer } from "../../reducers/slices/customerSlice";
+import configRoutes from "../../config/configRouter";
+import { getCustomer } from "../../reducers/actions/customerAction";
 
 const Login = (props) => {
   const [username, setUsername] = useState("");
@@ -15,24 +18,28 @@ const Login = (props) => {
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
-
+  const customer = useSelector(selectCustomer);
+  const accessToken = localStorage.getItem("access_token");
   useEffect(() => {
-    // const user = JSON.parse(localStorage.getItem("user"));
-    // if (user) {
-    //   dispatch(profile(user.accessToken)).then((res) => {
-    //     if (res.payload.status === 200) navigate("/profile");
-    //   });
-    // }
+    if (customer) {
+      navigate(configRoutes.home);
+      return;
+    }
+    if (accessToken) {
+      dispatch(getCustomer());
+      customer && navigate(configRoutes.home);
+      return;
+    }
   }, []);
 
   const submitHandle = async () => {
     const res = await dispatch(login({ username, password }));
-    if (res.payload.status === 200) {
+    if (res.payload.status === 201) {
       setTimeout(() => {
         navigate("/");
       }, 500);
     }
-    if (res.payload.status === 404) {
+    if (res.payload.status === 402) {
       toast.error("Số điện thoại không tồn tại. Vui lòng đăng nhập lại!!!");
     }
     if (res.payload.status === 401) {

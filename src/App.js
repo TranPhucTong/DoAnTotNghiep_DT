@@ -8,6 +8,7 @@ import { useSelector } from "react-redux";
 import { routeState } from "./reducers/slices/routeSlice";
 import { useEffect, useState } from "react";
 import LayoutAdmin from "./layout/layout-admin/LayoutAdmin";
+import FakePage from "./pages/fake-page/FakePage";
 // import { ClipLoader, RingLoader } from "react-spinners";
 
 function App() {
@@ -39,43 +40,44 @@ function App() {
           size={100}
         />
       ) : ( */}
-        <Routes>
-          {isMainRoute &&
-            mainRoutes.map((route, index) => {
-              const Page = route.component;
-              return (
-                <Route
-                  key={index}
-                  path={route.path}
-                  element={
-                    !route.isLayout ? (
-                      <Layout>
-                        <Page />
-                      </Layout>
-                    ) : (
+      <Routes>
+        {isMainRoute &&
+          mainRoutes.map((route, index) => {
+            const Page = route.component;
+            return (
+              <Route
+                key={index}
+                path={route.path}
+                element={
+                  !route.isLayout ? (
+                    <Layout>
                       <Page />
-                    )
-                  }
-                ></Route>
-              );
-            })}
-          {isAdminRoute &&
-            adminRoutes.map((route, index) => {
-              const Page = route.component;
-              return (
-                <Route
-                  key={index}
-                  path={route.path}
-                  element={
-                    <LayoutAdmin>
-                      <Page />
-                    </LayoutAdmin>
-                  }
-                ></Route>
-              );
-            })}
-        </Routes>
+                    </Layout>
+                  ) : (
+                    <Page />
+                  )
+                }
+              ></Route>
+            );
+          })}
+        {isAdminRoute &&
+          adminRoutes.map((route, index) => {
+            const Page = route.component;
+            return (
+              <Route
+                key={index}
+                path={route.path}
+                element={
+                  <LayoutAdmin>
+                    <Page />
+                  </LayoutAdmin>
+                }
+              ></Route>
+            );
+          })}
+      </Routes>
       {/* )} */}
+      <FakePage />
     </div>
   );
 }
