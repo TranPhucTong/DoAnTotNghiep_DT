@@ -11,6 +11,8 @@ import {
   isLoggedIn,
   selectCustomer,
 } from "../../reducers/slices/customerSlice";
+import { Link } from "react-router-dom";
+import configRoutes from "../../config/configRouter";
 const Header = () => {
   const isLogin = useSelector(isLoggedIn);
   const customer = useSelector(selectCustomer);
@@ -125,7 +127,7 @@ const Popover = () => {
   return (
     <ul className="px-2 pr-12">
       <li className="my-4 text-base text-black hover:text-blue-600 hover:font-bold cursor-pointer transition-all">
-        Tài khoản
+        <Link to={configRoutes.profileCustomer}>Tài khoản</Link>
       </li>
       <li className="my-4 text-base text-black hover:text-blue-600 hover:font-bold cursor-pointer transition-all">
         Đơn thuê

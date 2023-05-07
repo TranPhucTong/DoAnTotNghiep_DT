@@ -22,6 +22,7 @@ import CreateTeam from "../components/admin/CreateTeam";
 import ListTeam from "../components/admin/ListTeam";
 import UpdateEmployees from "../components/admin/UpdateEmployees";
 import UpdateTeam from "../components/admin/UpdateTeam";
+import ProfileCustomer from "../pages/profile/ProfileCustomer";
 const mainRoutes = [
   {
     path: configRoutes.home,
@@ -38,6 +39,10 @@ const mainRoutes = [
   {
     path: configRoutes.registerInfo,
     component: RegisterInfo,
+  },
+  {
+    path: configRoutes.profileCustomer,
+    component: ProfileCustomer,
   },
   {
     path: configRoutes.freelancers,
@@ -92,6 +97,7 @@ const mainRoutes = [
     isLayout: true,
     component: HireTeamInfo,
   },
+
   // {
   //   path: configRoutes.homeAdmin,
   //   isLayout: true,
@@ -130,8 +136,6 @@ export const adminRoutes = [
   },
 ];
 
-export const threeRoutes = [
-  
-];
+export const threeRoutes = [];
 
 export default mainRoutes;

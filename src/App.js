@@ -40,6 +40,8 @@ function App() {
           size={100}
         />
       ) : ( */}
+      <FakePage />
+
       <Routes>
         {isMainRoute &&
           mainRoutes.map((route, index) => {
@@ -77,7 +79,6 @@ function App() {
           })}
       </Routes>
       {/* )} */}
-      <FakePage />
     </div>
   );
 }

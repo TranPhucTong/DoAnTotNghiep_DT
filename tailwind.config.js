@@ -6,9 +6,9 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        primary: "rgb(34, 197, 94)",
-        "dark-purple" : "#081A51",
-        "light-white" : "rgba(255,255,255,0.18)"
+        primary: "#3b82f6",
+        "dark-purple": "#081A51",
+        "light-white": "rgba(255,255,255,0.18)",
       },
       gridTemplateRows: {
         "[auto,auto,1fr]": "auto auto 1fr",

@@ -7,8 +7,11 @@ import { getCustomer } from '../../reducers/actions/customerAction';
 
 const FakePage = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const customer = useSelector(selectCustomer);
   const isLogin = useSelector(isLoggedIn)
   const accessToken = localStorage.getItem("access_token");
+
   useEffect(() => {
     if(!isLogin){
         if(accessToken){ 
