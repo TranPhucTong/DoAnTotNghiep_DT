@@ -19,6 +19,7 @@ const HireModel = ({ open, onOpen, employee }) => {
     formState: { errors },
   } = useForm();
   const submitHandle = async (data) => {
+    if (confirm) return;
     const contract = { ...data, employee: employee.employeeId };
     setConfirm(true);
     try {
@@ -166,9 +167,9 @@ const HireModel = ({ open, onOpen, employee }) => {
                                 notPastDate: (value) => {
                                   const date = new Date(value);
                                   const currentDate = new Date();
-                                  
+
                                   return (
-                                    days(date,currentDate) >= 7 ||
+                                    days(date, currentDate) >= 7 ||
                                     "Ngày bắt đầu phải sau 7 ngày"
                                   );
                                 },
@@ -226,21 +227,32 @@ const HireModel = ({ open, onOpen, employee }) => {
                   </div>
                 </div>
                 <div className="bg-gray-50 px-4 py-3 sm:flex sm:flex-row-reverse sm:px-6">
-                  <button
-                    type="submit"
-                    className="inline-flex w-full justify-center rounded-md bg-blue-500 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-blue-600 sm:ml-3 sm:w-auto"
-                    onClick={() => changeConfirmHandle(true)}
-                  >
-                    Xác nhận
-                  </button>
-                  {!confirm && (
+                  {!confirm ? (
+                    <>
+                      <button
+                        type="submit"
+                        className="inline-flex w-full justify-center rounded-md bg-blue-500 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-blue-600 sm:ml-3 sm:w-auto"
+                        onClick={() => changeConfirmHandle(true)}
+                      >
+                        Xác nhận
+                      </button>
+                      <button
+                        type="button"
+                        className="mt-3 inline-flex w-full justify-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 sm:mt-0 sm:w-auto"
+                        onClick={() => onOpen(false)}
+                        ref={cancelButtonRef}
+                      >
+                        Hủy bỏ
+                      </button>
+                    </>
+                  ) : (
                     <button
                       type="button"
-                      className="mt-3 inline-flex w-full justify-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 sm:mt-0 sm:w-auto"
+                      className="inline-flex w-full justify-center rounded-md bg-blue-500 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-blue-600 sm:ml-3 sm:w-auto"
                       onClick={() => onOpen(false)}
                       ref={cancelButtonRef}
                     >
-                      Hủy bỏ
+                      Xác nhận
                     </button>
                   )}
                 </div>
