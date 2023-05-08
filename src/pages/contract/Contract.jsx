@@ -1,9 +1,12 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Nav from "./component/nav/Nav";
 import Search from "./component/search/Search";
 import ListContract from "./component/list-contract/ListContract";
+import { useSelector } from "react-redux";
+import { isLoggedIn } from "../../reducers/slices/customerSlice";
 
 const Contract = () => {
+
   return (
     <div className="w-full h-full p-20">
       <div className="w-4/5 mx-auto">

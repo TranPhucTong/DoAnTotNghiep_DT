@@ -10,5 +10,8 @@ const contractApi = {
   getContracts(orderStatus) {
     return mainAxios.get(`${url}/customer`, { params: { orderStatus } });
   },
+  cancelContract(contractId, reason) {
+    return mainAxios.put(`${url}/cancel`, { contractId, reason });
+  },
 };
 export default contractApi;

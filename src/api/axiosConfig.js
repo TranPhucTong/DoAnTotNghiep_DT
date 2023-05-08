@@ -1,4 +1,6 @@
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
+import configRoutes from "../config/configRouter";
 
 const mainAxios = axios.create({
   baseURL: process.env.REACT_APP_API_URL,
@@ -20,6 +22,10 @@ mainAxios.interceptors.response.use(
     console.error(`Error status: ${error.response.status}`);
     console.error(`Error message: ${error.message}`);
     localStorage.removeItem("access_token");
+    if (error.response.status === 401) {
+      console.log("401");
+      window.location.replace("/login");
+    }
     return Promise.reject(error);
   }
 );

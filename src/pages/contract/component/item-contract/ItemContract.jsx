@@ -13,6 +13,9 @@ import {
 import Card from "../../../../components/card/Card";
 import formatGender from "../../../../utils/convertGender";
 import formatBirthDate from "../../../../utils/convertDate";
+import Modal from "../../../../components/modal/Modal";
+import { useDispatch } from "react-redux";
+import { setSelectContract } from "../../../../reducers/slices/contractSlice";
 const TypeExpiry = {
   NEW: "green",
   REGULAR: "yellow",
@@ -27,9 +30,11 @@ const statusContent = (status) => {
       return "Đang trong tiến độ";
     case "done":
       return "Hoàn thành";
+    case "cancel":
+      return "Đã hủy";
   }
 };
-const ItemContract = ({ item }) => {
+const ItemContract = ({ item, onOpen }) => {
   const {
     employee,
     nameProject,
@@ -43,7 +48,12 @@ const ItemContract = ({ item }) => {
 
   const [active, setActive] = useState(false);
   const changeActiveHandle = () => setActive(!active);
+  const dispatch = useDispatch()
   const statusRender = statusContent(status);
+  const cancelHandle = ()=>{
+    onOpen(true)
+    dispatch(setSelectContract(item))
+  }
 
   return (
     <Card active={active}>
@@ -109,11 +119,26 @@ const ItemContract = ({ item }) => {
                 {description}
               </p>
             </div>
+             <div className=" text-neutral-900 my-3">
+                {status === "cancel" && (
+                <>
+                <p className="mr-2 w-20 text-neutral-600">
+                    Lí do:
+                  </p>
+                  <p className="mt-2 font-normal text-sm h-[100px] w-full">
+                    {item.reason}
+                  </p>
+                </>
+              )}
+             </div>
           </div>
           <div className="flex justify-between items-center ">
             <p className="text-left font-bold text-green-500">{statusRender}</p>
             {status === "pending" && (
-              <button class="bg-blue-500 hover:bg-blue-700 text-white font-normal py-2 px-4 rounded">
+              <button
+                onClick={cancelHandle}
+                class="bg-blue-500 hover:bg-blue-700 text-white font-normal py-2 px-4 rounded"
+              >
                 Hủy
               </button>
             )}
@@ -122,6 +147,7 @@ const ItemContract = ({ item }) => {
                 Đánh giá
               </button>
             )}
+            
           </div>
         </>
       ) : (
