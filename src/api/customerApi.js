@@ -10,5 +10,10 @@ const customerApi = {
   getCustomer() {
     return mainAxios.get(`${url}/profile`);
   },
+  updateCustomer(customerUpdate){
+    return mainAxios.patch(`${url}`, {
+      customerUpdate
+    });
+  }
 };
 export default customerApi;

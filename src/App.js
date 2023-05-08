@@ -9,6 +9,7 @@ import { routeState } from "./reducers/slices/routeSlice";
 import { useEffect, useState } from "react";
 import LayoutAdmin from "./layout/layout-admin/LayoutAdmin";
 import FakePage from "./pages/fake-page/FakePage";
+import { ToastContainer } from "react-toastify";
 // import { ClipLoader, RingLoader } from "react-spinners";
 
 function App() {
@@ -79,6 +80,7 @@ function App() {
           })}
       </Routes>
       {/* )} */}
+      <ToastContainer />
     </div>
   );
 }

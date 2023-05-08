@@ -23,7 +23,7 @@ const InputRadio = ({
             type="radio"
             value={"male"}
             {...register(name)}
-            checked = {defaultValue === 'male'}
+            defaultChecked = {defaultValue === 'male'}
 
           />
           <label
@@ -39,7 +39,7 @@ const InputRadio = ({
             type="radio"
             value={"female"}
             {...register(name)}
-            checked = {defaultValue === 'female'}
+            defaultChecked = {defaultValue === 'female'}
           />
           <label className="mt-px inline-block pl-[0.15rem] hover:cursor-pointer">
             Nữ
@@ -51,7 +51,7 @@ const InputRadio = ({
             type="radio"
             value={"other"}
             {...register(name)}
-            checked = {defaultValue === 'other'}
+            defaultChecked = {defaultValue === 'other'}
 
           />
           <label className="mt-px inline-block pl-[0.15rem] hover:cursor-pointer">

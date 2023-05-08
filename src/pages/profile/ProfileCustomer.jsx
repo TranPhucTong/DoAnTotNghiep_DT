@@ -7,6 +7,8 @@ import { selectCustomer } from "../../reducers/slices/customerSlice";
 import NoneInput from "./component/input/NoneInput";
 import InputRadio from "./component/input/InputRadio";
 import InputDate from "./component/input/InputDate";
+import customerApi from "../../api/customerApi";
+import { toast } from "react-toastify";
 const valueForm = {
   name: "name",
   password: "password",
@@ -27,7 +29,14 @@ const ProfileCustomer = () => {
   }
   const { name, gender, birthDate, gmail, phone } = customer;
   const onSubmit = async (data) => {
-    console.log("data: ", data);
+    try {
+       const res = await customerApi.updateCustomer(data);
+      console.log(res);
+      res.status === 201 && toast.success("Cập nhật thành công")
+    } catch (error) {
+      console.log(error);
+    }
+   
   };
   return (
     <div className="-mb-[100px] h-[90vh] bg-neutral-100 flex justify-center items-center py-14">

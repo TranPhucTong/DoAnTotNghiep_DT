@@ -6,10 +6,11 @@ import "tippy.js/dist/tippy.css";
 import "tippy.js/dist/backdrop.css";
 import "tippy.js/animations/shift-away.css";
 import "tippy.js/themes/light.css";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import {
   isLoggedIn,
   selectCustomer,
+  setLogout,
 } from "../../reducers/slices/customerSlice";
 import { Link } from "react-router-dom";
 import configRoutes from "../../config/configRouter";
@@ -24,6 +25,7 @@ const Header = () => {
   const registerHandle = () => {
     navigate("/register");
   };
+
   return (
     <div className="bg-gray-900 text-white fixed top-0 left-0 right-0 w-full z-10">
       <div className="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8 flex items-center justify-between">
@@ -124,6 +126,11 @@ const Header = () => {
 export default Header;
 
 const Popover = () => {
+  const dispatch = useDispatch();
+  const logOutHandle = () => {
+    localStorage.removeItem("access_token");
+    dispatch(setLogout());
+  };
   return (
     <ul className="px-2 pr-12">
       <li className="my-4 text-base text-black hover:text-blue-600 hover:font-bold cursor-pointer transition-all">
@@ -132,7 +139,10 @@ const Popover = () => {
       <li className="my-4 text-base text-black hover:text-blue-600 hover:font-bold cursor-pointer transition-all">
         Đơn thuê
       </li>
-      <li className="my-4 text-base text-black hover:text-blue-600 hover:font-bold cursor-pointer transition-all">
+      <li
+        onClick={logOutHandle}
+        className="my-4 text-base text-black hover:text-blue-600 hover:font-bold cursor-pointer transition-all"
+      >
         Đăng xuất
       </li>
     </ul>

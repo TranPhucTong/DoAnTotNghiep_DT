@@ -19,6 +19,7 @@ const customerSlice = createSlice({
     },
     setLogout: (state) => {
       state.isLoggedIn = false;
+      state.customer = null;
     },
     setLogin: (state) => {
       state.isLoggedIn = true;
@@ -69,5 +70,5 @@ export const selectCustomer = (state) =>
   state.customer.customer ? state.customer.customer : null;
 
 export const isLoggedIn = (state) => state.customer.isLoggedIn;
-export const { setLogin } = customerSlice.actions;
+export const { setLogin, setLogout } = customerSlice.actions;
 export default customerSlice;
