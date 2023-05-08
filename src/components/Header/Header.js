@@ -137,7 +137,7 @@ const Popover = () => {
         <Link to={configRoutes.profileCustomer}>Tài khoản</Link>
       </li>
       <li className="my-4 text-base text-black hover:text-blue-600 hover:font-bold cursor-pointer transition-all">
-        Đơn thuê
+        <Link to={configRoutes.contract}> Đơn thuê</Link>
       </li>
       <li
         onClick={logOutHandle}

@@ -7,5 +7,8 @@ const contractApi = {
       contract,
     });
   },
+  getContracts(orderStatus) {
+    return mainAxios.get(`${url}/customer`, { params: { orderStatus } });
+  },
 };
 export default contractApi;

@@ -23,6 +23,7 @@ import ListTeam from "../components/admin/ListTeam";
 import UpdateEmployees from "../components/admin/UpdateEmployees";
 import UpdateTeam from "../components/admin/UpdateTeam";
 import ProfileCustomer from "../pages/profile/ProfileCustomer";
+import Contract from "../pages/contract/Contract";
 const mainRoutes = [
   {
     path: configRoutes.home,
@@ -43,6 +44,10 @@ const mainRoutes = [
   {
     path: configRoutes.profileCustomer,
     component: ProfileCustomer,
+  },
+  {
+    path: configRoutes.contract,
+    component: Contract,
   },
   {
     path: configRoutes.freelancers,
