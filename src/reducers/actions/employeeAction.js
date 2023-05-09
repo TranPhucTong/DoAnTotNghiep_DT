@@ -23,9 +23,9 @@ export const getListEmployeeByType = createAsyncThunk(
 
 export const getFreelancerByPage = createAsyncThunk(
   "/employees/freelancer/page",
-  async (page) => {
+  async ({ page, field }) => {
     try {
-      const res = await employeeApi.getFreelancerByPage(page);
+      const res = await employeeApi.getFreelancerByPage(page, field);
       return { data: res.data, status: res.status };
     } catch (error) {
       return error.response;

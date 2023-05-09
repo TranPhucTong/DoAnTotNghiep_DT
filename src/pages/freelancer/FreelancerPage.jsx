@@ -13,7 +13,7 @@ const FreelancerPage = () => {
     setCategory(category)
   }
   
-  const defaultCategory = category ? category : "Tất cả";
+  const defaultCategory = category ? category.name : "Tất cả";
   useEffect(()=>{
     !listFreelancer.length && dispatch(getFreelancerByPage(1));
   },[])
@@ -27,7 +27,7 @@ const FreelancerPage = () => {
        </div>
         <ListFreelancer listFreelancer={listFreelancer} />
       </div>
-      <Pagination/>
+      <Pagination field={category? category.value : ""}/>
       <div>
       
     </div>

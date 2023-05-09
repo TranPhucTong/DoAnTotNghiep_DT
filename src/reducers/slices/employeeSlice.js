@@ -55,7 +55,7 @@ const employeeSlice = createSlice({
     [getFreelancerByPage.fulfilled]: (state, action) => {
       if (!action.payload.data) return;
       const { totalPage, results } = action.payload.data;
-      state.listEmployee = results.results;
+      state.listEmployee = results;
       state.totalPage = totalPage;
     },
   },
