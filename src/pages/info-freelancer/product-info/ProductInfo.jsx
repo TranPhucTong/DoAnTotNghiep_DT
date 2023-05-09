@@ -3,13 +3,26 @@ import { RadioGroup } from "@headlessui/react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faStar } from "@fortawesome/free-solid-svg-icons";
 import { dateToAge } from '../../../utils/convert';
+import { useSelector } from 'react-redux';
+import { isLoggedIn } from '../../../reducers/slices/customerSlice';
+import { useNavigate } from 'react-router-dom';
+import configRoutes from '../../../config/configRouter';
 const reviews = { href: "#", average: 4, totalCount: 117 };
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
 const ProductInfo = ({employee, onOpen }) => {
+  const login = useSelector(isLoggedIn)
+  const navigate = useNavigate();
+  const hireHandle = ()=> {
+    if(!login){
+      navigate(configRoutes.login)
+      return;
+    }
+    onOpen(true);
 
+  }
   return (
     <div className="mx-auto max-w-2xl px-4 pb-16 pt-10 sm:px-6 lg:grid lg:max-w-7xl lg:grid-cols-3 lg:grid-rows-[auto,auto,1fr] lg:gap-x-8 lg:px-8 lg:pb-24 lg:pt-16">
           <div className="lg:col-span-2 lg:border-r lg:border-gray-200 lg:pr-8">
@@ -57,7 +70,7 @@ const ProductInfo = ({employee, onOpen }) => {
             <div className="mt-10">
 
               <button
-              onClick = {()=>onOpen(true)}
+              onClick = {hireHandle}
                 className="mt-10 flex w-full items-center justify-center rounded-md border border-transparent bg-blue-500 px-8 py-3 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
               >
                 Thuê

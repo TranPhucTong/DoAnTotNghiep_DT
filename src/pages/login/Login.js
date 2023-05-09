@@ -6,7 +6,6 @@ import InputAuthen from "../../components/input/InputAuthen";
 import "./login.scss";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import authApi from "../../api/authApi";
 import { login } from "../../reducers/actions/authAction";
 import { selectCustomer } from "../../reducers/slices/customerSlice";
 import configRoutes from "../../config/configRouter";
@@ -20,6 +19,7 @@ const Login = (props) => {
   const navigate = useNavigate();
   const customer = useSelector(selectCustomer);
   const accessToken = localStorage.getItem("access_token");
+
   useEffect(() => {
     if (customer) {
       navigate(configRoutes.home);
@@ -36,7 +36,7 @@ const Login = (props) => {
     const res = await dispatch(login({ username, password }));
     if (res.payload.status === 201) {
       setTimeout(() => {
-        navigate("/");
+        navigate(-1);
       }, 500);
     }
     if (res.payload.status === 402) {

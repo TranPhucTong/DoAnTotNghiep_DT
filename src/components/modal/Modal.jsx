@@ -10,8 +10,6 @@ const Modal = ({ open, onOpen }) => {
   const [reason, setReason] = useState("");
   const dispatch = useDispatch();
   const submitHandle = () => {
-    console.log("contractId: ", contract._id);
-    console.log("reason: ", reason);
     dispatch(cancelContract({ contractId: contract._id, reason }));
     onOpen(false);
   };
