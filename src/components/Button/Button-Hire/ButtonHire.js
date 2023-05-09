@@ -1,12 +1,9 @@
 import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faAngleRight } from "@fortawesome/free-solid-svg-icons";import { useNavigate } from "react-router-dom";
+import { faAngleRight } from "@fortawesome/free-solid-svg-icons";
+import { useNavigate } from "react-router-dom";
 
 const ButtonHire = ({ text, onClick }) => {
-  const navigate = useNavigate();
-  const loginHandle = () => {
-    navigate("/login");
-  };
   return (
     <button
       onClick={onClick}

@@ -9,11 +9,7 @@ import ButtonHire from "../button/Button-Hire/ButtonHire";
 import configRoutes from "../../config/configRouter";
 import { useNavigate } from "react-router";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  getFreelancerByPage,
-  getListEmployee,
-  getListEmployeeByType,
-} from "../../reducers/actions/employeeAction";
+import { getFreelancerByPage } from "../../reducers/actions/employeeAction";
 import {
   changeEmployee,
   listEmployee,
@@ -65,20 +61,15 @@ export const freelancers = [
   },
 ];
 
-export const FreelancerCard = ({ freelancer, onChangeFreelancer }) => {
-  const router = useNavigate();
+export const FreelancerCard = ({ freelancer }) => {
   const dispatch = useDispatch();
-  const changeSelectFreelanceHandle = (freelancer) => {
-    console.log(freelancer);
-    dispatch(changeEmployee(freelancer));
-  };
+  const { phone, name } = freelancer.employeeId;
   const getFreelancerHandle = (freelancer) => {
-    changeSelectFreelanceHandle(freelancer);
-    // router(configRoutes.infoFreelancers);
+    dispatch(changeEmployee(freelancer));
   };
   return (
     <Link
-      to={`/freelancers/info/${freelancer.phone}`}
+      to={`/freelancers/info/${phone}`}
       onClick={() => getFreelancerHandle(freelancer)}
       className="flex flex-col cursor-pointer border-[1px] rounded-xl border-gray-200 hover:shadow-xl transition-all duration-300 ease-out hover:text-[#00bdd6] shadow-md"
     >
@@ -101,9 +92,7 @@ export const FreelancerCard = ({ freelancer, onChangeFreelancer }) => {
             className="w-8 h-8 rounded-full"
             alt={freelancer.name}
           />
-          <h2 className="font-bold text-[22px] text-yellow-500">
-            {freelancer.name}
-          </h2>
+          <h2 className="font-bold text-[22px] text-yellow-500">{name}</h2>
         </div>
         <p className="text-left mb-4">{freelancer.introduce}</p>
         <div className="flex justify-between items-center">
@@ -168,7 +157,7 @@ function Freelancer() {
       </p>
       <div className="grid grid-cols-4 grid-rows-1 gap-10 mb-8">
         {listRender.map((freelancer) => (
-          <div key={freelancer.id} className="col-span-1 row-span-1">
+          <div key={freelancer._id} className="col-span-1 row-span-1">
             <FreelancerCard freelancer={freelancer} />
           </div>
         ))}
@@ -185,7 +174,10 @@ function Freelancer() {
           className="icon text-green-500 text-xl  font-bold cursor-pointer"
         />
       </div>
-      <ButtonHire text="Thuê cộng sự của bạn ngay bây giờ" />
+      <ButtonHire
+        text="Thuê cộng sự của bạn ngay bây giờ"
+        onClick={() => navigate(configRoutes.freelancers)}
+      />
     </div>
   );
 }
