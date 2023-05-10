@@ -23,7 +23,6 @@ mainAxios.interceptors.response.use(
     console.error(`Error message: ${error.message}`);
     localStorage.removeItem("access_token");
     if (error.response.status === 401) {
-      console.log("401");
       window.location.replace("/login");
     }
     return Promise.reject(error);
