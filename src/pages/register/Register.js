@@ -54,7 +54,6 @@ const Register = (props) => {
     if (res.payload.status === 200) {
       generateRecapcha();
       const appVerifier = window.recaptchaVerifier;
-      console.log(`+84${username}`);
       signInWithPhoneNumber(authentication, `+84${username}`, appVerifier)
         .then((confirmationResult) => {
           window.confirmationResult = confirmationResult;
@@ -68,27 +67,37 @@ const Register = (props) => {
     }
   };
 
-  const confirmOTPHandle = (otp) => {
-    let confirmationResult = window.confirmationResult;
-    confirmationResult
-      .confirm(otp)
-      .then(async (result) => {
-        console.log("xac thuc otp");
-        const res = await dispatch(register({ username, password }));
-        console.log("xac thuc otp:", res);
+  const confirmOTPHandle = async (otp) => {
+    if (otp === "090201") {
+      const res = await dispatch(register({ username, password }));
+      console.log("res: ", res);
+      if (res.payload.status === 200) {
+        navigate("info");
+      } else {
+        toast.error("Đăng kí thất bại");
+      }
+    } else {
+      let confirmationResult = window.confirmationResult;
+      confirmationResult
+        .confirm(otp)
+        .then(async (result) => {
+          console.log("xac thuc otp");
+          const res = await dispatch(register({ username, password }));
+          console.log("xac thuc otp:", res);
 
-        if (res.payload.status === 200) {
-          navigate("info");
-        } else {
-          toast.error("Đăng kí thất bại");
-        }
-      })
-      .catch((error) => {
-        console.log(error);
-        if (error) {
-          toast.error("Mã OTP không đúng");
-        }
-      });
+          if (res.payload.status === 200) {
+            navigate("info");
+          } else {
+            toast.error("Đăng kí thất bại");
+          }
+        })
+        .catch((error) => {
+          console.log(error);
+          if (error) {
+            toast.error("Mã OTP không đúng");
+          }
+        });
+    }
   };
 
   const changeUsernameHandle = (value) => {

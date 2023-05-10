@@ -63,6 +63,11 @@ const customerSlice = createSlice({
       state.customer = customer;
       localStorage.setItem("access_token", accessToken);
     },
+    [register.fulfilled]: (state, action) => {
+      if (!action.payload.data) return;
+      const { customer } = action.payload.data;
+      state.customer = customer;
+    },
   },
 });
 

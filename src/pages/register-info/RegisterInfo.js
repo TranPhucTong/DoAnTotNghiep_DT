@@ -23,7 +23,7 @@ const RegisterInfo = (props) => {
   const submitHandle = async () => {
     console.log(sCustomer);
     const info = {
-      phone: sCustomer.customer.phone,
+      phone: sCustomer.phone,
       name,
       birthDate: birthDay,
       gender,
