@@ -12,7 +12,6 @@ const employeeApi = {
     return mainAxios.get(`${url}`, { params: { phone } });
   },
   getFreelancerByPage: (page, field) => {
-    console.log("page: ", page, " field: ", field);
     return mainAxios.get(`${url}/freelancer/page`, { params: { page, field } });
   },
 };

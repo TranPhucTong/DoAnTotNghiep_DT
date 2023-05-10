@@ -51,7 +51,7 @@ const Register = (props) => {
     }
 
     const res = await dispatch(checkIsPhone(username));
-    if (res.payload.status === 201) {
+    if (res.payload.status === 200) {
       generateRecapcha();
       const appVerifier = window.recaptchaVerifier;
       console.log(`+84${username}`);
@@ -64,6 +64,7 @@ const Register = (props) => {
         });
     } else {
       toast.warning("Tài khoản đã tồn tại!");
+      return;
     }
   };
 
@@ -101,8 +102,8 @@ const Register = (props) => {
   };
   return (
     <>
-      <ToastContainer />
-      {confirmOTP ? (
+      {/* <ToastContainer /> */}
+      {!confirmOTP ? (
         <div className="login">
           <div className="login__container">
             <div className="login__title">

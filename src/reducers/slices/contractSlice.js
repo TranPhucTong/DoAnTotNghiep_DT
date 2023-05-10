@@ -3,7 +3,6 @@ import { cancelContract, getContracts } from "../actions/contractAction";
 
 const initialState = {
   listContract: [],
-  // listFilterContract: [],
 };
 
 const contractSlice = createSlice({

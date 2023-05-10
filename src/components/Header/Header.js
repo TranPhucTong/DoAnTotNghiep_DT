@@ -104,9 +104,6 @@ const Header = () => {
             </button>
           </div>
         ) : (
-          // <div>
-          //   <p>Thanh Danh</p>
-          // </div>
           <Tippy
             interactive={true}
             hideOnClick={false}

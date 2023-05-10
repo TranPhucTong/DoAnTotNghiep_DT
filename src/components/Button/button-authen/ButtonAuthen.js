@@ -7,7 +7,11 @@ const ButtonAuthen = (props) => {
     inputButtonSkip += "inputButtonSkip";
   }
   return (
-    <button className={`login_btn ${inputButtonSkip}`} onClick={props.onClick}>
+    <button
+      type="button"
+      className={`login_btn ${inputButtonSkip}`}
+      onClick={props.onClick}
+    >
       {props.content}
     </button>
   );
