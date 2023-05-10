@@ -10,20 +10,24 @@ import { updateRequire4 } from "../../reducers/slices/hireTeamSlice";
 const HireTeamWorkWeek = () => {
   const dispatch = useDispatch();
   const [selectedAnswer, setSelectedAnswer] = useState(null);
-  const answers = ["Full Time (Thứ 2-Thứ 6)", "PartTime", "Hourly"];
+  const answers = [
+    { value: "fulltime", content: "Full Time (Thứ 2-Thứ 6)" },
+    { value: "parttime", content: "PartTime" },
+  ];
   const navigate = useNavigate();
   const hireTeam = () => {
     navigate("/hireTeam/quiz/work-length");
   };
   const workLength = () => {
     dispatch(updateRequire4(selectedAnswer))
-    navigate("/hireTeam/quiz/work-skill");
+    navigate("/hireTeam/quiz/work-start");
   };
 
   const handleSubmit = (event) => {
     event.preventDefault();
     console.log(`Selected option: ${selectedAnswer}`);
   };
+
   return (
     <div className="flex flex-row items-center w-full h-[100vh]">
       <div className="p-16 w-[70%] h-full flex flex-col items-center justify-center">
@@ -42,12 +46,12 @@ const HireTeamWorkWeek = () => {
                   type="radio"
                   className="form-radio h-5 w-5 text-blue-600"
                   name="answer"
-                  value={answer}
-                  onChange={() => setSelectedAnswer(answer)}
-                  checked={selectedAnswer === answer}
+                  value={answer.value}
+                  onChange={() => setSelectedAnswer(answer.value)}
+                  checked={selectedAnswer === answer.value}
                 />
                 <span className="ml-4 text-gray-700 text-xl font-semibold">
-                  {answer}
+                  {answer.content}
                 </span>
               </label>
             ))}

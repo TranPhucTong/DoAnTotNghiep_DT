@@ -2,20 +2,20 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   field: "",
-  numberEmployee: "",
-  workLength: "",
-  workWeek: "",
-  tech: "",
-  workStart: "",
-  workForm: "",
-  workWage: "",
-  info: {
-    name: "",
-    email: "",
-    phone: "",
-    jobType: "",
-    address: "",
-  },
+  totalPersonnel: Number,
+  duration: "",
+  workingTime: "",
+  // tech: "",
+  startTime: "",
+  typeWork: "",
+  budget: Number,
+  // info: {
+  //   name: "",
+  //   email: "",
+  //   phone: "",
+  //   jobType: "",
+  //   address: "",
+  // },
 };
 const hireTeamSlice = createSlice({
   name: "hireteam",
@@ -26,44 +26,44 @@ const hireTeamSlice = createSlice({
       console.log("action: ", action);
     },
     updateRequire2: (state, action) => {
-      state.numberEmployee = action.payload;
+      state.totalPersonnel = action.payload;
       console.log("action: ", action);
     },
     updateRequire3: (state, action) => {
-      state.workLength = action.payload;
+      state.duration = action.payload;
       console.log("action: ", action);
     },
     updateRequire4: (state, action) => {
-      state.workWeek = action.payload;
+      state.workingTime = action.payload;
       console.log("action: ", action);
     },
-    updateRequire5: (state, action) => {
-      state.tech = action.payload;
-      console.log("action: ", action);
-    },
+    // updateRequire5: (state, action) => {
+    //   state.tech = action.payload;
+    //   console.log("action: ", action);
+    // },
     updateRequire6: (state, action) => {
-      state.workStart = action.payload;
+      state.startTime = action.payload;
       console.log("action: ", action);
     },
     updateRequire7: (state, action) => {
-      state.workForm = action.payload;
+      state.typeWork = action.payload;
       console.log("action: ", action);
     },
     updateRequire8: (state, action) => {
-      state.workWage = action.payload;
+      state.budget = action.payload;
       console.log("action: ", action);
     },
-    updateRequire9: (state, action) => {
-      state.info = {
-        name: action.payload.name,
-        email: action.payload.email,
-        phone: action.payload.phone,
-        jobType: action.payload.jobTitle,
-        address: action.payload.addressWork,
-      };
-      console.log("state: ", { ...state });
-      console.log("action: ", action);
-    },
+    // updateRequire9: (state, action) => {
+    //   state.info = {
+    //     name: action.payload.name,
+    //     email: action.payload.email,
+    //     phone: action.payload.phone,
+    //     jobType: action.payload.jobTitle,
+    //     address: action.payload.addressWork,
+    //   };
+    //   console.log("state: ", { ...state });
+    //   console.log("action: ", action);
+    // },
   },
 });
 
@@ -72,11 +72,11 @@ export const {
   updateRequire2,
   updateRequire3,
   updateRequire4,
-  updateRequire5,
+  // updateRequire5,
   updateRequire6,
   updateRequire7,
   updateRequire8,
-  updateRequire9,
+  // updateRequire9,
 } = hireTeamSlice.actions;
 export const hireTeam = (state) => state.hireTeam;
 

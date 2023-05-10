@@ -11,12 +11,11 @@ import { useDispatch } from "react-redux";
 const HireTeamSize = () => {
   const [selectedAnswer, setSelectedAnswer] = useState(null);
   const answers = [
-    "Ít hơn 10 nhân sự",
-    "11-50 nhân sự",
-    "51-100 nhân sự",
-    "101-200 nhân sự",
-    "201-500 nhân sự",
-    "Hơn 500 nhân sự",
+    { num: 10, text: "10 nhân sự" },
+    { num: 50, text: "50 nhân sự" },
+    { num: 100, text: "100 nhân sự" },
+    { num: 200, text: "200 nhân sự" },
+    { num: 500, text: "500 nhân sự" },
   ];
   const navigate = useNavigate();
    const dispatch = useDispatch();
@@ -51,12 +50,12 @@ const HireTeamSize = () => {
                   type="radio"
                   className="form-radio h-5 w-5 text-blue-600"
                   name="answer"
-                  value={answer}
-                  onChange={() => setSelectedAnswer(answer)}
-                  checked={selectedAnswer === answer}
+                  value={answer.num}
+                  onChange={() => setSelectedAnswer(answer.num)}
+                  checked={selectedAnswer === answer.num}
                 />
                 <span className="ml-4 text-gray-700 text-xl font-semibold">
-                  {answer}
+                  {answer.text}
                 </span>
               </label>
             ))}

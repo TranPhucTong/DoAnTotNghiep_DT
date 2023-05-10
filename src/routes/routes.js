@@ -24,6 +24,7 @@ import UpdateEmployees from "../components/admin/UpdateEmployees";
 import UpdateTeam from "../components/admin/UpdateTeam";
 import ProfileCustomer from "../pages/profile/ProfileCustomer";
 import Contract from "../pages/contract/Contract";
+import ListOrderCustomer from "../components/admin/ListOrderCustomer";
 const mainRoutes = [
   {
     path: configRoutes.home,
@@ -138,6 +139,10 @@ export const adminRoutes = [
   {
     path: configRoutes.adminUpdateTeam,
     component: UpdateTeam,
+  },
+  {
+    path: configRoutes.adminListOrder,
+    component: ListOrderCustomer,
   },
 ];
 

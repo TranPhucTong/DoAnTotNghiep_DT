@@ -15,10 +15,10 @@ const HireTeamSkill = () => {
   const hireTeam = () => {
     navigate("/hireTeam/quiz/work-week");
   };
-  const workLength = () => {
-    dispatch(updateRequire5(selectedAnswer))
-    navigate("/hireTeam/quiz/work-start");
-  };
+  // const workLength = () => {
+  //   dispatch(updateRequire5(selectedAnswer))
+  //   navigate("/hireTeam/quiz/work-start");
+  // };
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -63,7 +63,7 @@ const HireTeamSkill = () => {
               Quay lại
             </button>
 
-            <button
+            {/* <button
               type="submit"
               disabled={!selectedAnswer}
               onClick={workLength}
@@ -71,7 +71,7 @@ const HireTeamSkill = () => {
             >
               Tiếp tục
               <FontAwesomeIcon className="ml-6 " icon={faRightLong} />
-            </button>
+            </button> */}
           </div>
         </form>
       </div>
