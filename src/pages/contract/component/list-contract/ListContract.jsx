@@ -1,12 +1,16 @@
 import React, { useState } from "react";
 import ItemContract from "../item-contract/ItemContract";
 import { useSelector } from "react-redux";
-import { listContractStore } from "../../../../reducers/slices/contractSlice";
+import { listContractStore, listFilterContractStore } from "../../../../reducers/slices/contractSlice";
 import Modal from "../../../../components/modal/Modal";
 import noneContract from "../../../../assests/imgs/none-contract.png";
 
 const ListContract = () => {
-  const listContract = useSelector(listContractStore);
+  let listContract = useSelector(listContractStore);
+  const listFilterContract = useSelector(listFilterContractStore);
+  if(listFilterContract){
+    listContract = listFilterContract;
+  }
   const [open,setOpen] = useState(false);
   const openModalHandle = (open)=> setOpen(open);
   return (

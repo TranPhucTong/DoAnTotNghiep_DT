@@ -3,6 +3,7 @@ import { cancelContract, getContracts } from "../actions/contractAction";
 
 const initialState = {
   listContract: [],
+  // listFilterContract: [],
 };
 
 const contractSlice = createSlice({
@@ -11,6 +12,15 @@ const contractSlice = createSlice({
   reducers: {
     setSelectContract: (state, action) => {
       state.selectContract = action.payload;
+    },
+    setListContractFilter: (state, action) => {
+      const condition = action.payload.toLowerCase();
+      const listContractFilter = state.listContract.filter(
+        (contract) =>
+          contract.nameProject.toLowerCase().includes(condition) ||
+          contract.employee.name.toLowerCase().includes(condition)
+      );
+      state.listFilterContract = listContractFilter;
     },
   },
   extraReducers: {
@@ -30,7 +40,10 @@ const contractSlice = createSlice({
 });
 
 export const listContractStore = (state) => state.contract.listContract;
+export const listFilterContractStore = (state) =>
+  state.contract.listFilterContract;
 export const selectContract = (state) => state.contract.selectContract;
 
-export const { setSelectContract } = contractSlice.actions;
+export const { setSelectContract, setListContractFilter } =
+  contractSlice.actions;
 export default contractSlice;

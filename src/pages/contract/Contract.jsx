@@ -2,8 +2,6 @@ import React, { useEffect } from "react";
 import Nav from "./component/nav/Nav";
 import Search from "./component/search/Search";
 import ListContract from "./component/list-contract/ListContract";
-import { useSelector } from "react-redux";
-import { isLoggedIn } from "../../reducers/slices/customerSlice";
 
 const Contract = () => {
 
