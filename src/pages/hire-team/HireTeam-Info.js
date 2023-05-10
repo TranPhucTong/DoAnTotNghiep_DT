@@ -4,8 +4,8 @@ import TypingEffect from "../../components/TypingEffect/TypingEffect";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useNavigate } from "react-router-dom";
 import { faRightLong, faLeftLong, faCheckCircle } from "@fortawesome/free-solid-svg-icons";
-import { useDispatch } from "react-redux";
-import { updateRequire9 } from "../../reducers/slices/hireTeamSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { hireTeam, updateRequire9 } from "../../reducers/slices/hireTeamSlice";
 
 
 const NotificationLayer = ({ message, onClose }) => {
@@ -45,11 +45,13 @@ const HireTeamInfo = () => {
 
 
   const [showNotification, setShowNotification] = useState(false);
+  const test = useSelector(hireTeam);
 
   const navigate = useNavigate();
   const handleCloseNotification = () => {
     setShowNotification(false);
-    navigate("/admin/home");
+    // navigate("/admin/home");
+    console.log(test);
   };
 
   const handleSubmit = (e) => {
@@ -57,7 +59,7 @@ const HireTeamInfo = () => {
     const formData = { name, email, phone, jobTitle, addressWork };
     console.log(formData);
     setShowNotification(true);
-    dispatch(updateRequire9(formData))
+    // dispatch(updateRequire9(formData))
   };
   useEffect(() => {
     if (

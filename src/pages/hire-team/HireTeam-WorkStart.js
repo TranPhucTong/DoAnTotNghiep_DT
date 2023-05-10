@@ -23,11 +23,10 @@ const HireTeamWorkStart = () => {
     console.log(`Selected date is: ${date}`);
 
     navigate("/hireTeam/quiz/work-form");
-    // Hoặc có thể thực hiện lưu giá trị date vào state của component cha ở đây
   };
   const navigate = useNavigate();
   const hireTeam = () => {
-    navigate("/hireTeam/quiz/work-skill");
+    navigate("/hireTeam/quiz/work-week");
   };
   return (
     <div className="flex flex-row items-center w-full h-[100vh]">

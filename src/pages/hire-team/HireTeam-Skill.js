@@ -15,10 +15,10 @@ const HireTeamSkill = () => {
   const hireTeam = () => {
     navigate("/hireTeam/quiz/work-week");
   };
-  const workLength = () => {
-    dispatch(updateRequire5(selectedAnswer))
-    navigate("/hireTeam/quiz/work-start");
-  };
+  // const workLength = () => {
+  //   dispatch(updateRequire5(selectedAnswer))
+  //   navigate("/hireTeam/quiz/work-start");
+  // };
 
   const handleSubmit = (event) => {
     event.preventDefault();

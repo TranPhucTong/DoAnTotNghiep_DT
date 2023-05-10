@@ -20,7 +20,8 @@ const configRoutes = {
   adminCreateTeam: "/admin/create-team",
   adminListTeam: "/admin/list-team",
   adminUpdateEmployees : "/admin/update-employees",
-  adminUpdateTeam : "/admin/update-team"
+  adminUpdateTeam : "/admin/update-team",
+  adminListOrder : "/admin/list-order"
 };
 
 export default configRoutes;
