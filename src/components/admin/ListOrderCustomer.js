@@ -7,11 +7,28 @@ import {
   faListCheck,
 } from "@fortawesome/free-solid-svg-icons";
 
-const OrderDetail = ({ message, onClose, IdCustomer, idOder, orderDate }) => {
+const OrderDetail = ({
+  message,
+  onClose,
+  IdCustomer,
+  customerName,
+  customerPhone,
+  customerEmail,
+  idOder,
+  orderDate,
+  field,
+  totalPersonnel,
+  duration,
+  workingTime,
+  startTime,
+  typeWork,
+  budget,
+}) => {
+  const [completeSelected, setCompleteSelected] = useState(false);
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center">
+    <div className="fixed inset-0 z-[999] flex items-center justify-center">
       <div className="absolute inset-0 bg-gray-950 opacity-50"></div>
-      <div className="bg-white z-30 shadow-xl rounded-lg p-6">
+      <div className="bg-white relative z-30 shadow-xl rounded-lg p-6">
         <div className="flex flex-row justify-center items-center mb-4">
           <h1 className="text-3xl uppercase font-bold text-blue-500">
             {message}
@@ -22,41 +39,113 @@ const OrderDetail = ({ message, onClose, IdCustomer, idOder, orderDate }) => {
           />
         </div>
         <div className="w-full my-10 flex flex-row gap-12">
-          <div className="w-[50%]">
-            <div className="font-semibold w-full text-center text-lg border-b border-gray-300 mb-4">
+          <div className="w-[40%]">
+            <div className="font-semibold w-full text-center text-lg border-b border-gray-300 mb-4 text-orange-500">
               Thông tin khách hàng
             </div>
             <p className="text-lg font-semibold mb-2">
               Mã : <span className="font-thin">{IdCustomer}</span>
             </p>
             <p className="text-lg font-semibold mb-2">
-              Họ tên : <span className="font-thin">Đỗ Thành Danh</span>
+              Họ tên : <span className="font-thin">{customerName}</span>
             </p>
             <p className="text-lg font-semibold mb-2">
-              Số điện thoại : <span className="font-thin">0337175348</span>
+              Số điện thoại : <span className="font-thin">{customerPhone}</span>
             </p>
             <p className="text-lg font-semibold mb-2">
-              Email : <span className="font-thin">thDanh@gmail.com</span>
+              Email : <span className="font-thin">{customerEmail}</span>
             </p>
           </div>
-          <div className="w-[50%]">
-            <div className="font-semibold w-full text-center text-lg border-b border-gray-300 mb-4">
+          <div className="w-[60%]">
+            <div className="font-extrabold w-full text-center text-lg border-b border-gray-300 mb-4 text-violet-500">
               Thông tin đơn thuê
             </div>
-            <p className="text-lg font-semibold mb-2">
-              Mã đơn : <span className="font-thin">{idOder}</span>
-            </p>
-            <p className="text-lg font-semibold mb-2">
-              Thời gian đặt :{" "}
-              <span className="font-thin">
-                {" "}
-                {new Date(orderDate).toLocaleDateString("en-US")}
+            <div className="flex w-full gap-6">
+              <div className="w-[40%]">
+                <p className="text-lg font-semibold mb-2">
+                  Mã đơn : <span className="font-thin">{idOder}</span>
+                </p>
+                <p className="text-lg font-semibold mb-2">
+                  Thời gian đặt :{" "}
+                  <span className="font-medium text-blue-500">
+                    {" "}
+                    {new Date(orderDate).toLocaleDateString("en-US")}
+                  </span>
+                </p>
+                <p className="text-lg font-semibold mb-2">
+                  Mảng làm việc :{" "}
+                  <span className="font-medium text-yellow-500 uppercase">
+                    {field}
+                  </span>
+                </p>
+                <p className="text-lg font-semibold mb-2">
+                  Số lượng nhân viên:{" "}
+                  <span className="font-medium text-blue-500">
+                    {totalPersonnel}
+                  </span>
+                </p>
+              </div>
+              <div className="w-[60%] ml-10">
+                <p className="text-lg font-semibold mb-2">
+                  Thời gian thực hiện :{" "}
+                  <span className="font-medium text-blue-500">{duration}</span>
+                </p>
+                <p className="text-lg font-semibold mb-2 ">
+                  Hình thức làm việc:{" "}
+                  <span className="font-medium text-blue-500 capitalize">
+                    {workingTime}
+                  </span>
+                </p>
+                <p className="text-lg font-semibold mb-2">
+                  Thời gian bắt đầu:{" "}
+                  <span className="font-medium text-green-500">
+                    {" "}
+                    {new Date(startTime).toLocaleDateString("en-US")}
+                  </span>
+                </p>
+                <p className="text-lg font-semibold mb-2">
+                  Mô hình làm việc :{" "}
+                  <span className="font-medium text-blue-500 capitalize">
+                    {typeWork}
+                  </span>
+                </p>
+                <p className="text-lg font-semibold mb-2">
+                  Lương đáp ứng :{" "}
+                  <span className="font-medium text-blue-500">{budget} $</span>
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div className="border-t border-solid border-gray-500 my-10 pb-10">
+          <div className="mt-8 w-full flex">
+            <span className="font-bold text-xl">Nhóm phụ trách dự án : </span>
+            {completeSelected ? (
+              <span className="font-medium text-xl ml-2 text-blue-500">
+                Legato Web
               </span>
-            </p>
+            ) : (
+              <button
+                onClick={() => setCompleteSelected(true)}
+                className="bg-blue-500 text-white ml-4 px-2 py-1  rounded-lg hover:bg-blue-800 transition-colors duration-150 ease-in-out"
+              >
+                Xác nhận
+              </button>
+            )}
+          </div>
+          <div>
+            {completeSelected ? ("") : (
+              <span className="">
+                <span className="opacity-80 italic text-sm text-red-400">
+                  Chưa có nhóm phụ trách cho dự án của khách hàng. Vui lòng xác
+                  nhận để chọn nhóm!!!
+                </span>
+              </span>
+            )}
           </div>
         </div>
         <button
-          className="bg-gray-800 text-white px-4 py-2 rounded-lg"
+          className="bg-gray-700 absolute right-6 bottom-4 hover:bg-gray-500 transition-colors duration-150 ease-in-out text-white px-4 py-2 rounded-lg"
           onClick={onClose}
         >
           Đóng
@@ -85,11 +174,14 @@ const ListOrderCustomer = () => {
   const hanldeOpenOrderDetail = (order) => {
     setShowOrderDetail(true);
     setSelectedOrder(order);
+    console.log(order.customer._id);
   };
 
   const handleCloseOrderDetail = () => {
     setShowOrderDetail(false);
   };
+
+  console.log(dataAxiosListOrder);
 
   return (
     <div class="w-full min-h-screen-except-header">
@@ -102,7 +194,10 @@ const ListOrderCustomer = () => {
             <thead className="w-full">
               <tr className="border-b border-solid border-gray-400">
                 <th className=" px-[16px] py-[20px] text-center min-w-[80px]">
-                  Mã khách hàng
+                  Mã đơn thuê
+                </th>
+                <th className=" px-[16px] py-[20px] text-center min-w-[80px]">
+                  Họ tên khách hàng
                 </th>
                 <th className=" px-[16px] py-[20px] text-center min-w-[80px]">
                   Thời gian
@@ -121,13 +216,16 @@ const ListOrderCustomer = () => {
             <tbody className="w-full">
               {dataAxiosListOrder.map((dt, index) => (
                 <tr
-                  key={dt._id}
+                  key={index}
                   className={`border-t border-solid border-gray-200 ${
                     index % 2 === 0 ? "bg-sky-100" : "bg-white"
                   }`}
                 >
                   <td className=" px-[16px] py-[20px] text-center min-w-[80px]">
-                    {dt.customerId}
+                    {dt._id}
+                  </td>
+                  <td className=" px-[16px] py-[20px] text-center min-w-[80px]">
+                    {dt.customer.name}
                   </td>
                   <td className=" px-[16px] py-[20px] text-center min-w-[80px]">
                     {new Date(dt.orderDate).toLocaleDateString("en-US")}
@@ -168,9 +266,19 @@ const ListOrderCustomer = () => {
         <OrderDetail
           message="chi tiết đơn thuê của khách hàng"
           onClose={handleCloseOrderDetail}
-          IdCustomer={selectedOrder.customerId}
+          IdCustomer={selectedOrder.customer._id}
+          customerName={selectedOrder.customer.name}
+          customerPhone={selectedOrder.customer.phone}
+          customerEmail={selectedOrder.customer.gmail}
           idOder={selectedOrder._id}
           orderDate={selectedOrder.orderDate}
+          field={selectedOrder.field}
+          totalPersonnel={selectedOrder.totalPersonnel}
+          duration={selectedOrder.duration}
+          workingTime={selectedOrder.workingTime}
+          startTime={selectedOrder.startTime}
+          typeWork={selectedOrder.typeWork}
+          budget={selectedOrder.budget}
         />
       )}
     </div>
