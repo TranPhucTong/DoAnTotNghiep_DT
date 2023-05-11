@@ -7,7 +7,8 @@ const orderTeamApi = {
   },
   getListOrder : () => {
     return mainAxios.get(`${url}`);
-  }
+  },
+  
 }
 
 export default orderTeamApi;

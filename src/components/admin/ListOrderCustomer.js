@@ -5,7 +5,9 @@ import {
   faWarning,
   faCheckCircle,
   faListCheck,
+  faXmark
 } from "@fortawesome/free-solid-svg-icons";
+import teamWorkApi from "../../api/teamWorkApi";
 
 const OrderDetail = ({
   message,
@@ -134,7 +136,9 @@ const OrderDetail = ({
             )}
           </div>
           <div>
-            {completeSelected ? ("") : (
+            {completeSelected ? (
+              ""
+            ) : (
               <span className="">
                 <span className="opacity-80 italic text-sm text-red-400">
                   Chưa có nhóm phụ trách cho dự án của khách hàng. Vui lòng xác
@@ -155,9 +159,110 @@ const OrderDetail = ({
   );
 };
 
+const SelectTeam = ({ onClose }) => {
+  const [listTeamNoActive, setListTeamNoActive] = useState([]);
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const resTeamNoActive = await teamWorkApi.getIsTeamActive(false);
+        setListTeamNoActive(resTeamNoActive.data);
+      } catch (error) {
+        console.log("Lỗi: " + error);
+      }
+    };
+    fetchData();
+  }, []);
+  return (
+    <div className="fixed inset-0 z-[999] flex items-center justify-center">
+      <div className="absolute inset-0 bg-gray-950 opacity-50"></div>
+      <div className="bg-white relative z-30 shadow-xl rounded-lg p-6">
+        <div className="absolute right-6 top-6">
+          <FontAwesomeIcon
+            onClick={onClose}
+            className="font-bold text-4xl text-gray-400 hover:text-red-400 cursor-pointer"
+            icon={faXmark}
+          />
+        </div>
+        <div className="flex flex-col justify-center items-center mb-4">
+          <h1 className="text-3xl uppercase font-bold text-blue-500">
+            Chọn nhóm phù hợp với yêu cầu
+          </h1>
+          <div class=" w-full overflow-x-auto shadow-2xl rounded-lg">
+            <table class="w-full text-sm mt-5 text-dark-purple transition-all duration-500 ease-in-out ">
+              <thead className="w-full bg-pink-500 text-white">
+                <tr className="border-b border-solid border-gray-400 ">
+                  <th className=" px-[16px] py-[20px] text-center min-w-[80px]">
+                    Tên nhóm
+                  </th>
+                  <th className=" px-[16px] py-[20px] text-center min-w-[80px]">
+                    Mảng làm việc
+                  </th>
+                  <th className=" px-[16px] py-[20px] text-center min-w-[80px]">
+                    Trưởng nhóm
+                  </th>
+                  <th className=" px-[16px] py-[20px] text-center min-w-[80px]">
+                    Số lượng nhân viên
+                  </th>
+                  {/* <th className=" px-[16px] py-[20px] text-center min-w-[80px]">
+                    Thời gian làm việc
+                  </th> */}
+                  <th className=" px-[16px] py-[20px] text-center min-w-[80px]">
+                    Hình thức làm việc
+                  </th>
+                  <th className=" px-[16px] py-[20px] text-center min-w-[80px]">
+                    Tùy chọn
+                  </th>
+                </tr>
+              </thead>
+              <tbody className="w-full">
+                {listTeamNoActive.map((dt, index) => (
+                  <tr
+                    key={dt._id}
+                    className={`border-t border-solid border-gray-200 ${
+                      index % 2 === 0 ? "bg-sky-100" : "bg-white"
+                    }`}
+                  >
+                    <td className=" px-[16px] py-[20px] text-center min-w-[80px]">
+                      {dt.name}
+                    </td>
+                    <td className=" px-[16px] py-[20px] text-center min-w-[80px] uppercase">
+                      {dt.field}
+                    </td>
+                    <td className=" px-[16px] py-[20px] text-center min-w-[80px]">
+                      {dt.leader.name}
+                    </td>
+                    <td className=" px-[16px] py-[20px] text-center min-w-[80px]">
+                      {dt.totalEmployee}
+                    </td>
+                    <td className=" px-[16px] py-[20px] text-center min-w-[80px] capitalize">
+                      {dt.typeWork}
+                    </td>
+                    <td className=" px-[16px] py-[20px] text-center min-w-[80px]">
+                      <button
+                        // onClick={() => {
+                        //   setShowSelectTeam(true);
+                        //   console.log(dt.customer.name);
+                        // }}
+                        className="px-4 py-2 bg-blue-500 text-white rounded-xl hover:bg-sky-500 transition-all duration-150 ease-in-out"
+                      >
+                        Chọn
+                      </button>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
 const ListOrderCustomer = () => {
   const [dataAxiosListOrder, setDataAxiosListOrder] = useState([]);
   const [showOrderDetail, setShowOrderDetail] = useState(false);
+  const [showSelectTeam, setShowSelectTeam] = useState(false);
   const [selectedOrder, setSelectedOrder] = useState();
   useEffect(() => {
     const fetchData = async () => {
@@ -181,6 +286,10 @@ const ListOrderCustomer = () => {
     setShowOrderDetail(false);
   };
 
+  const onCloseSelectTeam = () => {
+    setShowSelectTeam(false)
+  }
+ 
   console.log(dataAxiosListOrder);
 
   return (
@@ -248,7 +357,13 @@ const ListOrderCustomer = () => {
                   </td>
                   <td className=" px-[16px] py-[20px] text-center min-w-[80px]">
                     <div class="flex justify-center items-center gap-2">
-                      <button className="px-4 py-2 bg-blue-500 text-white rounded-xl hover:bg-sky-500 transition-all duration-150 ease-in-out">
+                      <button
+                        onClick={() => {
+                          setShowSelectTeam(true);
+                          console.log(dt.customer.name);
+                        }}
+                        className="px-4 py-2 bg-blue-500 text-white rounded-xl hover:bg-sky-500 transition-all duration-150 ease-in-out"
+                      >
                         Xác nhận
                       </button>
                       <button className="px-4 py-2 bg-gray-500 text-white rounded-xl hover:bg-slate-400 transition-all duration-150 ease-in-out">
@@ -269,7 +384,7 @@ const ListOrderCustomer = () => {
           IdCustomer={selectedOrder.customer._id}
           customerName={selectedOrder.customer.name}
           customerPhone={selectedOrder.customer.phone}
-          customerEmail={selectedOrder.customer.gmail}
+          customerEmail={selectedOrder.customer.email}
           idOder={selectedOrder._id}
           orderDate={selectedOrder.orderDate}
           field={selectedOrder.field}
@@ -281,6 +396,7 @@ const ListOrderCustomer = () => {
           budget={selectedOrder.budget}
         />
       )}
+      {showSelectTeam && <SelectTeam onClose={onCloseSelectTeam} />}
     </div>
   );
 };
