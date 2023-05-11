@@ -134,7 +134,9 @@ const OrderDetail = ({
             )}
           </div>
           <div>
-            {completeSelected ? ("") : (
+            {completeSelected ? (
+              ""
+            ) : (
               <span className="">
                 <span className="opacity-80 italic text-sm text-red-400">
                   Chưa có nhóm phụ trách cho dự án của khách hàng. Vui lòng xác
@@ -269,7 +271,7 @@ const ListOrderCustomer = () => {
           IdCustomer={selectedOrder.customer._id}
           customerName={selectedOrder.customer.name}
           customerPhone={selectedOrder.customer.phone}
-          customerEmail={selectedOrder.customer.gmail}
+          customerEmail={selectedOrder.customer.email}
           idOder={selectedOrder._id}
           orderDate={selectedOrder.orderDate}
           field={selectedOrder.field}

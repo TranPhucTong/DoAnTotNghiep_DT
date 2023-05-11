@@ -27,7 +27,7 @@ const ProfileCustomer = () => {
   if (!customer) {
     return <></>;
   }
-  const { name, gender, birthDate, gmail, phone } = customer;
+  const { name, gender, birthDate, email, phone } = customer;
   const onSubmit = async (data) => {
     try {
        const res = await customerApi.updateCustomer(data);
@@ -70,7 +70,7 @@ const ProfileCustomer = () => {
               }}
               error={errors.name?.message}
             />
-            <NoneInput label={"Email"} value={gmail} />
+            <NoneInput label={"Email"} value={email} />
 
             <NoneInput label={"Số điện thoại"} value={phone} />
             <InputRadio
