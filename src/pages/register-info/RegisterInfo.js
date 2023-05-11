@@ -14,20 +14,19 @@ const RegisterInfo = (props) => {
   const [name, setName] = useState("");
   const [birthDay, setBirthDay] = useState("");
   const [gender, setGender] = useState("");
-  const [gmail, setGmail] = useState("");
+  const [email, setEmail] = useState("");
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const sCustomer = useSelector(selectCustomer);
 
   const submitHandle = async () => {
-    console.log(sCustomer);
     const info = {
-      phone: sCustomer.customer.phone,
+      phone: sCustomer.phone,
       name,
       birthDate: birthDay,
       gender,
-      gmail,
+      email,
     };
     const res = await dispatch(registerInfo(info));
     console.log(res);
@@ -47,8 +46,8 @@ const RegisterInfo = (props) => {
     setBirthDay(value);
   };
 
-  const changeGmailHandle = (value) => {
-    setGmail(value);
+  const changeEmailHandle = (value) => {
+    setEmail(value);
   };
 
   return (
@@ -90,10 +89,10 @@ const RegisterInfo = (props) => {
           </div>
 
           <InputAuthen
-            label="Gmail"
+            label="Email"
             type="text"
-            placeholder="Nhập gmail"
-            onInput={changeGmailHandle}
+            placeholder="Nhập email"
+            onInput={changeEmailHandle}
           />
 
           <div className="button_authen__wrapper">

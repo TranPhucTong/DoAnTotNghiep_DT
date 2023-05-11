@@ -112,15 +112,15 @@ const CreatEmployee = (props) => {
               />
             </div>
 
-            {/* gmail  */}
+            {/* email  */}
             <div class="h-[2.875rem] relative flex items-center justify-center border border-solid focus-within:border-blue-500 transition-all ease-linear border-gray-200 rounded-lg">
               <label className="absolute -top-1/4 left-2 px-2 bg-white text-blue-500 text-sm">
-                Gmail
+                Email
               </label>
               <input
                 className="text-sm  w-full border border-none outline-none px-4 py-2"
                 type="text"
-                formControlName="gmail"
+                formControlName="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
               />

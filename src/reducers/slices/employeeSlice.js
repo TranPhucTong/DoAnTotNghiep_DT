@@ -11,7 +11,7 @@ let employee = {
   name: "",
   birthDate: "",
   gender: "",
-  gmail: "",
+  email: "",
   skill: [],
   field: "",
   introduce: "",

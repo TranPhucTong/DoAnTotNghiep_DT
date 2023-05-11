@@ -1,15 +1,14 @@
-import React, { useState, useEffect } from 'react';
-import { useSelector } from 'react-redux';
-import { updateEmployee } from '../../reducers/slices/updateEmployeeSlice';
-import employeeApii from '../../api/employeeApii';
-import { useNavigate } from 'react-router-dom';
-import teamWorkApi from '../../api/teamWorkApi';
-
+import React, { useState, useEffect } from "react";
+import { useSelector } from "react-redux";
+import { updateEmployee } from "../../reducers/slices/updateEmployeeSlice";
+import employeeApii from "../../api/employeeApii";
+import { useNavigate } from "react-router-dom";
+import teamWorkApi from "../../api/teamWorkApi";
 
 const UpdateEmployees = () => {
   const transiData = useSelector(updateEmployee);
   // const [idEm, setIdEm] = useState(transiData.id);
-  const idEm = transiData.id
+  const idEm = transiData.id;
   const [name, setName] = useState(transiData.name);
   const [email, setEmail] = useState(transiData.email);
   const [gender, setGender] = useState(transiData.gender);
@@ -21,14 +20,9 @@ const UpdateEmployees = () => {
   const [isFormComplete, setIsFormComplete] = useState(false);
 
   const navigate = useNavigate();
-  
+
   useEffect(() => {
-    if (
-      name !== "" &&
-      email !== "" &&
-      gender !== "" &&
-      birthday !== "" 
-    ) {
+    if (name !== "" && email !== "" && gender !== "" && birthday !== "") {
       setIsFormComplete(true);
     } else {
       setIsFormComplete(false);
@@ -43,14 +37,11 @@ const UpdateEmployees = () => {
       birthDate: birthday,
       email: email,
     };
-     const response = await employeeApii.updateEmployee(employeeUpdate);
-     console.log(response);
-     console.log(employeeUpdate.id);
-     navigate("/admin/list-employees");
-  }
-
-  
-
+    const response = await employeeApii.updateEmployee(employeeUpdate);
+    console.log(response);
+    console.log(employeeUpdate.id);
+    navigate("/admin/list-employees");
+  };
 
   return (
     <div class="p-6 w-full  min-h-screen-except-header">
@@ -103,15 +94,15 @@ const UpdateEmployees = () => {
             />
           </div>
 
-          {/* gmail  */}
+          {/* email  */}
           <div class="h-[2.875rem] relative flex items-center justify-center border border-solid focus-within:border-blue-500 transition-all ease-linear border-gray-200 rounded-lg">
             <label className="absolute -top-1/4 left-2 px-2 bg-white text-blue-500 text-sm">
-              Gmail
+              Email
             </label>
             <input
               className="text-sm  w-full border border-none outline-none px-4 py-2"
               type="text"
-              formControlName="gmail"
+              formControlName="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
             />
@@ -147,6 +138,6 @@ const UpdateEmployees = () => {
       </div>
     </div>
   );
-}
+};
 
 export default UpdateEmployees;
