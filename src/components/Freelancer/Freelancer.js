@@ -15,7 +15,11 @@ import {
   listEmployee,
 } from "../../reducers/slices/employeeSlice";
 import { Link } from "react-router-dom";
-
+import Tippy from "@tippyjs/react";
+import "tippy.js/dist/tippy.css";
+import "tippy.js/dist/backdrop.css";
+import "tippy.js/animations/shift-away.css";
+import "tippy.js/themes/light.css";
 export const freelancers = [
   {
     id: 1,
@@ -96,30 +100,28 @@ export const FreelancerCard = ({ freelancer }) => {
         </div>
         <p className="text-left mb-4">{freelancer.introduce}</p>
         <div className="flex justify-between items-center">
-          <div className="flex">
-            <FontAwesomeIcon
-              className="font-semibold cursor-pointer text-green-500"
-              icon={faStar}
-            />
-            <FontAwesomeIcon
-              className="font-semibold cursor-pointer text-green-500"
-              icon={faStar}
-            />
-            <FontAwesomeIcon
-              className="font-semibold cursor-pointer text-green-500"
-              icon={faStar}
-            />
-            <FontAwesomeIcon
-              className="font-semibold cursor-pointer text-green-500"
-              icon={faStar}
-            />
-            <FontAwesomeIcon
-              className="font-semibold cursor-pointer text-green-500"
-              icon={faStar}
-            />
-          </div>
-          <div className="text-[#00bdd6] font-bold text-xl">
-            {freelancer.rentFrom}
+          <Tippy
+            interactive={true}
+            hideOnClick={false}
+            trigger="mouseenter focus"
+            theme="light"
+            content={<span>{freelancer.totalReview}</span>}
+          >
+            <div className="flex">
+              {[0, 1, 2, 3, 4].map((rating) => (
+                <FontAwesomeIcon
+                  className={`font-semibold cursor-pointer ${
+                    freelancer.totalRating > rating
+                      ? "text-green-500"
+                      : "text-gray-500"
+                  } `}
+                  icon={faStar}
+                />
+              ))}
+            </div>
+          </Tippy>
+          <div className="text-[#00bdd6] font-bold text-base">
+            {freelancer.rent_from}$ - {freelancer.rent_to}$
           </div>
         </div>
       </div>

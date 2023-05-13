@@ -12,7 +12,7 @@ const reviews = { href: "#", average: 4, totalCount: 117 };
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
-const ProductInfo = ({employee, onOpen }) => {
+const ProductInfo = ({employee, onOpen, onOpenReview }) => {
   const login = useSelector(isLoggedIn)
   const navigate = useNavigate();
   const hireHandle = ()=> {
@@ -22,6 +22,9 @@ const ProductInfo = ({employee, onOpen }) => {
     }
     onOpen(true);
 
+  }
+  const openReviewModal = () => {
+    onOpenReview(true)
   }
   return (
     <div className="mx-auto max-w-2xl px-4 pb-16 pt-10 sm:px-6 lg:grid lg:max-w-7xl lg:grid-cols-3 lg:grid-rows-[auto,auto,1fr] lg:gap-x-8 lg:px-8 lg:pb-24 lg:pt-16">
@@ -48,22 +51,26 @@ const ProductInfo = ({employee, onOpen }) => {
             {/* Reviews */}
             <div className="my-3 ">
               <h3 className="sr-only">Reviews</h3>
-              <div className="flex items-center ">
+                  
+              <div className="flex items-center " onClick={() => openReviewModal()}>
                 <div className="flex items-center">
-                  {[0, 1, 2, 3, 4].map((rating) => (
-                    <FontAwesomeIcon
-                      className="font-semibold cursor-pointer text-green-500"
-                      icon={faStar}
-                    />
-                  ))}
+                 {[0, 1, 2, 3, 4].map((rating) => (
+                <FontAwesomeIcon
+                  className={`font-semibold cursor-pointer ${
+                    employee.totalRating > rating
+                      ? "text-green-500"
+                      : "text-gray-500"
+                  } `}
+                  icon={faStar}
+                />
+              ))}
                 </div>
-                <p className="sr-only">{employee.reviews} out of 5 stars</p>
-                {/* <a
-                  href={reviews.href}
+                <p className="sr-only">{employee.totalRating} out of 5 stars</p>
+                <a
                   className="ml-3 text-sm font-medium text-indigo-600 hover:text-indigo-500"
                 >
-                  {reviews.totalCount} reviews
-                </a> */}
+                  {employee.totalReview} reviews
+                </a>
               </div>
             </div>
 

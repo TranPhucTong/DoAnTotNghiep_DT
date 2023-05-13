@@ -20,6 +20,9 @@ let employee = {
   rentTo: 0,
   background: "",
   avatar: "",
+  review: [],
+  totalReview: 0,
+  totalRating: 0,
 };
 
 const initialState = {
