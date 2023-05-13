@@ -21,6 +21,13 @@ const contractSlice = createSlice({
       );
       state.listFilterContract = listContractFilter;
     },
+    setIsRatingContract: (state, action) => {
+      const contractId = action.payload;
+      const index = state.listContract.findIndex(
+        (item) => item._id === contractId
+      );
+      state.listContract[index]["isRating"] = true;
+    },
   },
   extraReducers: {
     [getContracts.fulfilled]: (state, action) => {
@@ -43,6 +50,6 @@ export const listFilterContractStore = (state) =>
   state.contract.listFilterContract;
 export const selectContract = (state) => state.contract.selectContract;
 
-export const { setSelectContract, setListContractFilter } =
+export const { setSelectContract, setListContractFilter, setIsRatingContract } =
   contractSlice.actions;
 export default contractSlice;

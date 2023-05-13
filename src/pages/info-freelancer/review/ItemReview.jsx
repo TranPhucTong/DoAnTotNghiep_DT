@@ -5,7 +5,7 @@ import React from "react";
 const ItemReview = ({ review }) => {
   const {customer,comment} = review
   return (
-    <div className="pb-6 border-b-2">
+    <div className="py-6 border-b-2">
       <div>
         <h4 className="font-bold text-sm mb-1 text-slate-900">{customer.name}</h4>
         <div className="flex items-center ">

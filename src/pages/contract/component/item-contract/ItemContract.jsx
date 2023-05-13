@@ -34,7 +34,7 @@ const statusContent = (status) => {
       return "Đã hủy";
   }
 };
-const ItemContract = ({ item, onOpen }) => {
+const ItemContract = ({ item, onOpen, onOpenReview }) => {
   const {
     employee,
     nameProject,
@@ -48,12 +48,12 @@ const ItemContract = ({ item, onOpen }) => {
 
   const [active, setActive] = useState(false);
   const changeActiveHandle = () => setActive(!active);
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
   const statusRender = statusContent(status);
-  const cancelHandle = ()=>{
-    onOpen(true)
-    dispatch(setSelectContract(item))
-  }
+  const cancelHandle = () => {
+    onOpen(true);
+    dispatch(setSelectContract(item));
+  };
 
   return (
     <Card active={active}>
@@ -119,18 +119,16 @@ const ItemContract = ({ item, onOpen }) => {
                 {description}
               </p>
             </div>
-             <div className=" text-neutral-900 my-3">
-                {status === "cancel" && (
+            <div className=" text-neutral-900 my-3">
+              {status === "cancel" && (
                 <>
-                <p className="mr-2 w-20 text-neutral-600">
-                    Lí do:
-                  </p>
+                  <p className="mr-2 w-20 text-neutral-600">Lí do:</p>
                   <p className="mt-2 font-normal text-sm h-[100px] w-full">
                     {item.reason}
                   </p>
                 </>
               )}
-             </div>
+            </div>
           </div>
           <div className="flex justify-between items-center ">
             <p className="text-left font-bold text-green-500">{statusRender}</p>
@@ -142,12 +140,16 @@ const ItemContract = ({ item, onOpen }) => {
                 Hủy
               </button>
             )}
-            {status === "done" && (
-              <button class="bg-blue-500 hover:bg-blue-700 text-white font-normal py-2 px-4 rounded">
+            {status === "done" && !item.isRating && (
+              <button
+                onClick={() =>
+                  onOpenReview({ isOpen: true, employee: employee._id, contract: item })
+                }
+                class="bg-blue-500 hover:bg-blue-700 text-white font-normal py-2 px-4 rounded"
+              >
                 Đánh giá
               </button>
             )}
-            
           </div>
         </>
       ) : (
