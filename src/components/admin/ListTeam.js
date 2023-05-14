@@ -47,8 +47,10 @@ const ListTeam = () => {
     }
 
     const fetchData = async () => {
-      const res = await employeeApii.getEmplees();
+      const res = await employeeApii.getIsEmployeeActive(false);
       setDataAxiosEmployeeAdd(res.data);
+
+      fetchData();
     };
     fetchData();
 
@@ -119,21 +121,20 @@ const ListTeam = () => {
 
   const clickDeleteTeam = async () => {
     const teamDel = teams.find((team) => team.name === selectedTeam);
-    const name =  teamDel.name
-    // console.log(name);
-    const infoTeamDel = {
-     name,
-    };
-    console.log(name);
-   try {
-     const res = await teamWorkApi.deleteTeam(name);
-     console.log("Xóa nhóm thành công" + res);
-     alert("Xóa nhóm thành công");
-   } catch (error) {
-     console.log("Xóa nhóm không thành công" + error);
-     alert("Xóa nhóm Không thành công");
-   }
-   window.location.reload(false);
+    const name = teamDel.name;
+    try {
+      const res = await teamWorkApi.deleteTeam(name);
+      if (res.data.active === true) {
+        alert("Nhóm đang hoạt động. Không thể xóa !!!");
+      } else {
+        alert("Xóa thành công");
+        setSelectedTeam("");
+      }
+    } catch (error) {
+      console.log("Xóa nhóm không thành công", error);
+      alert("Xóa nhóm Không thành công");
+    }
+    // window.location.reload(false);
   };
   return (
     <div class="py-6 px-8">
