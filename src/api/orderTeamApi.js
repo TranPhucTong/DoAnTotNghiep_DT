@@ -2,12 +2,18 @@ import { mainAxios } from "./axiosConfig";
 
 const url = "orders";
 const orderTeamApi = {
-  createOrder : (order) => {
-    return mainAxios.post(`${url}`, { "order" :  order });
+  createOrder: (order) => {
+    return mainAxios.post(`${url}`, { order: order });
   },
-  getListOrder : () => {
+  getListOrder: () => {
     return mainAxios.get(`${url}`);
+  },
+  addTeamToOrder: (dataAddTeamToOrder) => {
+    return mainAxios.put(`${url}`, dataAddTeamToOrder);
+  },
+  cancelOrder : (dataCancel) => {
+    return mainAxios.put(`${url}/cancel`, dataCancel);
   }
-}
+};
 
 export default orderTeamApi;

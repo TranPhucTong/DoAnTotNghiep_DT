@@ -10,14 +10,16 @@ const CreateTeam = () => {
   const [typeWork, setTypeWork] = useState("");
   const [total, setToTal] = useState();
   const [dataAxiosLeader, setDataAxiosLeader] = useState([]);
+  const [dataMember, setDataMember] = useState([]);
   const [isFormComplete, setIsFormComplete] = useState(false);
 
   useEffect(() => {
     const fetchData = async () => {
-      const res = await employeeApii.getEmplees();
+      const res = await employeeApii.getIsEmployeeActive(false);
       setDataAxiosLeader(res.data);
     };
     fetchData();
+    setDataMember(dataAxiosLeader.filter((member) => member._id !== leader));
     if (
       nameTeam !== "" &&
       field !== "" &&
@@ -30,11 +32,11 @@ const CreateTeam = () => {
     } else {
       setIsFormComplete(false);
     }
-  });
+  }, [dataAxiosLeader]);
 
   const [selectedEmployees, setSelectedEmployees] = useState([]);
 
-  const options = dataAxiosLeader.map((employee) => ({
+  const options = dataMember.map((employee) => ({
     value: employee._id,
     label: employee.name,
   }));
