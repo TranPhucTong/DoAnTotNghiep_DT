@@ -12,9 +12,12 @@ const teamWorkApi = {
   addMemberFromTeam: (member) => {
     return mainAxios.post(`${url}/add-member`, member);
   },
-  deleteTeam : (name) => {
-    return mainAxios.delete(`${url}`,  {data:{name}});
-  }
+  deleteTeam: (name) => {
+    return mainAxios.delete(`${url}`, { data: { name } });
+  },
+  getIsTeamActive: (active) => {
+    return mainAxios.get(`${url}?active=${active}`);
+  },
 };
 
 export default teamWorkApi;

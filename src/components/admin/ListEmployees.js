@@ -25,6 +25,9 @@ const ListEmployees = () => {
   const [searchNum, setSearchNum] = useState("");
   const [isNotFould, setIsNotFould] = useState(false);
   const [isTranPage, setIsTranPage] = useState(true);
+  const [showNoti, setShowNoti] = useState(false);
+  const [showNoEmployeeTeam, setShowNoEmployeeTeam] = useState(false);
+  const [selectDel, setSelectDel] = useState();
 
   const handleSelectEmployee = (employee) => {
     dispatch(updateRequireEmployee(employee));
@@ -47,6 +50,7 @@ const ListEmployees = () => {
       const resultFree = await axios.get(
         "https://6433e7e61c5ed06c9589d5e5.mockapi.io/api/employee/Freelancer"
       );
+
       setDataFree(resultFree.data);
     };
     fetchData();
@@ -57,13 +61,42 @@ const ListEmployees = () => {
     }
   }, [type]);
 
+  const clickDelCheckEmployee = async (employeeId) => {
+    try {
+      const resultCheckEmployee = await employeeApii.checkEmployeeExist(
+        employeeId
+      );
+      setSelectDel(dataAxios.filter((employee) => employee._id === employeeId));
+      if (resultCheckEmployee.message === "exist user!") {
+        setShowNoti(true);
+      } else {
+        setShowNoti(false);
+        setShowNoEmployeeTeam(true);
+      }
+    } catch (error) {
+      console.log("Lỗi", error);
+    }
+  };
+  // console.log(selectDel);
   const clickDeleteEmployee = async (phone) => {
     try {
       const respon = await employeeApii.deleteEmloyee(phone);
       setDataAxios(dataAxios.filter((employee) => employee.phone !== phone));
       console.log(respon);
+      setShowNoEmployeeTeam(false);
     } catch (erorr) {
-      console.log("Lỗi :" + erorr);
+      console.log("Lỗi :", erorr);
+    }
+  };
+
+  const clickDeleteEmployeeInTeam = async (phone) => {
+    try {
+      const respon = await employeeApii.deleteEmloyeeInTeam(phone);
+      setDataAxios(dataAxios.filter((employee) => employee.phone !== phone));
+      console.log(respon);
+      setShowNoti(false);
+    } catch (erorr) {
+      console.log("Lỗi :", erorr);
     }
   };
 
@@ -110,7 +143,6 @@ const ListEmployees = () => {
   const handlePageChange1 = (pageNumber) => {
     setCurrentPage1(pageNumber);
   };
-  const [selectedEmployee, setSelectedEmployee] = useState(null);
 
   return (
     <div className="p-7 h-full w-full">
@@ -366,13 +398,79 @@ const ListEmployees = () => {
                             <FontAwesomeIcon icon={faPenToSquare} />
                           </button>
                           <button
-                            onClick={() => clickDeleteEmployee(dt.phone)}
+                            onClick={() => clickDelCheckEmployee(dt._id)}
                             class="rounded-full  hover:bg-red-500 hover:text-white cursor-pointer bg-gray-200 p-2 text-gray-500 btn icon secondary sm"
                           >
                             <FontAwesomeIcon icon={faTrash} />
                           </button>
                         </div>
                       </td>
+                      {showNoti ? (
+                        <div className="fixed inset-0 z-[1000] flex items-center justify-center">
+                          <div className="absolute inset-0 bg-gray-950 opacity-50"></div>
+                          <div className="bg-white relative z-30 shadow-xl rounded-lg p-6">
+                            <div className="flex flex-col justify-center items-center mb-4">
+                              <h1 className="text-3xl  text-center font-bold text-blue-500">
+                                Nhân viên hiện đang trong nhóm làm việc <br />
+                                Bạn có muốn xóa ?
+                              </h1>
+                              <div className="flex gap-2 mt-6">
+                                <button
+                                  onClick={() =>
+                                    clickDeleteEmployeeInTeam(
+                                      selectDel[0].phone
+                                    )
+                                  }
+                                  className="px-4 py-2 rounded-xl bg-red-500 text-white font-semibold hover:bg-red-700 duration-150 transition-colors ease-linear"
+                                >
+                                  Xóa
+                                </button>
+                                <button
+                                  onClick={() => setShowNoti(false)}
+                                  className="px-4 py-2 rounded-xl bg-gray-500 text-white font-semibold hover:bg-gray-700 duration-150 transition-colors ease-linear"
+                                >
+                                  Hủy
+                                </button>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      ) : (
+                        <div>
+                          {showNoEmployeeTeam ? (
+                            <div className="fixed inset-0 z-[1000] flex items-center justify-center">
+                              <div className="absolute inset-0 bg-gray-950 opacity-50"></div>
+                              <div className="bg-white relative z-30 shadow-xl rounded-lg p-6">
+                                <div className="flex flex-col justify-center items-center mb-4">
+                                  <h1 className="text-3xl  text-center font-bold text-blue-500">
+                                    Bạn có chắc xóa nhân viên ?
+                                  </h1>
+                                  <div className="flex gap-2 mt-6">
+                                    <button
+                                      onClick={() =>
+                                        clickDeleteEmployee(selectDel[0].phone)
+                                      }
+                                      className="px-4 py-2 rounded-xl bg-red-500 text-white font-semibold hover:bg-red-700 duration-150 transition-colors ease-linear"
+                                    >
+                                      Xóa
+                                    </button>
+                                    <button
+                                      onClick={() =>
+                                        setShowNoEmployeeTeam(false)
+                                      }
+                                      className="px-4 py-2 rounded-xl bg-gray-500 text-white font-semibold hover:bg-gray-700 duration-150 transition-colors ease-linear"
+                                    >
+                                      Hủy
+                                    </button>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          ) : (
+                            ""
+                          )}
+                        </div>
+                      )}
                     </tr>
                   ))}
                 </tbody>
