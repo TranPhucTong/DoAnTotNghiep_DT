@@ -34,6 +34,10 @@ const customerSlice = createSlice({
     changeInfo: (state, action) => {
       state.user = action.payload;
     },
+    changeCustomer: (state, action) => {
+      const customerUpdate = { ...state.customer, ...action.payload };
+      state.customer = customerUpdate;
+    },
   },
   extraReducers: {
     [login.fulfilled]: (state, action) => {
@@ -75,5 +79,5 @@ export const selectCustomer = (state) =>
   state.customer.customer ? state.customer.customer : null;
 
 export const isLoggedIn = (state) => state.customer.isLoggedIn;
-export const { setLogin, setLogout } = customerSlice.actions;
+export const { setLogin, setLogout, changeCustomer } = customerSlice.actions;
 export default customerSlice;

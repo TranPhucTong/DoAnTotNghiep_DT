@@ -2,8 +2,8 @@ import React, { useEffect } from "react";
 import Form from "./component/Form";
 import { useForm } from "react-hook-form";
 import InputText from "./component/input/InputText";
-import { useSelector } from "react-redux";
-import { selectCustomer } from "../../reducers/slices/customerSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { changeCustomer, selectCustomer } from "../../reducers/slices/customerSlice";
 import NoneInput from "./component/input/NoneInput";
 import InputRadio from "./component/input/InputRadio";
 import InputDate from "./component/input/InputDate";
@@ -17,7 +17,7 @@ const valueForm = {
 };
 const ProfileCustomer = () => {
   const customer = useSelector(selectCustomer);
-
+  const dispatch = useDispatch()  
   const {
     register,
     handleSubmit,
@@ -30,13 +30,12 @@ const ProfileCustomer = () => {
   const { name, gender, birthDate, email, phone } = customer;
   const onSubmit = async (data) => {
     try {
-       const res = await customerApi.updateCustomer(data);
-      console.log(res);
-      res.status === 201 && toast.success("Cập nhật thành công")
+      const res = await customerApi.updateCustomer(data);
+      res.status === 201 && toast.success("Cập nhật thành công");
+      dispatch(changeCustomer(data));
     } catch (error) {
       console.log(error);
     }
-   
   };
   return (
     <div className="-mb-[100px] h-[90vh] bg-neutral-100 flex justify-center items-center py-14">
@@ -116,7 +115,7 @@ const ProfileCustomer = () => {
           </div>
         </div>
         <div>
-          <button class="w-1/4 transition-all bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded">
+          <button className="w-1/4 transition-all bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded">
             Cập nhật
           </button>
         </div>
