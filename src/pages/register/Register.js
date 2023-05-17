@@ -14,13 +14,14 @@ import authentication from "../../firebase/firebase";
 import { signInWithPhoneNumber, RecaptchaVerifier } from "firebase/auth";
 import { checkIsPhone } from "../../reducers/actions/customerAction";
 import { register } from "../../reducers/actions/authAction";
+import { set } from "react-hook-form";
 
 const Register = (props) => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [confirmOTP, setConfirmOTP] = useState(false);
-
+  const [isLoading, setIsLoading] = useState(false);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -44,33 +45,43 @@ const Register = (props) => {
   };
 
   const submitHandle = async () => {
+    const regexPhone = /(84|0[3|5|7|8|9])+([0-9]{8})\b/g;
+    if (!regexPhone.test(username)) {
+      toast.error("Số điện thoại không hợp lệ!!!");
+      return;
+    }
+    if (password.length < 6) {
+      toast.error("Mật khẩu phải có ít nhất 6 ký tự");
+      return;
+    }
     const isConfirm = confirmPassword === password;
     if (!isConfirm) {
       toast.error("Nhập mật khẩu không khớp");
       return;
     }
-
+    changeLoadingHandle(true);
     const res = await dispatch(checkIsPhone(username));
-    if (res.payload.status === 200) {
-      generateRecapcha();
-      const appVerifier = window.recaptchaVerifier;
-      signInWithPhoneNumber(authentication, `+84${username}`, appVerifier)
-        .then((confirmationResult) => {
-          window.confirmationResult = confirmationResult;
-        })
-        .catch((error) => {
-          console.log(error);
-        });
-    } else {
+    if (res.payload.data) {
       toast.warning("Tài khoản đã tồn tại!");
+      changeLoadingHandle(false);
       return;
     }
+    generateRecapcha();
+    const appVerifier = window.recaptchaVerifier;
+    signInWithPhoneNumber(authentication, `+84${username}`, appVerifier)
+      .then((confirmationResult) => {
+        window.confirmationResult = confirmationResult;
+        changeLoadingHandle(false);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   };
 
   const confirmOTPHandle = async (otp) => {
+    changeLoadingHandle(true);
     if (otp === "090201") {
       const res = await dispatch(register({ username, password }));
-      console.log("res: ", res);
       if (res.payload.status === 200) {
         navigate("info");
       } else {
@@ -81,26 +92,29 @@ const Register = (props) => {
       confirmationResult
         .confirm(otp)
         .then(async (result) => {
-          console.log("xac thuc otp");
           const res = await dispatch(register({ username, password }));
-          console.log("xac thuc otp:", res);
-
           if (res.payload.status === 200) {
             navigate("info");
+            changeLoadingHandle(false);
           } else {
             toast.error("Đăng kí thất bại");
+            changeLoadingHandle(false);
           }
         })
         .catch((error) => {
-          console.log(error);
           if (error) {
             toast.error("Mã OTP không đúng");
+            changeLoadingHandle(false);
           }
         });
     }
   };
 
+  const changeLoadingHandle = (boolean) => {
+    setIsLoading(boolean);
+  };
   const changeUsernameHandle = (value) => {
+    if (value.length > 12) return;
     setUsername(value);
   };
   const changePasswordHandle = (value) => {
@@ -124,6 +138,7 @@ const Register = (props) => {
                 type="text"
                 placeholder="Nhập số điện thoại..."
                 onInput={changeUsernameHandle}
+                value={username}
               />
               <InputAuthen
                 label="Mật khẩu"
@@ -143,7 +158,11 @@ const Register = (props) => {
               />
             </div>
             <div className="button_authen__wrapper">
-              <ButtonAuthen onClick={submitHandle} content="Đăng ký" />
+              <ButtonAuthen
+                onClick={submitHandle}
+                content="Đăng ký"
+                isLoading={isLoading}
+              />
             </div>
             <div className="login__descript">
               <div className="line"></div>
@@ -161,7 +180,11 @@ const Register = (props) => {
           </div>
         </div>
       ) : (
-        <ConfirmOTP onSubmit={confirmOTPHandle} username={username} />
+        <ConfirmOTP
+          onSubmit={confirmOTPHandle}
+          username={username}
+          isLoading={isLoading}
+        />
       )}
     </>
   );

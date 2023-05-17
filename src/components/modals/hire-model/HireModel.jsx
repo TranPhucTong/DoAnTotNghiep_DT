@@ -6,10 +6,11 @@ import InputDate from "./input-date/InputDate";
 import Textarea from "./textarea/Textarea";
 import days from "../../../utils/totalDay";
 import contractApi from "../../../api/contractApi";
-import { toast } from "react-toastify";
+import Loading from "../../loading/Loading";
 
 const HireModel = ({ open, onOpen, employee }) => {
   const [confirm, setConfirm] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const cancelButtonRef = useRef(null);
   const {
     register,
@@ -21,12 +22,14 @@ const HireModel = ({ open, onOpen, employee }) => {
   const submitHandle = async (data) => {
     if (confirm) return;
     const contract = { ...data, employee: employee.employeeId };
-    setConfirm(true);
     try {
+      changeLoadingHandle(true);
       const res = await contractApi.createContract(contract);
+      res && setConfirm(true);
     } catch (error) {
       console.log(error);
     }
+    changeLoadingHandle(false);
   };
 
   const changeConfirmHandle = () => {
@@ -35,6 +38,9 @@ const HireModel = ({ open, onOpen, employee }) => {
       setConfirm(false);
       return;
     }
+  };
+  const changeLoadingHandle = (boolean) => {
+    setIsLoading(boolean);
   };
   return (
     <Transition.Root show={open} as={Fragment}>
@@ -231,24 +237,26 @@ const HireModel = ({ open, onOpen, employee }) => {
                     <>
                       <button
                         type="submit"
-                        className="inline-flex w-full justify-center rounded-md bg-blue-500 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-blue-600 sm:ml-3 sm:w-auto"
+                        className={`${
+                          isLoading && "opacity-50"
+                        }  inline-flex w-full justify-center rounded-md bg-blue-500 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-blue-600 sm:ml-3 sm:w-auto`}
                         onClick={() => changeConfirmHandle(true)}
                       >
-                        Xác nhận
+                        {isLoading ? <Loading /> : <>Xác nhận</>}
                       </button>
-                      <button
+                      {!isLoading && <button
                         type="button"
                         className="mt-3 inline-flex w-full justify-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 sm:mt-0 sm:w-auto"
                         onClick={() => onOpen(false)}
                         ref={cancelButtonRef}
                       >
                         Hủy bỏ
-                      </button>
+                      </button>}
                     </>
                   ) : (
                     <button
                       type="button"
-                      className="inline-flex w-full justify-center rounded-md bg-blue-500 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-blue-600 sm:ml-3 sm:w-auto"
+                      className={`inline-flex w-full justify-center rounded-md bg-blue-500 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-blue-600 sm:ml-3 sm:w-auto`}
                       onClick={() => onOpen(false)}
                       ref={cancelButtonRef}
                     >

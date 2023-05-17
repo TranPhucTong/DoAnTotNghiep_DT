@@ -1,5 +1,6 @@
 import React from "react";
 import "./ButtonAuthen.scss";
+import Loading from "../../loading/Loading";
 
 const ButtonAuthen = (props) => {
   let inputButtonSkip = "";
@@ -9,10 +10,13 @@ const ButtonAuthen = (props) => {
   return (
     <button
       type="button"
-      className={`login_btn ${inputButtonSkip}`}
+      className={`login_btn ${inputButtonSkip} ${
+        props.isLoading && "opacity-50"
+      }`}
       onClick={props.onClick}
+      disabled={props.isLoading}
     >
-      {props.content}
+      {props.isLoading ? <Loading /> : <>{props.content}</>}
     </button>
   );
 };

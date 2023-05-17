@@ -9,6 +9,7 @@ const ConfirmOTP = (props) => {
 
   const [OTP, setOTP] = useState("");
   const changeOTPHandle = (value) => {
+    if (value.length > 6) return;
     setOTP(value);
   };
   const submitHandle = () => {
@@ -30,11 +31,16 @@ const ConfirmOTP = (props) => {
             type="text"
             placeholder="Nhập mã OTP"
             onInput={changeOTPHandle}
+            value={OTP}
           />
         </div>
 
         <div className="button_authen__wrapper">
-          <ButtonAuthen onClick={submitHandle} content="Xác nhận" />
+          <ButtonAuthen
+            onClick={submitHandle}
+            content="Xác nhận"
+            isLoading={props.isLoading}
+          />
         </div>
         <div className="confirmOTP__resend__link">
           <p>Không nhận được mã ? </p>

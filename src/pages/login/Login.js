@@ -14,6 +14,7 @@ import { getCustomer } from "../../reducers/actions/customerAction";
 const Login = (props) => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -33,25 +34,41 @@ const Login = (props) => {
   }, []);
 
   const submitHandle = async () => {
+    const regexPhone = /(84|0[3|5|7|8|9])+([0-9]{8})\b/g;
+    if (!regexPhone.test(username)) {
+      toast.error("Số điện thoại không hợp lệ!!!");
+      return;
+    }
+    if (password.length < 6) {
+      toast.error("Mật khẩu phải có ít nhất 6 ký tự!!!");
+      return;
+    }
+    changeLoadingHandle(true);
     const res = await dispatch(login({ username, password }));
+    console.log(res);
     if (res.payload.status === 201) {
       setTimeout(() => {
         navigate(-1);
       }, 500);
     }
     if (res.payload.status === 402) {
-      toast.error("Số điện thoại không tồn tại. Vui lòng đăng nhập lại!!!");
+      toast.error("Số điện thoại này chưa được đăng ký!!!");
     }
-    if (res.payload.status === 401) {
-      toast.error("Mật khẩu không chính xác. Vui lòng đăng nhập lại!!!");
+    if (res.payload.status === 400) {
+      toast.error("Mật khẩu không chính xác.");
     }
+    changeLoadingHandle(false);
   };
 
   const changeUsernameHandle = (value) => {
+    if (value.length > 12) return;
     setUsername(value);
   };
   const changePasswordHandle = (value) => {
     setPassword(value);
+  };
+  const changeLoadingHandle = (value) => {
+    setIsLoading(value);
   };
 
   return (
@@ -66,6 +83,7 @@ const Login = (props) => {
             type="text"
             placeholder="Nhập số điện thoại"
             onInput={changeUsernameHandle}
+            value={username}
           />
           <InputAuthen
             label="Mật khẩu"
@@ -83,7 +101,11 @@ const Login = (props) => {
           </div>
         </div>
         <div className="button_authen__wrapper">
-          <ButtonAuthen content="Đăng nhập" onClick={submitHandle} />
+          <ButtonAuthen
+            content="Đăng nhập"
+            onClick={submitHandle}
+            isLoading={isLoading}
+          />
         </div>
         <ToastContainer />
 

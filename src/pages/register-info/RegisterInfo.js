@@ -15,12 +15,43 @@ const RegisterInfo = (props) => {
   const [birthDay, setBirthDay] = useState("");
   const [gender, setGender] = useState("");
   const [email, setEmail] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const sCustomer = useSelector(selectCustomer);
 
   const submitHandle = async () => {
+    if (name.length < 2) {
+      toast.error("Họ tên ít nhất 2 kí tự!!");
+      return;
+    }
+    // Valid birthDay > 18
+    if (birthDay === "") {
+      toast.error("Ngày sinh không được để trống!!");
+      return;
+    }
+    const today = new Date();
+    const birthDate = new Date(birthDay);
+    const age = today.getFullYear() - birthDate.getFullYear();
+    const month = today.getMonth() - birthDate.getMonth();
+    if (month < 0 || (month === 0 && today.getDate() < birthDate.getDate())) {
+      age--;
+    }
+    if (age < 18) {
+      toast.error("Bạn chưa đủ 18 tuổi!!");
+      return;
+    }
+    // valid email
+    if (email === "") {
+      toast.error("Email không được để trống!!");
+      return;
+    }
+    if (!email.includes("@")) {
+      toast.error("Email không hợp lệ!!");
+      return;
+    }
+
     const info = {
       phone: sCustomer.phone,
       name,
@@ -28,14 +59,16 @@ const RegisterInfo = (props) => {
       gender,
       email,
     };
+    changeLoadingHandle(true);
     const res = await dispatch(registerInfo(info));
-    console.log(res);
     if (res.payload.status === 201) {
       // Đăng kí thành công
       navigate("/");
+      changeLoadingHandle(false);
     } else {
       // Đăng kí thất bại
       toast.error("Đăng kí thất bại!!");
+      changeLoadingHandle(false);
     }
   };
 
@@ -48,6 +81,10 @@ const RegisterInfo = (props) => {
 
   const changeEmailHandle = (value) => {
     setEmail(value);
+  };
+
+  const changeLoadingHandle = (value) => {
+    setIsLoading(value);
   };
 
   return (
@@ -96,7 +133,11 @@ const RegisterInfo = (props) => {
           />
 
           <div className="button_authen__wrapper">
-            <ButtonAuthen content="Cập nhật" onClick={submitHandle} />
+            <ButtonAuthen
+              content="Cập nhật"
+              onClick={submitHandle}
+              isLoading={isLoading}
+            />
           </div>
         </div>
       </div>
