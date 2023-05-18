@@ -14,9 +14,7 @@ const Pagination = ({ field }) => {
     dispatch(getFreelancerByPage({ page, field }));
     setSelectPage(page);
   };
-  useEffect(() => {
-    dispatch(getFreelancerByPage({ page: 1, field }));
-  }, [field]);
+
   const Page = arr.map((item, index) => {
     if (selectPage === item)
       return (

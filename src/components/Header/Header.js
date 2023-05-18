@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import logoCompany from "../../images/logoCompany.png";
 import { useNavigate } from "react-router";
 import Tippy from "@tippyjs/react";
@@ -14,9 +14,12 @@ import {
 } from "../../reducers/slices/customerSlice";
 import { Link } from "react-router-dom";
 import configRoutes from "../../config/configRouter";
+import { getFreelancerByPage } from "../../reducers/actions/employeeAction";
 const Header = () => {
   const isLogin = useSelector(isLoggedIn);
   const customer = useSelector(selectCustomer);
+  const searchRef = useRef(null);
+  const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const loginHandle = () => {
@@ -24,6 +27,11 @@ const Header = () => {
   };
   const registerHandle = () => {
     navigate("/register");
+  };
+  const findEmployeeHandle = () => {
+    const search = searchRef.current.value;
+    dispatch(getFreelancerByPage({ name: search }));
+    navigate(`${configRoutes.freelancers}`);
   };
 
   return (
@@ -80,11 +88,15 @@ const Header = () => {
         </nav>
         <div className="flex items-center">
           <input
+            ref={searchRef}
             type="text"
-            placeholder="Search"
+            placeholder="Tìm ứng viên theo tên..."
             className="px-4 py-2 rounded-l-lg focus:outline-none focus:ring text-black focus:ring-blue-500"
           />
-          <button className="bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded-r-lg">
+          <button
+            onClick={findEmployeeHandle}
+            className="bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded-r-lg"
+          >
             Search
           </button>
         </div>

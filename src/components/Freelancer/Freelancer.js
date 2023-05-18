@@ -139,7 +139,7 @@ function Freelancer() {
   }
   useEffect(() => {
     if (!listFreelancer.length) {
-      dispatch(getFreelancerByPage(1));
+      dispatch(getFreelancerByPage({ page: 1 }));
     }
   }, []);
 
