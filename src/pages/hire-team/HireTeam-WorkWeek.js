@@ -19,7 +19,7 @@ const HireTeamWorkWeek = () => {
     navigate("/hireTeam/quiz/work-length");
   };
   const workLength = () => {
-    dispatch(updateRequire4(selectedAnswer))
+    dispatch(updateRequire4(selectedAnswer));
     navigate("/hireTeam/quiz/work-start");
   };
 
@@ -56,7 +56,7 @@ const HireTeamWorkWeek = () => {
               </label>
             ))}
           </div>
-          <div class="border border-t w-[70%] my-6 border-gray-400"></div>
+          <div className="border border-t w-[70%] my-6 border-gray-400"></div>
           <div className="flex flex-row justify-between w-[70%] items-center">
             <button
               type="submit"

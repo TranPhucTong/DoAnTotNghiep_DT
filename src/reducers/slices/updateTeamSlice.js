@@ -6,7 +6,7 @@ const initialState = {
   field: "",
   leader: {},
   typeWork: "",
-  total : Number
+  total: 0,
 };
 
 const updateTeamSlice = createSlice({
@@ -14,13 +14,14 @@ const updateTeamSlice = createSlice({
   initialState: initialState,
   reducers: {
     updateRequireTeam: (state, action) => {
-      state.id = action.payload._id
-      state.nameTeam = action.payload.name
-      state.field = action.payload.field 
-      state.leader = action.payload.leader 
-      state.total = action.payload.totalEmployee
-      state.typeWork = action.payload.typeWork
-    }}
+      state.id = action.payload._id;
+      state.nameTeam = action.payload.name;
+      state.field = action.payload.field;
+      state.leader = action.payload.leader;
+      state.total = action.payload.totalEmployee;
+      state.typeWork = action.payload.typeWork;
+    },
+  },
 });
 
 export const { updateRequireTeam } = updateTeamSlice.actions;

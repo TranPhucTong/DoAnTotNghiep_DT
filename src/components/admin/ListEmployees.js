@@ -147,12 +147,14 @@ const ListEmployees = () => {
   return (
     <div className="p-7 h-full w-full">
       {/* Content Header  */}
-      <div class="flex flex-col items-start justify-between gap-4 select-none md:flex-row md:items-center md:gap-0">
-        <h4 class="text-xl font-medium md:text-2xl">Employees Management</h4>
-        <div class="relative w-full md:w-[18.75rem]">
+      <div className="flex flex-col items-start justify-between gap-4 select-none md:flex-row md:items-center md:gap-0">
+        <h4 className="text-xl font-medium md:text-2xl">
+          Employees Management
+        </h4>
+        <div className="relative w-full md:w-[18.75rem]">
           <span
             onClick={() => clickSearchEmployee(searchNum)}
-            class="absolute cursor-pointer bg-blue-500 p-3 hover:bg-blue-700 rounded-md text-white top-1/2 left-0 -translate-y-1/2 text-[#11111152]"
+            className="absolute cursor-pointer bg-blue-500 p-3 hover:bg-blue-700 rounded-md text-white top-1/2 left-0 -translate-y-1/2 text-[#11111152]"
           >
             <FontAwesomeIcon className="font-extrabold" icon={faSearch} />
           </span>
@@ -162,21 +164,21 @@ const ListEmployees = () => {
             value={searchNum}
             onChange={(e) => setSearchNum(e.target.value)}
             placeholder="Search by phone"
-            class="w-full pl-[3.25rem] focus:border focus:border-blue-500 transition-all ease-in-out duration-300 pr-4 py-[0.688rem] outline-none border border-[#DDDDDD] border-solid rounded-md text-dark"
+            className="w-full pl-[3.25rem] focus:border focus:border-blue-500 transition-all ease-in-out duration-300 pr-4 py-[0.688rem] outline-none border border-[#DDDDDD] border-solid rounded-md text-dark"
           />
         </div>
       </div>
 
       {/* Content  */}
-      <div class="mt-6 rounded-lg bg-white shadow-xl">
-        <div class="flex flex-col items-start justify-between gap-4 p-6 border-b border-solid md:flex-row md:items-center md:gap-0 border-secondary">
-          <div class="text-sm md:text-base">
+      <div className="mt-6 rounded-lg bg-white shadow-xl">
+        <div className="flex flex-col items-start justify-between gap-4 p-6 border-b border-solid md:flex-row md:items-center md:gap-0 border-secondary">
+          <div className="text-sm md:text-base">
             Show
-            <span class="">
+            <span className="">
               <select
                 name=""
                 id="num-per-page"
-                class="px-2 py-1 border border-solid rounded-lg outline-none border-secondary"
+                className="px-2 py-1 border border-solid rounded-lg outline-none border-secondary"
               >
                 <option value="10">10</option>
                 <option value="20">20</option>
@@ -186,17 +188,17 @@ const ListEmployees = () => {
             entries
           </div>
 
-          <div class="flex items-center justify-between gap-4">
-            {/* <button class="btn icon rounded-lg bg-blue-500 text-white py-2 px-3">
+          <div className="flex items-center justify-between gap-4">
+            {/* <button className="btn icon rounded-lg bg-blue-500 text-white py-2 px-3">
               <FontAwesomeIcon icon={faList} />
             </button>
 
-            <button class="btn icon rounded-lg bg-gray-200 text-gray-600 py-2 px-3">
+            <button className="btn icon rounded-lg bg-gray-200 text-gray-600 py-2 px-3">
               <FontAwesomeIcon icon={faBorderAll} />
             </button>
 
             <button
-              class="rounded-lg btn icon primary bg-blue-500 text-white py-2 px-3"
+              className="rounded-lg btn icon primary bg-blue-500 text-white py-2 px-3"
               routerLink="create"
             >
               <FontAwesomeIcon icon={faPlus} />
@@ -216,9 +218,9 @@ const ListEmployees = () => {
             </select>
           </div>
         </div>
-        <div class="overflow-x-auto">
+        <div className="overflow-x-auto">
           {listFree ? (
-            <table class="w-full text-sm mt-5 text-dark-purple transition-all duration-500 ease-in-out">
+            <table className="w-full text-sm mt-5 text-dark-purple transition-all duration-500 ease-in-out">
               <thead>
                 <tr className="border-b border-solid border-gray-400">
                   <th className=" px-[16px] py-[20px] text-left min-w-[80px] pl-[24px] pr-[8px]">
@@ -266,13 +268,15 @@ const ListEmployees = () => {
                       {dt.id}
                     </td>
                     <td className=" px-[16px] py-[20px] text-left min-w-[80px]">
-                      <div class="flex items-center gap-2 cursor-pointer w-max group">
+                      <div className="flex items-center gap-2 cursor-pointer w-max group">
                         {/* <img
-                        class="w-[2.5rem] h-[2.5rem] rounded-full"
+                        className="w-[2.5rem] h-[2.5rem] rounded-full"
                         src="https://scontent.fsgn19-1.fna.fbcdn.net/v/t39.30808-6/337145845_1179316779393527_5171054869994625444_n.jpg?_nc_cat=103&ccb=1-7&_nc_sid=09cbfe&_nc_ohc=dGFHlbHly-YAX97zuJY&_nc_ht=scontent.fsgn19-1.fna&oh=00_AfBxVFE5RBIWR0o5M2DM6dpzxwxYybTsRZI1r2vzOsr6YQ&oe=64385EFD"
                         alt=""
                       /> */}
-                        <span class="group-hover:text-active">{dt.name}</span>
+                        <span className="group-hover:text-active">
+                          {dt.name}
+                        </span>
                       </div>
                     </td>
                     <td className=" px-[16px] py-[20px] text-left min-w-[80px]">
@@ -282,20 +286,20 @@ const ListEmployees = () => {
                       {dt.email}
                     </td>
                     <td className=" px-[16px] py-[20px] text-left min-w-[80px]">
-                      <span class="w-max inline-block">{dt.address}</span>
+                      <span className="w-max inline-block">{dt.address}</span>
                     </td>
                     <td className=" px-[16px] py-[20px] text-left min-w-[80px]">
-                      <span class="w-max inline-block">{dt.field}</span>
+                      <span className="w-max inline-block">{dt.field}</span>
                     </td>
                     <td className=" px-[16px] py-[20px] text-left min-w-[80px]">
-                      <div class="flex items-center gap-2">
+                      <div className="flex items-center gap-2">
                         <a
-                          class="btn icon hover:bg-blue-500 hover:text-white cursor-pointer bg-gray-200 p-2 text-gray-500 sm rounded-full"
+                          className="btn icon hover:bg-blue-500 hover:text-white cursor-pointer bg-gray-200 p-2 text-gray-500 sm rounded-full"
                           type="button"
                         >
                           <FontAwesomeIcon icon={faPenToSquare} />
                         </a>
-                        <button class="rounded-full  hover:bg-red-500 hover:text-white cursor-pointer bg-gray-200 p-2 text-gray-500 btn icon secondary sm">
+                        <button className="rounded-full  hover:bg-red-500 hover:text-white cursor-pointer bg-gray-200 p-2 text-gray-500 btn icon secondary sm">
                           <FontAwesomeIcon icon={faTrash} />
                         </button>
                       </div>
@@ -305,7 +309,7 @@ const ListEmployees = () => {
               </tbody>
             </table>
           ) : (
-            <table class="w-full text-sm mt-5 text-dark-purple transition-all duration-500 ease-in-out">
+            <table className="w-full text-sm mt-5 text-dark-purple transition-all duration-500 ease-in-out">
               <thead>
                 <tr className="border-b border-solid border-gray-400">
                   <th className=" px-[16px] py-[20px] text-left min-w-[80px] pl-[24px] pr-[8px]">
@@ -361,13 +365,15 @@ const ListEmployees = () => {
                       {dt._id}
                     </td> */}
                       <td className=" px-[16px] py-[20px] text-left min-w-[80px]">
-                        <div class="flex items-center gap-2 cursor-pointer w-max group">
+                        <div className="flex items-center gap-2 cursor-pointer w-max group">
                           {/* <img
-                        class="w-[2.5rem] h-[2.5rem] rounded-full"
+                        className="w-[2.5rem] h-[2.5rem] rounded-full"
                         src="https://scontent.fsgn19-1.fna.fbcdn.net/v/t39.30808-6/337145845_1179316779393527_5171054869994625444_n.jpg?_nc_cat=103&ccb=1-7&_nc_sid=09cbfe&_nc_ohc=dGFHlbHly-YAX97zuJY&_nc_ht=scontent.fsgn19-1.fna&oh=00_AfBxVFE5RBIWR0o5M2DM6dpzxwxYybTsRZI1r2vzOsr6YQ&oe=64385EFD"
                         alt=""
                       /> */}
-                          <span class="group-hover:text-active">{dt.name}</span>
+                          <span className="group-hover:text-active">
+                            {dt.name}
+                          </span>
                         </div>
                       </td>
                       <td className=" px-[16px] py-[20px] text-left min-w-[80px]">
@@ -380,15 +386,15 @@ const ListEmployees = () => {
                         {dt.type}
                       </td> */}
                       <td className=" px-[16px] py-[20px] text-left min-w-[80px]">
-                        <span class="w-max inline-block">{dt.phone}</span>
+                        <span className="w-max inline-block">{dt.phone}</span>
                       </td>
                       <td className=" px-[16px] py-[20px] text-left min-w-[80px]">
-                        <span class="w-max inline-block">{dt.email}</span>
+                        <span className="w-max inline-block">{dt.email}</span>
                       </td>
                       <td className=" px-[16px] py-[20px] text-left min-w-[80px]">
-                        <div class="flex items-center gap-2">
+                        <div className="flex items-center gap-2">
                           <button
-                            class="btn icon hover:bg-blue-500 hover:text-white cursor-pointer bg-gray-200 p-2 text-gray-500 sm rounded-full"
+                            className="btn icon hover:bg-blue-500 hover:text-white cursor-pointer bg-gray-200 p-2 text-gray-500 sm rounded-full"
                             type="button"
                             onClick={() => {
                               handleSelectEmployee(dt);
@@ -399,7 +405,7 @@ const ListEmployees = () => {
                           </button>
                           <button
                             onClick={() => clickDelCheckEmployee(dt._id)}
-                            class="rounded-full  hover:bg-red-500 hover:text-white cursor-pointer bg-gray-200 p-2 text-gray-500 btn icon secondary sm"
+                            className="rounded-full  hover:bg-red-500 hover:text-white cursor-pointer bg-gray-200 p-2 text-gray-500 btn icon secondary sm"
                           >
                             <FontAwesomeIcon icon={faTrash} />
                           </button>

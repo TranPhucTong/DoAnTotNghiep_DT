@@ -19,7 +19,7 @@ const LayoutAdmin = (props) => {
         >
           <NavAdmin open={open} />
         </div>
-        <div class="p-6 w-full bg-[#f7f7fa] min-h-screen-except-header">
+        <div className="p-6 w-full bg-[#f7f7fa] min-h-screen-except-header">
           {props.children}
         </div>
       </div>

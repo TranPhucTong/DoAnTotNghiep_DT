@@ -108,20 +108,20 @@ const HomeAdmin = () => {
   };
 
   return (
-    <div class="p-6 w-full bg-[#f7f7fa] min-h-screen-except-header">
-      <h3 class="text-2xl font-medium pb-8">Welcome Admin!</h3>
-      <div class="row flex items-center box-border mb-8">
+    <div className="p-6 w-full bg-[#f7f7fa] min-h-screen-except-header">
+      <h3 className="text-2xl font-medium pb-8">Welcome Admin!</h3>
+      <div className="row flex items-center box-border mb-8">
         {columns.map((column, index) => (
           <div
             key={index}
-            class="columns-3xs w-full bg-white rounded-lg box-border p-6 mr-6"
+            className="columns-3xs w-full bg-white rounded-lg box-border p-6 mr-6"
           >
-            <div class="item flex items-center justify-between">
-              <div class="text">
-                <h6 class="top text-fs14 text-footer">{column.title}</h6>
-                <h3 class="bottom text-fs22 font-semibold">{column.count}</h3>
+            <div className="item flex items-center justify-between">
+              <div className="text">
+                <h6 className="top text-fs14 text-footer">{column.title}</h6>
+                <h3 className="bottom text-fs22 font-semibold">{column.count}</h3>
               </div>
-              <div class="border rounded-lg bg-[#edf4ff]">
+              <div className="border rounded-lg bg-[#edf4ff]">
                 <img className="" src={column.img} alt="" />
               </div>
             </div>
@@ -129,14 +129,14 @@ const HomeAdmin = () => {
         ))}
       </div>
 
-      <div class="row flex items-center justify-between mb-8">
-        <div class="columns-lg bg-white rounded-lg box-border p-6 mr-6">
-          <div class="item">
-            <div class="top flex items-center justify-between pb-3">
-              <h5 class="text-xl font-semibold">Number of Employees</h5>
-              <i class="fa-solid fa-ellipsis-vertical w-6 h-8 leading-8 bg-lightgray rounded-md text-center cursor-pointer"></i>
+      <div className="row flex items-center justify-between mb-8">
+        <div className="columns-lg bg-white rounded-lg box-border p-6 mr-6">
+          <div className="item">
+            <div className="top flex items-center justify-between pb-3">
+              <h5 className="text-xl font-semibold">Number of Employees</h5>
+              <i className="fa-solid fa-ellipsis-vertical w-6 h-8 leading-8 bg-lightgray rounded-md text-center cursor-pointer"></i>
             </div>
-            <div class="bottom">
+            <div className="bottom">
               <Chart
                 chartType="PieChart"
                 data={data}
@@ -147,13 +147,13 @@ const HomeAdmin = () => {
             </div>
           </div>
         </div>
-        <div class="columns-lg bg-white rounded-lg box-border p-6 mr-6">
-          <div class="item">
-            <div class="top flex items-center justify-between pb-3">
-              <h5 class="text-xl font-semibold">Overview</h5>
-              <i class="fa-solid fa-ellipsis-vertical w-6 h-8 leading-8 bg-lightgray rounded-md text-center cursor-pointer"></i>
+        <div className="columns-lg bg-white rounded-lg box-border p-6 mr-6">
+          <div className="item">
+            <div className="top flex items-center justify-between pb-3">
+              <h5 className="text-xl font-semibold">Overview</h5>
+              <i className="fa-solid fa-ellipsis-vertical w-6 h-8 leading-8 bg-lightgray rounded-md text-center cursor-pointer"></i>
             </div>
-            <div class="bottom">
+            <div className="bottom">
               <Chart
                 chartType="ColumnChart"
                 width="100%"

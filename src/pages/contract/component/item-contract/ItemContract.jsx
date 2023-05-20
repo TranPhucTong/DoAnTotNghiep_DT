@@ -135,7 +135,7 @@ const ItemContract = ({ item, onOpen, onOpenReview }) => {
             {status === "pending" && (
               <button
                 onClick={cancelHandle}
-                class="bg-blue-500 hover:bg-blue-700 text-white font-normal py-2 px-4 rounded"
+                className="bg-blue-500 hover:bg-blue-700 text-white font-normal py-2 px-4 rounded"
               >
                 Hủy
               </button>
@@ -145,7 +145,7 @@ const ItemContract = ({ item, onOpen, onOpenReview }) => {
                 onClick={() =>
                   onOpenReview({ isOpen: true, employee: employee._id, contract: item })
                 }
-                class="bg-blue-500 hover:bg-blue-700 text-white font-normal py-2 px-4 rounded"
+                className="bg-blue-500 hover:bg-blue-700 text-white font-normal py-2 px-4 rounded"
               >
                 Đánh giá
               </button>

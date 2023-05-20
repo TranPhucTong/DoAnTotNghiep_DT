@@ -140,8 +140,8 @@ const OrderDetail = ({
               ) : (
                 <span className="">
                   <span className="opacity-80 ml-2 italic text-sm text-red-400">
-                    Chưa có nhóm phụ trách nào cho dự án của khách hàng. Vui lòng
-                    xác nhận và chọn nhóm!!!
+                    Chưa có nhóm phụ trách nào cho dự án của khách hàng. Vui
+                    lòng xác nhận và chọn nhóm!!!
                   </span>
                 </span>
               )}
@@ -277,13 +277,13 @@ const ListOrderCustomer = () => {
   };
 
   return (
-    <div class="w-full min-h-screen-except-header">
+    <div className="w-full min-h-screen-except-header">
       <span className="text-2xl font-extrabold text-blue-500">
         Quản lý đơn thuê của khách hàng
       </span>
-      <div class="mt-6 flex w-full rounded-lg bg-white shadow-xl">
-        <div class=" w-full overflow-x-auto">
-          <table class="w-full text-sm mt-0 text-dark-purple transition-all duration-500 ease-in-out">
+      <div className="mt-6 flex w-full rounded-lg bg-white shadow-xl">
+        <div className=" w-full overflow-x-auto">
+          <table className="w-full text-sm mt-0 text-dark-purple transition-all duration-500 ease-in-out">
             <thead className="w-full">
               <tr className="border-b border-solid border-gray-400">
                 <th className=" px-[16px] py-[20px] text-center min-w-[80px]">
@@ -335,7 +335,7 @@ const ListOrderCustomer = () => {
                   </td>
                   <td className=" px-[16px] py-[20px] text-center min-w-[80px]">
                     <span
-                      class={`w-max inline-block font-bold capitalize ${
+                      className={`w-max inline-block font-bold capitalize ${
                         dt.status === "pending"
                           ? "text-yellow-600"
                           : `${
@@ -375,7 +375,7 @@ const ListOrderCustomer = () => {
                   </td>
                   <td className=" px-[16px] py-[20px] text-center min-w-[80px]">
                     {dt.status === "pending" ? (
-                      <div class="flex justify-center items-center gap-2">
+                      <div className="flex justify-center items-center gap-2">
                         <button
                           onClick={() => {
                             setShowSelectTeam(true);
@@ -397,7 +397,7 @@ const ListOrderCustomer = () => {
                         </button>
                       </div>
                     ) : dt.status === "progress" ? (
-                      <div class="flex justify-center items-center gap-2">
+                      <div className="flex justify-center items-center gap-2">
                         <button
                           onClick={() => {
                             setShowReason(true);
@@ -455,8 +455,8 @@ const ListOrderCustomer = () => {
               <h1 className="text-3xl uppercase font-bold text-blue-500">
                 Chọn nhóm phù hợp với yêu cầu
               </h1>
-              <div class="mt-6 w-full overflow-x-auto shadow-2xl rounded-lg">
-                <table class="w-full text-sm mt-0 text-dark-purple transition-all duration-500 ease-in-out ">
+              <div className="mt-6 w-full overflow-x-auto shadow-2xl rounded-lg">
+                <table className="w-full text-sm mt-0 text-dark-purple transition-all duration-500 ease-in-out ">
                   <thead className="w-full bg-pink-500 text-white">
                     <tr className="border-b border-solid border-gray-400 ">
                       <th className=" px-[16px] py-[20px] text-center min-w-[80px]">

@@ -3,10 +3,7 @@ import logo from "../../images/logo.png";
 import TypingEffect from "../../components/TypingEffect/TypingEffect";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useNavigate } from "react-router-dom";
-import {
-  faRightLong,
-  faLeftLong,
-} from "@fortawesome/free-solid-svg-icons";
+import { faRightLong, faLeftLong } from "@fortawesome/free-solid-svg-icons";
 import { useDispatch } from "react-redux";
 import { updateRequire6 } from "../../reducers/slices/hireTeamSlice";
 
@@ -41,7 +38,7 @@ const HireTeamWorkStart = () => {
           className="rounded-lg border-gray-200 font-semibold text-blue-500 tracking-widest shadow-xl border-2 w-[50%] text-2xl px-14 py-6"
           onChange={handleDateChange}
           value={date}
-          checked = {date}
+          checked={date}
         />
         {/* <button
           className="bg-blue-500 text-white rounded-lg p-2"
@@ -49,7 +46,7 @@ const HireTeamWorkStart = () => {
         >
           Save date
         </button> */}
-        <div class="border border-t w-[70%] my-6 border-gray-400"></div>
+        <div className="border border-t w-[70%] my-6 border-gray-400"></div>
         <div className="flex flex-row justify-between w-[70%] items-center">
           <button
             type="submit"

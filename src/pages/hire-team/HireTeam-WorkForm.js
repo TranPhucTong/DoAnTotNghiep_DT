@@ -55,7 +55,7 @@ const HireTeamWorkForm = () => {
               </label>
             ))}
           </div>
-          <div class="border border-t w-[70%] my-6 border-gray-400"></div>
+          <div className="border border-t w-[70%] my-6 border-gray-400"></div>
           <div className="flex flex-row justify-between w-[70%] items-center">
             <button
               type="submit"

@@ -137,16 +137,16 @@ const ListTeam = () => {
     // window.location.reload(false);
   };
   return (
-    <div class="py-6 px-8">
-      <div class="flex justify-between">
-        <h1 class="font-medium text-[1.2rem]">Nhóm : {selectedTeam}</h1>
-        <p class="text-[0.9rem] text-gray-500 font-medium">
-          <span class="text-black">Dashboard</span> / Team{" "}
+    <div className="py-6 px-8">
+      <div className="flex justify-between">
+        <h1 className="font-medium text-[1.2rem]">Nhóm : {selectedTeam}</h1>
+        <p className="text-[0.9rem] text-gray-500 font-medium">
+          <span className="text-black">Dashboard</span> / Team{" "}
         </p>
       </div>
-      <div class="mt-16 py-6 px-4 flex items-center bg-white">
-        <div class="flex w-[30%] space-x-4">
-          <div class="relative w-full flex items-center">
+      <div className="mt-16 py-6 px-4 flex items-center bg-white">
+        <div className="flex w-[30%] space-x-4">
+          <div className="relative w-full flex items-center">
             <select
               className="px-4 py-2 focus-within:border-blue-500 focus-within:text-blue-500 font-bold transition-all duration-200 ease-linear w-full border-solid m-0 rounded-lg outline-none border-[2px] border-gray-300"
               onChange={(event) => {
@@ -168,10 +168,10 @@ const ListTeam = () => {
           </div>
         </div>
       </div>
-      <div class="flex justify-between mt-6 border-b border-b-gray-200 items-center">
-        <div class="flex space-x-9 px-4">
+      <div className="flex justify-between mt-6 border-b border-b-gray-200 items-center">
+        <div className="flex space-x-9 px-4">
           <p
-            class="font-bold py-3 cursor-pointer
+            className="font-bold py-3 cursor-pointer
            border-b-2 border-blue-600 text-blue-600"
           >
             Nhân viên trong nhóm
@@ -181,35 +181,35 @@ const ListTeam = () => {
           <FontAwesomeIcon
             onClick={handleOpenModal}
             icon={faUserPlus}
-            class={`text-sm w-6 text-green-700 hover:text-green-800 mr-8 cursor-pointer ${
+            className={`text-sm w-6 text-green-700 hover:text-green-800 mr-8 cursor-pointer ${
               isFormComplete ? "" : "opacity-50 pointer-events-none"
             }`}
           />
           <FontAwesomeIcon
             onClick={handleSelectTeam}
             icon={faEdit}
-            class={`text-sm w-5 text-blue-700 hover:text-blue-800 mr-8 cursor-pointer ${
+            className={`text-sm w-5 text-blue-700 hover:text-blue-800 mr-8 cursor-pointer ${
               isFormComplete ? "" : "opacity-50 pointer-events-none"
             }`}
           />
           <FontAwesomeIcon
             icon={faTrash}
             onClick={clickDeleteTeam}
-            class={`text-xl w-5 text-red-600 hover:text-red-700 mr-8 cursor-pointer ${
+            className={`text-xl w-5 text-red-600 hover:text-red-700 mr-8 cursor-pointer ${
               isFormComplete ? "" : "opacity-50 pointer-events-none"
             }`}
           />
           <a
             onClick={addTeam}
-            class="py-4 px-6 text-white bg-blue-500 flex rounded-lg font-bold cursor-pointer hover:bg-blue-600"
+            className="py-4 px-6 text-white bg-blue-500 flex rounded-lg font-bold cursor-pointer hover:bg-blue-600"
           >
-            <FontAwesomeIcon icon={faPlus} class="text-white w-5 mr-2" />
+            <FontAwesomeIcon icon={faPlus} className="text-white w-5 mr-2" />
             Tạo team mới
           </a>
         </div>
       </div>
       {selectedTeam && (
-        <table class="w-full text-sm mt-5 text-dark-purple transition-all duration-500 ease-in-out">
+        <table className="w-full text-sm mt-5 text-dark-purple transition-all duration-500 ease-in-out">
           <thead>
             <tr className="border-b border-solid border-gray-400">
               <th className=" px-[16px] py-[20px] text-left min-w-[80px] pl-[24px] pr-[8px]">
@@ -291,10 +291,10 @@ const ListTeam = () => {
                     {member.isLeader ? "Leader" : "Member"}
                   </td>
                   <td className=" px-[16px] py-[20px] text-left min-w-[80px]">
-                    <div class="flex items-center gap-2">
+                    <div className="flex items-center gap-2">
                       <button
                         onClick={() => clickDeleteMemberFromTeam(member._id)}
-                        class="rounded-full  hover:bg-red-500 hover:text-white cursor-pointer bg-gray-200 p-2 text-gray-500 btn icon secondary sm"
+                        className="rounded-full  hover:bg-red-500 hover:text-white cursor-pointer bg-gray-200 p-2 text-gray-500 btn icon secondary sm"
                       >
                         <FontAwesomeIcon icon={faTrash} />
                       </button>
@@ -309,7 +309,7 @@ const ListTeam = () => {
         <h2 className="text-lg text-center font-bold mb-4 text-blue-600">
           Thêm nhân viên mới
         </h2>
-        <div class="h-[2.875rem] w-96 relative flex items-center justify-center border border-solid focus-within:border-blue-500 transition-all ease-linear border-gray-500 rounded-lg">
+        <div className="h-[2.875rem] w-96 relative flex items-center justify-center border border-solid focus-within:border-blue-500 transition-all ease-linear border-gray-500 rounded-lg">
           <select
             className="text-sm w-full border border-none outline-none px-4 py-2 mb-0"
             formControlName="leader"

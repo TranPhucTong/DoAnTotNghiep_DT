@@ -103,8 +103,8 @@ const HireTeamWage = () => {
   };
 
   const handleCloseNotificationSure = () => {
-    setShowNotificationSure(false)
-  }
+    setShowNotificationSure(false);
+  };
 
   const sendInfo = async () => {
     const order = {
@@ -127,7 +127,7 @@ const HireTeamWage = () => {
       console.log("Lỗi" + erorr);
       alert("Lỗi");
     }
-  }
+  };
   return (
     <div className="flex flex-row items-center w-full h-[100vh]">
       <div className="p-16 w-[70%] h-full flex flex-col items-center justify-center">
@@ -156,7 +156,7 @@ const HireTeamWage = () => {
               </label>
             ))}
           </div>
-          <div class="border border-t w-[70%] my-6 border-gray-400"></div>
+          <div className="border border-t w-[70%] my-6 border-gray-400"></div>
           <div className="flex flex-row justify-between w-[70%] items-center">
             <button
               type="submit"

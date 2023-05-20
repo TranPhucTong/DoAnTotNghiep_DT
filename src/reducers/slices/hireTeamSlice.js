@@ -1,14 +1,14 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-  field: "",
-  totalPersonnel: Number,
-  duration: "",
-  workingTime: "",
+  // field: "",
+  // totalPersonnel: Number,
+  // duration: "",
+  // workingTime: "",
   // tech: "",
-  startTime: "",
-  typeWork: "",
-  budget: Number,
+  // startTime: "",
+  // typeWork: "",
+  // budget: Number,
   // info: {
   //   name: "",
   //   email: "",

@@ -79,14 +79,14 @@ const UpdateTeam = () => {
   //    console.log(res);
   //  };
   return (
-    <div class="p-6 w-full  min-h-screen-except-header">
+    <div className="p-6 w-full  min-h-screen-except-header">
       <span className="text-2xl font-extrabold text-blue-500">
         Cập nhật đội ngũ
       </span>
-      <div class="mt-6 bg-white shadow-xl rounded-lg p-8 pt-10">
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-12">
+      <div className="mt-6 bg-white shadow-xl rounded-lg p-8 pt-10">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-12">
           {/* name  */}
-          <div class="h-[2.875rem] relative flex items-center border border-solid focus-within:border-blue-500 transition-all ease-linear  border-gray-200 rounded-lg">
+          <div className="h-[2.875rem] relative flex items-center border border-solid focus-within:border-blue-500 transition-all ease-linear  border-gray-200 rounded-lg">
             <label className="absolute -top-1/4  left-2 px-2 bg-white text-blue-500 text-sm">
               Tên nhóm
             </label>
@@ -99,7 +99,7 @@ const UpdateTeam = () => {
             />
           </div>
           {/* Field  */}
-          <div class="h-[2.875rem] relative flex items-center justify-center border border-solid focus-within:border-blue-500 transition-all ease-linear border-gray-200 rounded-lg">
+          <div className="h-[2.875rem] relative flex items-center justify-center border border-solid focus-within:border-blue-500 transition-all ease-linear border-gray-200 rounded-lg">
             <label className="absolute -top-1/4 left-2 px-2 bg-white text-blue-500 text-sm">
               Mảng làm việc
             </label>
@@ -120,7 +120,7 @@ const UpdateTeam = () => {
           </div>
 
           {/* Leader */}
-          <div class="h-[2.875rem] relative flex items-center justify-center border border-solid focus-within:border-blue-500 transition-all ease-linear border-gray-200 rounded-lg">
+          <div className="h-[2.875rem] relative flex items-center justify-center border border-solid focus-within:border-blue-500 transition-all ease-linear border-gray-200 rounded-lg">
             <label className="absolute -top-1/4 left-2 px-2 bg-white text-blue-500 text-sm">
               Chọn trưởng nhóm
             </label>
@@ -141,7 +141,7 @@ const UpdateTeam = () => {
           </div>
 
           {/* Type Work */}
-          <div class="h-[2.875rem] relative flex items-center justify-center border border-solid focus-within:border-blue-500 transition-all ease-linear border-gray-200 rounded-lg">
+          <div className="h-[2.875rem] relative flex items-center justify-center border border-solid focus-within:border-blue-500 transition-all ease-linear border-gray-200 rounded-lg">
             <label className="absolute -top-1/4 left-2 px-2 bg-white text-blue-500 text-sm">
               Chọn hình thức làm việc
             </label>
@@ -158,7 +158,7 @@ const UpdateTeam = () => {
           </div>
 
           {/* Total */}
-          <div class="h-[2.875rem] relative flex items-center border border-solid focus-within:border-blue-500 transition-all ease-linear  border-gray-200 rounded-lg">
+          <div className="h-[2.875rem] relative flex items-center border border-solid focus-within:border-blue-500 transition-all ease-linear  border-gray-200 rounded-lg">
             <label className="absolute -top-1/4  left-2 px-2 bg-white text-blue-500 text-sm">
               Số lượng nhân viên
             </label>
@@ -175,7 +175,7 @@ const UpdateTeam = () => {
           <button
             type="submit"
             onClick={clickUpdateTeam}
-            class={`bg-blue-500 px-8 py-2 text-white font-semibold rounded-lg mt-12 hover:bg-blue-600 transition-colors ease-linear 
+            className={`bg-blue-500 px-8 py-2 text-white font-semibold rounded-lg mt-12 hover:bg-blue-600 transition-colors ease-linear 
         
             ${isFormComplete ? "" : "opacity-50 pointer-events-none"}  `}
           >

@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useRef } from "react";
 import logoCompany from "../../images/logoCompany.png";
 import { useNavigate } from "react-router";
 import Tippy from "@tippyjs/react";
@@ -15,6 +15,7 @@ import {
 import { Link } from "react-router-dom";
 import configRoutes from "../../config/configRouter";
 import { getFreelancerByPage } from "../../reducers/actions/employeeAction";
+import { changeTypeContract } from "../../reducers/slices/contractSlice";
 const Header = () => {
   const isLogin = useSelector(isLoggedIn);
   const customer = useSelector(selectCustomer);
@@ -140,17 +141,51 @@ const Popover = () => {
     localStorage.removeItem("access_token");
     dispatch(setLogout());
   };
+  const changeTypeContractHandle = (type) => {
+    dispatch(changeTypeContract(type));
+  };
   return (
     <ul className="px-2 pr-12">
-      <li className="my-4 text-base text-black hover:text-blue-600 hover:font-bold cursor-pointer transition-all">
+      <li className="w-full my-4 text-base text-black hover:text-blue-600 hover:font-bold cursor-pointer transition-all">
         <Link to={configRoutes.profileCustomer}>Tài khoản</Link>
       </li>
-      <li className="my-4 text-base text-black hover:text-blue-600 hover:font-bold cursor-pointer transition-all">
-        <Link to={configRoutes.contract}> Đơn thuê</Link>
+      <li className="w-full my-4 text-base text-black hover:text-blue-600 hover:font-bold cursor-pointer transition-all">
+        <Tippy
+          interactive={true}
+          hideOnClick={false}
+          trigger="mouseenter focus"
+          animation="shift-away"
+          theme="light"
+          placement="right"
+          // animateFill={true}
+          // arrow={false}
+          content={
+            <ul className="px-2 pr-8">
+              <li className="w-full my-1 text-sm font-normal text-black hover:text-blue-600 hover:font-bold cursor-pointer transition-all">
+                <Link
+                  onClick={() => changeTypeContractHandle("freelancer")}
+                  to={configRoutes.contract}
+                >
+                  Ứng viên
+                </Link>
+              </li>
+              <li className="w-full my-1 text-sm font-normal text-black hover:text-blue-600 hover:font-bold cursor-pointer transition-all">
+                <Link
+                  onClick={() => changeTypeContractHandle("contract")}
+                  to={configRoutes.contract}
+                >
+                  Đội ngũ
+                </Link>
+              </li>
+            </ul>
+          }
+        >
+          <Link> Đơn thuê</Link>
+        </Tippy>
       </li>
       <li
         onClick={logOutHandle}
-        className="my-4 text-base text-black hover:text-blue-600 hover:font-bold cursor-pointer transition-all"
+        className="w-full my-4 text-base text-black hover:text-blue-600 hover:font-bold cursor-pointer transition-all"
       >
         Đăng xuất
       </li>

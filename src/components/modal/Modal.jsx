@@ -4,13 +4,18 @@ import React, { Fragment, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { selectContract } from "../../reducers/slices/contractSlice";
 import { cancelContract } from "../../reducers/actions/contractAction";
+import { toast } from "react-toastify";
 
-const Modal = ({ open, onOpen }) => {
+const Modal = ({ open, onOpen, onCancel }) => {
   const contract = useSelector(selectContract);
   const [reason, setReason] = useState("");
   const dispatch = useDispatch();
   const submitHandle = () => {
-    dispatch(cancelContract({ contractId: contract._id, reason }));
+    if(!reason){
+      toast.error("Vui lòng nhập lý do hủy hợp đồng");
+      return;
+    }
+    onCancel(contract._id, reason);
     onOpen(false);
   };
 

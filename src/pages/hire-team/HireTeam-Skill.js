@@ -10,7 +10,14 @@ import { updateRequire5 } from "../../reducers/slices/hireTeamSlice";
 const HireTeamSkill = () => {
   const dispatch = useDispatch();
   const [selectedAnswer, setSelectedAnswer] = useState(null);
-  const answers = ["ReactJs", "Angular", "ReactNative", "Flutter", "Ruby", "C++"];
+  const answers = [
+    "ReactJs",
+    "Angular",
+    "ReactNative",
+    "Flutter",
+    "Ruby",
+    "C++",
+  ];
   const navigate = useNavigate();
   const hireTeam = () => {
     navigate("/hireTeam/quiz/work-week");
@@ -52,7 +59,7 @@ const HireTeamSkill = () => {
               </label>
             ))}
           </div>
-          <div class="border border-t w-[70%] my-6 border-gray-400"></div>
+          <div className="border border-t w-[70%] my-6 border-gray-400"></div>
           <div className="flex flex-row justify-between w-[70%] items-center">
             <button
               type="submit"

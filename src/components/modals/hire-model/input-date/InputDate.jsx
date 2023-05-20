@@ -14,8 +14,8 @@ const InputDate = ({
   
 }) => {
   return (
-    <div class="mb-6">
-      <label class="block text-gray-700 text-sm font-bold mb-2" for="username">
+    <div className="mb-6">
+      <label className="block text-gray-700 text-sm font-bold mb-2" for="username">
         {label}:
       </label>
       <div className='flex justify-center items-center'>

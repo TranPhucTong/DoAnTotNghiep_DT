@@ -4,10 +4,10 @@ import Search from "./component/search/Search";
 import ListContract from "./component/list-contract/ListContract";
 import ModalComponent from "../../components/modal/ModalComponent";
 import Review from "./component/review/Review";
-import { selectEmployee } from "../../reducers/slices/employeeSlice";
 import reviewApi from "../../api/reviewApi";
-import { useDispatch } from "react-redux";
-import { setIsRatingContract } from "../../reducers/slices/contractSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { selectTypeContract, setIsRatingContract } from "../../reducers/slices/contractSlice";
+import ListOrder from "./component/list-order/ListOrder";
 
 const Contract = () => {
   const [openReview, setOpenReview] = useState({
@@ -18,6 +18,8 @@ const Contract = () => {
   const [isValidComment, setIsValidComment] = useState(false);
   const [selectRating, setSelectRating] = useState(0);
   const [isDisable, setIsDisable] = useState(true);
+  const typeContract = useSelector(selectTypeContract);
+  const isContract = typeContract === "freelancer";
   const dispatch = useDispatch();
   const commentRef = useRef(null);
   const ratingEmployeeHandle = async () => {
@@ -51,12 +53,17 @@ const Contract = () => {
   return (
     <div className="w-full h-full p-20">
       <div className="w-4/5 mx-auto">
-        <Nav />
+        <h3 className="mb-10 text-2xl text-blue-500 font-bold">ĐƠN THUÊ {typeContract === "freelancer" ? "ỨNG VIÊN" : "ĐỘI NGŨ"}</h3>
+        <Nav isContract = {isContract}/>
         <div className="w-full my-10">
-          <Search />
+          <Search isContract = {isContract}/>
         </div>
         <div className="w-full my-10">
+          {isContract ?
           <ListContract onOpenReview={setOpenReview} />
+          :
+          <ListOrder/>
+          }
         </div>
       </div>
       {openReview && (

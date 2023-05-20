@@ -18,13 +18,13 @@ const HireTeamSize = () => {
     { num: 500, text: "500 nhân sự" },
   ];
   const navigate = useNavigate();
-   const dispatch = useDispatch();
+  const dispatch = useDispatch();
   const hireTeam = () => {
     navigate("/hireTeam");
   };
   const workLength = () => {
     dispatch(updateRequire2(selectedAnswer));
-  
+
     navigate("/hireTeam/quiz/work-length");
   };
 
@@ -60,7 +60,7 @@ const HireTeamSize = () => {
               </label>
             ))}
           </div>
-          <div class="border border-t w-[70%] my-6 border-gray-400"></div>
+          <div className="border border-t w-[70%] my-6 border-gray-400"></div>
           <div className="flex flex-row justify-between w-[70%] items-center">
             <button
               type="submit"

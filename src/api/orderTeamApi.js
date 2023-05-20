@@ -11,9 +11,9 @@ const orderTeamApi = {
   addTeamToOrder: (dataAddTeamToOrder) => {
     return mainAxios.put(`${url}`, dataAddTeamToOrder);
   },
-  cancelOrder : (dataCancel) => {
+  cancelOrder: (dataCancel) => {
     return mainAxios.put(`${url}/cancel`, dataCancel);
-  }
+  },
 };
 
 export default orderTeamApi;

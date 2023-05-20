@@ -64,9 +64,12 @@ const HireTeam = () => {
               </label>
             ))}
           </div>
-          <div class="border border-t w-[70%] my-6 border-gray-400"></div>
+          <div className="border border-t w-[70%] my-6 border-gray-400"></div>
           <div className="flex items-center gap-20">
-            <button onClick={() => navigate("/")} className=" cursor-pointer shadow-xl px-8 py-2 hover:bg-gray-500 transition-colors duration-300  bg-gray-600 text-white rounded-xl ">
+            <button
+              onClick={() => navigate("/")}
+              className=" cursor-pointer shadow-xl px-8 py-2 hover:bg-gray-500 transition-colors duration-300  bg-gray-600 text-white rounded-xl "
+            >
               Về lại trang chủ
             </button>
             <button
