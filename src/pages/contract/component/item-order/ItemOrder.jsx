@@ -117,16 +117,22 @@ const ItemOrder = ({ item, onOpen }) => {
                 Hình thức làm việc: {typeWork}
               </p>
             </div>
-            <div className=" text-neutral-900 mt-8">
+
+            <div className=" text-neutral-900 mt-8 mb-4">
               {status === "cancel" && (
                 <>
                   <p className="mr-2 w-20 text-[#4069E5] text-lg font-bold">
                     Lí do:
                   </p>
                   <p className="mt-2 font-normal text-sm h-[100px] w-full ">
-                    {item.reason}
+                    {reason}
                   </p>
                 </>
+              )}
+              {status === "progress" && (
+                <span className="mr-2 w-20 text-[#4069E5] text-base font-bold">
+                  Đội ngũ: {team.name}
+                </span>
               )}
             </div>
           </div>

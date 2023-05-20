@@ -12,9 +12,6 @@ const Search = ({isContract}) => {
     isContract ? dispatch(setListContractFilter(value)) :
     dispatch(setListOrderFilter(value));
   };
-  useEffect(() => {
-      console.log("123");
-  });
 
   return (
     <div className="relative my-2">

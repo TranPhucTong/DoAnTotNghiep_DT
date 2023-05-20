@@ -23,19 +23,15 @@ const hireTeamSlice = createSlice({
   reducers: {
     updateRequire: (state, action) => {
       state.field = action.payload;
-      console.log("action: ", action);
     },
     updateRequire2: (state, action) => {
       state.totalPersonnel = action.payload;
-      console.log("action: ", action);
     },
     updateRequire3: (state, action) => {
       state.duration = action.payload;
-      console.log("action: ", action);
     },
     updateRequire4: (state, action) => {
       state.workingTime = action.payload;
-      console.log("action: ", action);
     },
     // updateRequire5: (state, action) => {
     //   state.tech = action.payload;
@@ -43,15 +39,12 @@ const hireTeamSlice = createSlice({
     // },
     updateRequire6: (state, action) => {
       state.startTime = action.payload;
-      console.log("action: ", action);
     },
     updateRequire7: (state, action) => {
       state.typeWork = action.payload;
-      console.log("action: ", action);
     },
     updateRequire8: (state, action) => {
       state.budget = action.payload;
-      console.log("action: ", action);
     },
     // updateRequire9: (state, action) => {
     //   state.info = {
