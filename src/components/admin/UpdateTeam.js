@@ -20,7 +20,7 @@ const UpdateTeam = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const res = await employeeApii.getEmplees();
+      const res = await employeeApii.getIsEmployeeActive();
       setDataAxiosLeader(res.data);
     };
     fetchData();
@@ -58,26 +58,6 @@ const UpdateTeam = () => {
 
     navigate("/admin/list-team");
   };
-  //  const clickUpdateTeam = async () => {
-  //    const res = await axios
-  //      .patch("https://doan-be-git-dev-danh-lofi.vercel.app/teams", {
-  //        id: idTeam,
-  //        name: nameTeam,
-  //        field: field,
-  //        totalEmployee: total,
-  //        typeWork: typeWork,
-  //        leader: leader,
-  //      })
-  //      .then((response) => {
-  //        console.log("Cập nhật thành công" + response);
-  //        alert("Cập nhật thành công");
-  //      })
-  //      .catch((error) => {
-  //        console.log("Cập nhật không thành công" + error);
-  //        alert("Cập nhật không thành công");
-  //      });
-  //    console.log(res);
-  //  };
   return (
     <div class="p-6 w-full  min-h-screen-except-header">
       <span className="text-2xl font-extrabold text-blue-500">
