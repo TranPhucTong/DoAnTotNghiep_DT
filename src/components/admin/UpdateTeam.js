@@ -20,7 +20,7 @@ const UpdateTeam = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const res = await employeeApii.getEmplees();
+      const res = await employeeApii.getIsEmployeeActive();
       setDataAxiosLeader(res.data);
     };
     fetchData();
@@ -132,6 +132,9 @@ const UpdateTeam = () => {
               defaultValue={leader}
             >
               <option value="">Vui lòng chọn</option>
+              <option value={transiData.leader._id}>
+                {transiData.leader.name}
+              </option>
               {dataAxiosLeader.map((leader, index) => (
                 <option key={leader._id} value={leader._id}>
                   {leader.name}

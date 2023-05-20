@@ -14,6 +14,9 @@ const orderTeamApi = {
   cancelOrder: (dataCancel) => {
     return mainAxios.put(`${url}/cancel`, dataCancel);
   },
+  doneOrder: (orderId) => {
+    return mainAxios.put(`${url}/done`, {orderId});
+  }
 };
 
 export default orderTeamApi;

@@ -5,6 +5,7 @@ import ButtonHire from "../button/Button-Hire/ButtonHire";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { changeRoutesss, routeState } from "../../reducers/slices/routeSlice";
+import { isLoggedIn } from "../../reducers/slices/customerSlice";
 
 const fields = [
   {
@@ -75,11 +76,17 @@ const FieldsCard = ({ field }) => (
 
 function Field() {
   const dispatch = useDispatch();
+  const isLogin = useSelector(isLoggedIn);
   const navigate = useNavigate();
   
 
   const hireTeamHanlde = () => {
-    navigate("/hireTeam");
+    if(isLogin === true){
+      navigate("/hireTeam");
+    } else {
+      alert("Bạn chưa đăng nhập vui lòng đăng nhập")
+      navigate("/login");
+    }
   };
   return (
     <div>

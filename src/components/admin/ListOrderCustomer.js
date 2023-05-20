@@ -7,6 +7,7 @@ import {
   faXmark,
   faSpinner,
   faBan,
+  faCheck,
 } from "@fortawesome/free-solid-svg-icons";
 import teamWorkApi from "../../api/teamWorkApi";
 import { useNavigate } from "react-router-dom";
@@ -30,9 +31,11 @@ const OrderDetail = ({
   noSelect,
   cancel,
   team,
+  done,
 }) => {
   const [completeSelected, setCompleteSelected] = useState(noSelect);
   const [statusCancel, setStatusCancel] = useState(cancel);
+  const [statusDone, setStatusDone] = useState(done);
   return (
     <div className="fixed inset-0 z-[999] flex items-center justify-center">
       <div className="absolute inset-0 bg-gray-950 opacity-50"></div>
@@ -127,9 +130,16 @@ const OrderDetail = ({
         </div>
         <div className="border-t border-solid border-gray-500 my-10 pb-10">
           {statusCancel ? (
-            <div className="mt-8 text-2xl font-bold text-gray-700 opacity-75">
-              Đơn thuê đã bị hủy
+            <div>
+              <div className="mt-8 text-2xl font-bold text-gray-700 opacity-75">
+                Đơn thuê đã bị hủy.
+              </div>
+              <div className="mt-3 text-xl font-semibold text-cyan-400">
+                Lý do hủy : <span>"{team.reason}"</span>
+              </div>
             </div>
+          ) : statusDone ? (
+            <div className="mt-8 text-green-600 text-xl font-bold">Dự án đã hoàn thành</div>
           ) : (
             <div className="mt-8 w-full flex">
               <span className="font-bold text-xl">Nhóm phụ trách dự án : </span>
@@ -172,6 +182,7 @@ const ListOrderCustomer = () => {
   const [idTeam, setIdTeam] = useState("");
   const [noSelect, setNoSelect] = useState(false);
   const [cancel, setCancel] = useState(false);
+  const [done, setDone] = useState(false);
   const navigate = useNavigate();
   // useEffect(() => {
   //   const fetchData = async () => {
@@ -236,11 +247,15 @@ const ListOrderCustomer = () => {
     if (order.status === "pending") {
       setNoSelect(false);
       setCancel(false);
+      setDone(false);
     } else if (order.status === "progress") {
       setNoSelect(true);
       setCancel(false);
     } else if (order.status === "cancel") {
       setCancel(true);
+    } else if (order.status === "done") {
+      setDone(true);
+      setCancel(false)
     }
   };
 
@@ -259,7 +274,7 @@ const ListOrderCustomer = () => {
     setReason(event.target.value);
   };
 
-  const handleSubmit = async () => {
+  const handleSubmitReason = async () => {
     const dataCancel = {
       orderId: idOder,
       reason: reason,
@@ -276,14 +291,39 @@ const ListOrderCustomer = () => {
     }
   };
 
+  const handleDoneOrder = async (selectIdOrder) => {
+    console.log(selectIdOrder);
+    const orderId = selectIdOrder;
+    try {
+      const res = await orderTeamApi.doneOrder(orderId);
+      console.log(res);
+      alert("Thành công !!!");
+      fetchData();
+    } catch (error) {
+      alert("Thất bại");
+      console.log("Lỗi : ", error);
+    }
+  };
+
+  //Giả lập áp cứng
+  // const [completed, setCompleted] = useState(
+  //   Array(dataAxiosListOrder.length).fill(false)
+  // );
+
+  // const handleComplete = (index) => {
+  //   const updatedCompleted = [...completed];
+  //   updatedCompleted[index] = true;
+  //   setCompleted(updatedCompleted);
+  // };
+
   return (
-    <div className="w-full min-h-screen-except-header">
+    <div class="w-full min-h-screen-except-header">
       <span className="text-2xl font-extrabold text-blue-500">
         Quản lý đơn thuê của khách hàng
       </span>
-      <div className="mt-6 flex w-full rounded-lg bg-white shadow-xl">
-        <div className=" w-full overflow-x-auto">
-          <table className="w-full text-sm mt-0 text-dark-purple transition-all duration-500 ease-in-out">
+      <div class="mt-6 flex w-full rounded-lg bg-white shadow-xl">
+        <div class=" w-full overflow-x-auto">
+          <table class="w-full text-sm mt-0 text-dark-purple transition-all duration-500 ease-in-out">
             <thead className="w-full">
               <tr className="border-b border-solid border-gray-400">
                 <th className=" px-[16px] py-[20px] text-center min-w-[80px]">
@@ -333,9 +373,10 @@ const ListOrderCustomer = () => {
                       Xem chi tiết
                     </a>
                   </td>
+
                   <td className=" px-[16px] py-[20px] text-center min-w-[80px]">
                     <span
-                      className={`w-max inline-block font-bold capitalize ${
+                      class={`w-max inline-block font-bold capitalize ${
                         dt.status === "pending"
                           ? "text-yellow-600"
                           : `${
@@ -344,7 +385,11 @@ const ListOrderCustomer = () => {
                                 : `${
                                     dt.status === "cancel"
                                       ? "text-gray-400"
-                                      : ""
+                                      : `${
+                                          dt.status === "done"
+                                            ? "text-lime-600"
+                                            : ""
+                                        }`
                                   }`
                             }`
                       }`}
@@ -369,13 +414,84 @@ const ListOrderCustomer = () => {
                           icon={faBan}
                         />
                       </span>
+                    ) : dt.status === "done" ? (
+                      <span className="ml-2 text-lime-600">
+                        <FontAwesomeIcon
+                          className="font-extrabold text-xl"
+                          icon={faCheck}
+                        />
+                      </span>
                     ) : (
                       ""
                     )}
                   </td>
+
+                  {/* <td className=" px-[16px] py-[20px] text-center min-w-[80px]">
+                    {completed[index] ? (
+                      <div>
+                        <span className="w-max inline-block font-bold capitalize text-lime-600">
+                          Done
+                        </span>
+                        <span className="ml-2 text-lime-600">
+                          <FontAwesomeIcon
+                            className="font-extrabold text-xl"
+                            icon={faCheck}
+                          />
+                        </span>
+                      </div>
+                    ) : (
+                      <div>
+                        <span
+                          className={`w-max inline-block font-bold capitalize ${
+                            dt.status === "pending"
+                              ? "text-yellow-600"
+                              : dt.status === "progress"
+                              ? "text-cyan-600"
+                              : dt.status === "cancel"
+                              ? "text-gray-400"
+                              : dt.status === "done"
+                              ? "text-lime-600"
+                              : ""
+                          }`}
+                        >
+                          {dt.status}
+                        </span>
+
+                        {dt.status === "pending" ? (
+                          <span className="ml-2 text-yellow-600">
+                            <FontAwesomeIcon icon={faWarning} />
+                          </span>
+                        ) : dt.status === "progress" ? (
+                          <span className="ml-2 text-green-600">
+                            <FontAwesomeIcon
+                              className="rotate-180 font-extrabold text-xl"
+                              icon={faSpinner}
+                            />
+                          </span>
+                        ) : dt.status === "cancel" ? (
+                          <span className="ml-2 text-gray-600">
+                            <FontAwesomeIcon
+                              className="font-extrabold text-xl"
+                              icon={faBan}
+                            />
+                          </span>
+                        ) : dt.status === "done" ? (
+                          <span className="ml-2 text-lime-600">
+                            <FontAwesomeIcon
+                              className="font-extrabold text-xl"
+                              icon={faCheck}
+                            />
+                          </span>
+                        ) : (
+                          ""
+                        )}
+                      </div>
+                    )}
+                  </td> */}
+
                   <td className=" px-[16px] py-[20px] text-center min-w-[80px]">
                     {dt.status === "pending" ? (
-                      <div className="flex justify-center items-center gap-2">
+                      <div class="flex justify-center items-center gap-2">
                         <button
                           onClick={() => {
                             setShowSelectTeam(true);
@@ -397,7 +513,15 @@ const ListOrderCustomer = () => {
                         </button>
                       </div>
                     ) : dt.status === "progress" ? (
-                      <div className="flex justify-center items-center gap-2">
+                      <div class="flex justify-center items-center gap-2">
+                        <button
+                          onClick={() => {
+                            handleDoneOrder(dt._id);
+                          }}
+                          className="px-4 py-2 bg-pink-500 text-white rounded-xl hover:bg-slate-400 transition-all duration-150 ease-in-out"
+                        >
+                          Hoàn thành
+                        </button>
                         <button
                           onClick={() => {
                             setShowReason(true);
@@ -407,6 +531,25 @@ const ListOrderCustomer = () => {
                         >
                           Hủy
                         </button>
+                        {/* {!completed[index] && (
+                          <div className="flex justify-center items-center gap-2">
+                            <button
+                              onClick={() => handleComplete(index)}
+                              className="px-4 py-2 bg-pink-500 text-white rounded-xl hover:bg-slate-400 transition-all duration-150 ease-in-out"
+                            >
+                              Hoàn thành
+                            </button>
+                            <button
+                              onClick={() => {
+                                setShowReason(true);
+                                setIdOrder(dt._id);
+                              }}
+                              className="px-4 py-2 bg-gray-500 text-white rounded-xl hover:bg-slate-400 transition-all duration-150 ease-in-out"
+                            >
+                              Hủy
+                            </button>
+                          </div>
+                        )} */}
                       </div>
                     ) : (
                       ""
@@ -437,6 +580,7 @@ const ListOrderCustomer = () => {
           budget={selectedOrder.budget}
           noSelect={noSelect}
           cancel={cancel}
+          done={done}
           team={selectedOrder}
         />
       )}
@@ -455,8 +599,8 @@ const ListOrderCustomer = () => {
               <h1 className="text-3xl uppercase font-bold text-blue-500">
                 Chọn nhóm phù hợp với yêu cầu
               </h1>
-              <div className="mt-6 w-full overflow-x-auto shadow-2xl rounded-lg">
-                <table className="w-full text-sm mt-0 text-dark-purple transition-all duration-500 ease-in-out ">
+              <div class="mt-6 w-full overflow-x-auto shadow-2xl rounded-lg">
+                <table class="w-full text-sm mt-0 text-dark-purple transition-all duration-500 ease-in-out ">
                   <thead className="w-full bg-pink-500 text-white">
                     <tr className="border-b border-solid border-gray-400 ">
                       <th className=" px-[16px] py-[20px] text-center min-w-[80px]">
@@ -591,7 +735,7 @@ const ListOrderCustomer = () => {
               />
             </label>
             <button
-              onClick={() => handleSubmit()}
+              onClick={() => handleSubmitReason()}
               className="px-6 py-3 bg-blue-500 rounded-xl text-white text-xl hover:bg-blue-700 duration-200 transition-colors ease-in-out"
               type="submit"
             >

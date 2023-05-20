@@ -73,14 +73,14 @@ const CreateTeam = () => {
   };
 
   return (
-    <div className="p-6 w-full  min-h-screen-except-header">
+    <div class="p-6 w-full  min-h-screen-except-header">
       <span className="text-2xl font-extrabold text-blue-500">
         Tạo nhóm mới
       </span>
-      <div className="mt-6 bg-white shadow-xl rounded-lg p-8 pt-10">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-12">
+      <div class="mt-6 bg-white shadow-xl rounded-lg p-8 pt-10">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-12">
           {/* name  */}
-          <div className="h-[2.875rem] relative flex items-center border border-solid focus-within:border-blue-500 transition-all ease-linear  border-gray-200 rounded-lg">
+          <div class="h-[2.875rem] relative flex items-center border border-solid focus-within:border-blue-500 transition-all ease-linear  border-gray-200 rounded-lg">
             <label className="absolute -top-1/4  left-2 px-2 bg-white text-blue-500 text-sm">
               Tên nhóm
             </label>
@@ -93,7 +93,7 @@ const CreateTeam = () => {
             />
           </div>
           {/* Field  */}
-          <div className="h-[2.875rem] relative flex items-center justify-center border border-solid focus-within:border-blue-500 transition-all ease-linear border-gray-200 rounded-lg">
+          <div class="h-[2.875rem] relative flex items-center justify-center border border-solid focus-within:border-blue-500 transition-all ease-linear border-gray-200 rounded-lg">
             <label className="absolute -top-1/4 left-2 px-2 bg-white text-blue-500 text-sm">
               Mảng làm việc
             </label>
@@ -114,7 +114,7 @@ const CreateTeam = () => {
           </div>
 
           {/* Leader */}
-          <div className="h-[2.875rem] relative flex items-center justify-center border border-solid focus-within:border-blue-500 transition-all ease-linear border-gray-200 rounded-lg">
+          <div class="h-[2.875rem] relative flex items-center justify-center border border-solid focus-within:border-blue-500 transition-all ease-linear border-gray-200 rounded-lg">
             <label className="absolute -top-1/4 left-2 px-2 bg-white text-blue-500 text-sm">
               Chọn trưởng nhóm
             </label>
@@ -134,7 +134,7 @@ const CreateTeam = () => {
           </div>
 
           {/* Type Work */}
-          <div className="h-[2.875rem] relative flex items-center justify-center border border-solid focus-within:border-blue-500 transition-all ease-linear border-gray-200 rounded-lg">
+          <div class="h-[2.875rem] relative flex items-center justify-center border border-solid focus-within:border-blue-500 transition-all ease-linear border-gray-200 rounded-lg">
             <label className="absolute -top-1/4 left-2 px-2 bg-white text-blue-500 text-sm">
               Chọn hình thức làm việc
             </label>
@@ -151,7 +151,7 @@ const CreateTeam = () => {
           </div>
 
           {/* Total */}
-          <div className="h-[2.875rem] relative flex items-center border border-solid focus-within:border-blue-500 transition-all ease-linear  border-gray-200 rounded-lg">
+          <div class="h-[2.875rem] relative flex items-center border border-solid focus-within:border-blue-500 transition-all ease-linear  border-gray-200 rounded-lg">
             <label className="absolute -top-1/4  left-2 px-2 bg-white text-blue-500 text-sm">
               Số lượng nhân viên
             </label>
@@ -165,7 +165,7 @@ const CreateTeam = () => {
           </div>
 
           <Select
-            className="h-[2.875rem] relative flex items-center justify-center border border-solid focus-within:border-blue-500 transition-all ease-linear border-gray-200 rounded-lg"
+            class="h-[2.875rem] relative flex items-center justify-center border border-solid focus-within:border-blue-500 transition-all ease-linear border-gray-200 rounded-lg"
             options={options}
             isMulti
             value={options.filter((option) =>
@@ -179,7 +179,7 @@ const CreateTeam = () => {
           <button
             onClick={clickCreateTeam}
             type="submit"
-            className={`bg-blue-500 px-8 py-2 text-white font-semibold rounded-lg mt-12 hover:bg-blue-600 transition-colors ease-linear 
+            class={`bg-blue-500 px-8 py-2 text-white font-semibold rounded-lg mt-12 hover:bg-blue-600 transition-colors ease-linear 
         
             ${isFormComplete ? "" : "opacity-50 pointer-events-none"}  `}
           >
