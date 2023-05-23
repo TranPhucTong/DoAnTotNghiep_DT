@@ -12,10 +12,9 @@ const HireTeamSize = () => {
   const [selectedAnswer, setSelectedAnswer] = useState(null);
   const answers = [
     { num: 10, text: "10 nhân sự" },
+    { num: 20, text: "20 nhân sự" },
+    { num: 30, text: "30 nhân sự" },
     { num: 50, text: "50 nhân sự" },
-    { num: 100, text: "100 nhân sự" },
-    { num: 200, text: "200 nhân sự" },
-    { num: 500, text: "500 nhân sự" },
   ];
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -37,7 +36,7 @@ const HireTeamSize = () => {
       <div className="p-16 w-[70%] h-full flex flex-col items-center justify-center">
         <img className="w-32 h-32 mb-6" src={logo} alt="" />
         <h2 className="text-3xl bg-[#edf1fd] p-3 rounded-lg font-medium mb-6">
-          Số lượng nhân lực mà bạn muốn thuê cho đội ngũ của bạn ?
+          Số lượng nhân lực mà bạn muốn thuê khoảng bao nhiêu ?
         </h2>
         <form
           className="w-full justify-center flex flex-col items-center"

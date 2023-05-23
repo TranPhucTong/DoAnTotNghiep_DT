@@ -17,13 +17,13 @@ const NavAdmin = (props) => {
   const [focus, setFocus] = useState(false);
   const navigate = useNavigate();
   const handleMenuClick = (title) => {
-    if (title === "Creat Employee") {
+    if (title === "Tạo nhân viên mới") {
       navigate("/admin/create-employees");
-    } else if (title === "List Employees") {
+    } else if (title === "Danh sách nhân viên") {
       navigate("/admin/list-employees");
-    } else if (title === "Creat Team") {
+    } else if (title === "Tạo nhóm làm việc") {
       navigate("/admin/create-team");
-    } else if (title === "List Team") {
+    } else if (title === "Quản lý nhóm") {
       navigate("/admin/list-team");
     } else if (title === "Yêu cầu của khách hàng") {
       navigate("/admin/list-order");
@@ -32,16 +32,16 @@ const NavAdmin = (props) => {
   };
   const Menus = [
     {
-      title: "Employees",
+      title: "Nhân viên",
       submenu: true,
-      submenuItems: [{ title: "Creat Employee" }, { title: "List Employees" }],
+      submenuItems: [{ title: "Tạo nhân viên mới" }, { title: "Danh sách nhân viên" }],
     },
   ];
   const MenusTeam = [
     {
-      title: "Team",
+      title: "Nhóm làm việc",
       submenu: true,
-      submenuItems: [{ title: "Creat Team" }, { title: "List Team" }],
+      submenuItems: [{ title: "Tạo nhóm làm việc" }, { title: "Quản lý nhóm" }],
     },
   ];
   const CustomerRequest = [

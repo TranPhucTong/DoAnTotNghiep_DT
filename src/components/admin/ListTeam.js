@@ -16,6 +16,7 @@ import {
 import teamWorkApi from "../../api/teamWorkApi";
 import EmployeeModal from "../modal/EmployeeModal";
 import employeeApii from "../../api/employeeApii";
+import { toast } from "react-toastify";
 
 const ListTeam = () => {
   const [teams, setTeams] = useState([]);
@@ -76,7 +77,7 @@ const ListTeam = () => {
     };
     try {
       const respon = await teamWorkApi.deleteMemberFromTeam(infoToRemove);
-      alert("Xóa thành viên thành công !!!");
+      toast.success("Xóa thành viên thành công !!!");
       const teamToUpdate = teams.find((team) => team.name === selectedTeam); // tìm đối tượng nhóm cần cập nhật
       const updatedMembers = teamToUpdate.members.filter(
         (member) => member._id !== idArrMember
@@ -89,7 +90,7 @@ const ListTeam = () => {
       updatedTeams[index] = teamToUpdate; // cập nhật lại đối tượng nhóm trong mảng
       setTeams(updatedTeams); // cập nhật lại giá trị state của mảng `teams`
     } catch (erorr) {
-      alert("Xóa thành viên thất bại, hãy kiểm tra lại");
+      toast.error("Xóa thành viên thất bại, hãy kiểm tra lại");
       console.log("Lỗi :" + erorr);
     }
   };
@@ -100,7 +101,7 @@ const ListTeam = () => {
     };
     try {
       const respon = await teamWorkApi.addMemberFromTeam(infoToAdd);
-      alert("Thêm thành công !!!");
+      toast.success("Thêm thành công !!!")
       const teamToUpdate = teams.find((team) => team.name === selectedTeam);
       const newMember = dataAxiosEmployeeAdd.find(
         (member) => member._id === employeeAdd
@@ -114,7 +115,7 @@ const ListTeam = () => {
       updatedTeams[index] = teamToUpdate; // cập nhật lại đối tượng nhóm trong mảng
       setTeams(updatedTeams); // cập nhật lại giá trị state của mảng `teams`
     } catch (erorr) {
-      alert("Thêm thất bại, hãy kiểm tra lại");
+      toast.error("Thêm thất bại. Hãy kiểm tra lại !!!")
       console.log("Lỗi :" + erorr);
     }
   };
@@ -125,14 +126,14 @@ const ListTeam = () => {
     try {
       const res = await teamWorkApi.deleteTeam(name);
       if (res.data.active === true) {
-        alert("Nhóm đang hoạt động. Không thể xóa !!!");
+        toast.error("Nhóm đang hoạt động. Không thể xóa!!!")
       } else {
-        alert("Xóa thành công");
+        toast.success("Xóa thành công")
         setSelectedTeam("");
       }
     } catch (error) {
-      console.log("Xóa nhóm không thành công", error);
-      alert("Xóa nhóm Không thành công");
+      console.log(error);
+      toast.error("Xóa nhóm không thành công")
     }
     // window.location.reload(false);
   };
@@ -158,7 +159,7 @@ const ListTeam = () => {
                 setSelectedTeamRedux(objTeam);
               }}
             >
-              <option value="">Select a team</option>
+              <option value="">Chọn nhóm làm việc</option>
               {teams.map((team) => (
                 <option key={team._id} value={team.name}>
                   {team.name}

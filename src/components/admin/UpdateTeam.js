@@ -5,6 +5,7 @@ import { useSelector } from "react-redux";
 import { updateTeam } from "../../reducers/slices/updateTeamSlice";
 import teamWorkApi from "../../api/teamWorkApi";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 const UpdateTeam = () => {
   const transiData = useSelector(updateTeam);
@@ -49,10 +50,12 @@ const UpdateTeam = () => {
     const response = await teamWorkApi
       .updateTeam(teamUpdate)
       .then((res) => {
-        alert("Cập nhật thành công" + res);
+        console.log("Cập nhật thành công" , res);
+        toast.success("Cập nhật thành công")
       })
       .catch((error) => {
-        alert("Cập nhật không thành công" + error);
+        console.log("Cập nhật không thành công" , error);
+        toast.error("Cập nhật thất bại. Kiểm tra lại")
       });
     console.log(response);
 

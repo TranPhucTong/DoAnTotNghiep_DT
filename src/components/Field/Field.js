@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { changeRoutesss, routeState } from "../../reducers/slices/routeSlice";
 import { isLoggedIn } from "../../reducers/slices/customerSlice";
+import { toast } from "react-toastify";
 
 const fields = [
   {
@@ -84,7 +85,8 @@ function Field() {
     if(isLogin === true){
       navigate("/hireTeam");
     } else {
-      alert("Bạn chưa đăng nhập vui lòng đăng nhập")
+      // alert("Bạn chưa đăng nhập vui lòng đăng nhập");
+      toast.error("Bạn chưa đăng nhập. Vui lòng đăng nhập");
       navigate("/login");
     }
   };

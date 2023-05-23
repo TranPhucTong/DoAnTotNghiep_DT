@@ -12,6 +12,7 @@ import employeeApii from "../../api/employeeApii";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { updateRequireEmployee } from "../../reducers/slices/updateEmployeeSlice";
+import { toast } from "react-toastify";
 
 const ListEmployees = () => {
   const [data, setData] = useState([]);
@@ -84,8 +85,10 @@ const ListEmployees = () => {
       setDataAxios(dataAxios.filter((employee) => employee.phone !== phone));
       console.log(respon);
       setShowNoEmployeeTeam(false);
+      toast.success("Xóa thành công")
     } catch (erorr) {
       console.log("Lỗi :", erorr);
+      toast.error("Xóa thất bại. Kiểm tra lại!!!")
     }
   };
 
@@ -95,8 +98,10 @@ const ListEmployees = () => {
       setDataAxios(dataAxios.filter((employee) => employee.phone !== phone));
       console.log(respon);
       setShowNoti(false);
+      toast.success("Xóa thành công")
     } catch (erorr) {
       console.log("Lỗi :", erorr);
+      toast.error("Thất bại. Kiểm tra lại")
     }
   };
 
@@ -148,8 +153,8 @@ const ListEmployees = () => {
     <div className="p-7 h-full w-full">
       {/* Content Header  */}
       <div className="flex flex-col items-start justify-between gap-4 select-none md:flex-row md:items-center md:gap-0">
-        <h4 className="text-xl font-medium md:text-2xl">
-          Employees Management
+        <h4 className="text-xl font-bold md:text-2xl text-blue-500">
+          Danh sách nhân viên
         </h4>
         <div className="relative w-full md:w-[18.75rem]">
           <span
@@ -163,7 +168,7 @@ const ListEmployees = () => {
             type="text"
             value={searchNum}
             onChange={(e) => setSearchNum(e.target.value)}
-            placeholder="Search by phone"
+            placeholder="Tìm kiếm bằng số điện thoại"
             className="w-full pl-[3.25rem] focus:border focus:border-blue-500 transition-all ease-in-out duration-300 pr-4 py-[0.688rem] outline-none border border-[#DDDDDD] border-solid rounded-md text-dark"
           />
         </div>
@@ -180,6 +185,7 @@ const ListEmployees = () => {
                 id="num-per-page"
                 className="px-2 py-1 border border-solid rounded-lg outline-none border-secondary"
               >
+                <option value="5">5</option>
                 <option value="10">10</option>
                 <option value="20">20</option>
                 <option value="50">50</option>
@@ -214,7 +220,6 @@ const ListEmployees = () => {
               required
             >
               <option value="employee">Danh sách nhân viên đội ngũ</option>
-              <option value="freelancer">Danh sách nhân viên tự do</option>
             </select>
           </div>
         </div>

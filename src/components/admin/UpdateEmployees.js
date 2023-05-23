@@ -4,6 +4,7 @@ import { updateEmployee } from "../../reducers/slices/updateEmployeeSlice";
 import employeeApii from "../../api/employeeApii";
 import { useNavigate } from "react-router-dom";
 import teamWorkApi from "../../api/teamWorkApi";
+import { toast } from "react-toastify";
 
 const UpdateEmployees = () => {
   const transiData = useSelector(updateEmployee);
@@ -37,10 +38,15 @@ const UpdateEmployees = () => {
       birthDate: birthday,
       email: email,
     };
-    const response = await employeeApii.updateEmployee(employeeUpdate);
-    console.log(response);
-    console.log(employeeUpdate.id);
-    navigate("/admin/list-employees");
+    try {
+      const response = await employeeApii.updateEmployee(employeeUpdate);
+      console.log(response);
+      console.log(employeeUpdate.id);
+      navigate("/admin/list-employees");
+      toast.success("Cập nhật thành công")
+    } catch {
+      toast.error("Cập nhật thất bại")
+    }
   };
 
   return (

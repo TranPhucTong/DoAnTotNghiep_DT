@@ -5,6 +5,7 @@ import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 import employeeApi from "../../api/employeeApi";
 import employeeApii from "../../api/employeeApii";
 import { useLocation } from "react-router-dom";
+import { toast } from "react-toastify";
 
 const CreatEmployee = (props) => {
   const [name, setName] = useState("");
@@ -49,10 +50,16 @@ const CreatEmployee = (props) => {
       type: "team",
     };
 
-    const response = await employeeApii.createEmployee(employee);
-    console.log(response);
-    console.log(name);
-    navigate("/admin/list-employees");
+    try {
+      const response = await employeeApii.createEmployee(employee);
+      console.log(response);
+      console.log(name);
+      navigate("/admin/list-employees");
+      toast.success("Tạo nhân viên thành công")
+    } catch (error) {
+      toast.error("Trùng số điện thoại. Vui lòng nhập lại!!!")
+      console.log(error);
+    }
   };
   return (
     <div className="p-6 w-full  min-h-screen-except-header">

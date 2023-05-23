@@ -11,6 +11,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import teamWorkApi from "../../api/teamWorkApi";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 const OrderDetail = ({
   message,
@@ -231,10 +232,12 @@ const ListOrderCustomer = () => {
     try {
       const res = await orderTeamApi.addTeamToOrder(dataAddTeamToOrder);
       console.log(res);
-      alert("Thành công");
+      // alert("Thành công");
+      toast.success("Thành công");
       fetchData();
     } catch (error) {
-      alert("Thất bại" + error);
+      // alert("Thất bại" + error);
+      toast.error("Thất bại");
     }
     setShowOrderDetail(false);
     setShowSelectTeam(false);
@@ -282,11 +285,13 @@ const ListOrderCustomer = () => {
     try {
       const res = await orderTeamApi.cancelOrder(dataCancel);
       console.log(res);
-      alert("Thành công !!!");
+      // alert("Thành công !!!");
+      toast.success("Thành công !!!");
       setShowReason(false);
       fetchData();
     } catch (error) {
-      alert("Thất bại");
+      // alert("Thất bại");
+      toast.error("Thất bại!!!")
       console.log("Lỗi : ", error);
     }
   };
@@ -297,10 +302,12 @@ const ListOrderCustomer = () => {
     try {
       const res = await orderTeamApi.doneOrder(orderId);
       console.log(res);
-      alert("Thành công !!!");
+      // alert("Thành công !!!");
+      toast.success("Thành công !!!");
       fetchData();
     } catch (error) {
-      alert("Thất bại");
+      // alert("Thất bại");
+      toast.success("Thất bại. Vui lòng kiểm tra lại !!!");
       console.log("Lỗi : ", error);
     }
   };

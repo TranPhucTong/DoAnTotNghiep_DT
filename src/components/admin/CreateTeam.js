@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import employeeApii from "../../api/employeeApii";
 import Select from "react-select";
 import axios from "axios";
+import { toast } from "react-toastify";
 
 const CreateTeam = () => {
   const [nameTeam, setNameTeam] = useState("");
@@ -57,11 +58,12 @@ const CreateTeam = () => {
       })
       .then((response) => {
         console.log("Tạo thành công" + response);
-        alert("Tạo thành công");
+        toast.success("Tạo thành công")
       })
       .catch((error) => {
         console.log("Tạo không thành công" + error);
-        alert("Không thành công");
+        // alert("Không thành công");
+        toast.error("Tạo không thành công")
       });
     console.log(res);
     setNameTeam("");

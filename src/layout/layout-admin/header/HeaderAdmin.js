@@ -19,6 +19,8 @@ import {
   faPenToSquare,
   faTrash,
 } from "@fortawesome/free-solid-svg-icons";
+import { useNavigate } from "react-router-dom";
+import avtAdmin from "../../../assests/imgs/avtAdmin.jpg"
 
 const HeaderAdmin = (props) => {
   function handleClick() {
@@ -29,6 +31,7 @@ const HeaderAdmin = (props) => {
   const handleBar = () => {
     setBars(!bars);
   };
+  const navigator = useNavigate();
   return (
     <div className="fixed top-0 bg-white left-0 right-0 z-[999] flex h-header items-center justify-between bg-light">
       <div className="header-logo order-2 lg:order-1 flex-1 lg:flex-none px-0 lg:px-5 flex w-auto lg:w-sidebar justify-start transition-all duration-200 ease-in-out">
@@ -63,14 +66,14 @@ const HeaderAdmin = (props) => {
         >
           <div className="w-[40px] h-[40px] rounded-full p-[0.125rem] border-2 border-secondary mr-0 md:mr-2 group-hover:border-primary transition duration-200 ease-in-out">
             <img
-              className="w-full rounded-full"
-              src="https://scontent.fsgn19-1.fna.fbcdn.net/v/t39.30808-6/337145845_1179316779393527_5171054869994625444_n.jpg?_nc_cat=103&ccb=1-7&_nc_sid=09cbfe&_nc_ohc=dGFHlbHly-YAX8_lDwe&_nc_ht=scontent.fsgn19-1.fna&oh=00_AfD7M2OZbyD_7o3sQwUI0YnRMp9f_DY7yhMS_VjwGkyxFA&oe=643664BD"
+              className="rounded-full w-full h-full"
+              src={avtAdmin}
               alt=""
             />
           </div>
           <div className="mr-2 hidden text-left lg:block">
             <p className="text-dark text-sm font-medium">Tran Phuc Tong</p>
-            <p className="text-active text-xs font-medium">Administrator</p>
+            <p className="text-active text-xs font-medium">Quản trị viên</p>
           </div>
           <span className="hidden lg:block">
             <FontAwesomeIcon icon={faChevronDown} />
@@ -86,23 +89,20 @@ const HeaderAdmin = (props) => {
           <div className="flex items-center gap-2 bg-[#f9f9f9] px-4 py-2">
             <img
               className="w-[40px] h-[40px] rounded-full"
-              src="https://scontent.fsgn19-1.fna.fbcdn.net/v/t39.30808-6/337145845_1179316779393527_5171054869994625444_n.jpg?_nc_cat=103&ccb=1-7&_nc_sid=09cbfe&_nc_ohc=dGFHlbHly-YAX8_lDwe&_nc_ht=scontent.fsgn19-1.fna&oh=00_AfD7M2OZbyD_7o3sQwUI0YnRMp9f_DY7yhMS_VjwGkyxFA&oe=643664BD"
+              src={avtAdmin}
               alt=""
             />
             <div className="grow">
               <p className="text-dark text-base font-medium">Tran Phuc Tong</p>
-              <p className="text-sidebar text-sm">Administrator</p>
+              <p className="text-sidebar text-sm">Quản trị viên</p>
             </div>
           </div>
           <ul className="text-sm text-dark text-left flex flex-col bg-white cursor-pointer">
-            <li className="px-4 py-3 border-t border-solid border-secondary hover:text-active hover:bg-[#e9ecef] transition-200-ease-in-out">
-              My Profile
-            </li>
-            <li className="px-4 py-3 border-t border-solid border-secondary hover:text-active hover:bg-[#e9ecef] transition-200-ease-in-out">
-              Inbox
-            </li>
-            <li className="px-4 py-3 border-t border-solid border-secondary hover:text-active hover:bg-[#e9ecef] transition-200-ease-in-out">
-              Logout
+            <li
+              onClick={() => navigator("/")}
+              className="px-4 py-3 border-t border-solid border-secondary hover:text-active hover:bg-[#e9ecef] transition-200-ease-in-out"
+            >
+              Đăng xuất
             </li>
           </ul>
         </div>

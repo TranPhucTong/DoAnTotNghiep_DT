@@ -49,13 +49,13 @@ const Header = () => {
         <nav>
           <ul className="flex space-x-4">
             <li>
-              <a href="#" className="hover:text-gray-400">
-                Home
+              <a href="/" className="hover:text-gray-400">
+                Trang chủ
               </a>
             </li>
             <li className="relative">
               <a href="#" className="hover:text-gray-400">
-                Products
+                Sản phẩm
               </a>
               <ul className="absolute top-full left-0 bg-gray-900 text-white w-48 py-2 mt-2 rounded-lg shadow-lg hidden">
                 <li>
@@ -77,12 +77,12 @@ const Header = () => {
             </li>
             <li>
               <a href="#" className="hover:text-gray-400">
-                About Us
+                Về chúng tôi
               </a>
             </li>
             <li>
               <a href="#" className="hover:text-gray-400">
-                Contact Us
+                Liên hệ
               </a>
             </li>
           </ul>
@@ -98,7 +98,7 @@ const Header = () => {
             onClick={findEmployeeHandle}
             className="bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded-r-lg"
           >
-            Search
+            Tìm kiếm
           </button>
         </div>
         {!isLogin ? (
