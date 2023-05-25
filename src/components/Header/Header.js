@@ -125,7 +125,7 @@ const Header = () => {
             theme="light"
             content={<Popover />}
           >
-            <p>{customer.name}</p>
+            <p>{customer.name ? customer.name : "Customer"}</p>
           </Tippy>
         )}
       </div>

@@ -24,6 +24,7 @@ const configRoutes = {
   profileCustomer: "/profile",
   adminListOrder: "/admin/list-order",
   contract: "/contract",
+  statement: "contract/:id",
 };
 
 export default configRoutes;

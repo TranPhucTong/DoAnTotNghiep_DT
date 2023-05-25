@@ -81,8 +81,8 @@ export const FreelancerCard = ({ freelancer }) => {
         <div className="w-full h-[200px] mb-5">
           <img
             src={
-              freelancer.background
-                ? freelancer.background
+              freelancer.spotlight[0]
+                ? freelancer.spotlight[0]
                 : "https://cdn.dribbble.com/users/1797155/screenshots/5018207/malware-attack.gif"
             }
             className="rounded-lg w-full h-full object-cover"

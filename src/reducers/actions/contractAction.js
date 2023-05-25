@@ -12,6 +12,17 @@ export const getContracts = createAsyncThunk(
     }
   }
 );
+export const getContractById = createAsyncThunk(
+  "contract/id",
+  async (contractId) => {
+    try {
+      const res = await contractApi.getContractById(contractId);
+      return { data: res.data, status: res.status };
+    } catch (error) {
+      return error.response;
+    }
+  }
+);
 
 export const cancelContract = createAsyncThunk(
   "contract/cancel",

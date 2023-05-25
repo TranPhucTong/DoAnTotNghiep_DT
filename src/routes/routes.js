@@ -25,6 +25,7 @@ import UpdateTeam from "../components/admin/UpdateTeam";
 import ProfileCustomer from "../pages/profile/ProfileCustomer";
 import Contract from "../pages/contract/Contract";
 import ListOrderCustomer from "../components/admin/ListOrderCustomer";
+import Statement from "../pages/statement/Statement";
 const mainRoutes = [
   {
     path: configRoutes.home,
@@ -102,6 +103,10 @@ const mainRoutes = [
     path: configRoutes.hireteamCustomInfo,
     isLayout: true,
     component: HireTeamInfo,
+  },
+  {
+    path: configRoutes.statement,
+    component: Statement,
   },
 
   // {

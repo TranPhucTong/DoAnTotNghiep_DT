@@ -23,7 +23,7 @@ const employees = [
     name: "Emily Dubow",
     position: "Python Developer",
     imageUrl:
-      "http://media.thieunien.vn/uploads/2019/07/1562834819-photo-1-1562817296997400822402.jpg",
+      "https://assets.toptal.io/images?url=https://bs-uploads.toptal.io/blackfish-uploads/talent/profile/picture_file/picture/1052449/huge_0ab6ee57e62bb109541df04f8d5daa83-7c75eeb11b5435dc03b5db9eff35f589.jpg&width=425",
   },
   {
     id: 4,

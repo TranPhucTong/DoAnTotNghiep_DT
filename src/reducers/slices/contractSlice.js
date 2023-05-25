@@ -1,5 +1,9 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { cancelContract, getContracts } from "../actions/contractAction";
+import {
+  cancelContract,
+  getContractById,
+  getContracts,
+} from "../actions/contractAction";
 
 const initialState = {
   listContract: [],
@@ -38,6 +42,10 @@ const contractSlice = createSlice({
       if (!action.payload.data) return;
       state.listContract = action.payload.data;
       state.listFilterContract = null;
+    },
+    [getContractById.fulfilled]: (state, action) => {
+      if (!action.payload.data) return;
+      state.selectContract = action.payload.data;
     },
     [cancelContract.fulfilled]: (state, action) => {
       const { contractId, reason } = action.payload.data;
