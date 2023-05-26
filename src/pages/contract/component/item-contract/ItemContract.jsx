@@ -25,7 +25,7 @@ const TypeExpiry = {
   EMERGENCY: "red",
 };
 
-const ItemContract = ({ item, onOpen, onOpenReview }) => {
+const ItemContract = ({ item, onOpen, onOpenReview, onOpenMaintain }) => {
   const {
     employee,
     nameProject,
@@ -33,8 +33,8 @@ const ItemContract = ({ item, onOpen, onOpenReview }) => {
     endDate,
     budget,
     description,
-    createdDate,
     status,
+    maintains,
     _id,
   } = item;
   const navigate = useNavigate();
@@ -42,6 +42,8 @@ const ItemContract = ({ item, onOpen, onOpenReview }) => {
   const changeActiveHandle = () => setActive(!active);
   const dispatch = useDispatch();
   const statusRender = statusContent(status);
+  //Check haven’t maintain in pending
+  const isMaintainPending = maintains.some( (item) => item.status === "pending");
   const cancelHandle = () => {
     onOpen(true);
     dispatch(setSelectContract(item));
@@ -147,6 +149,19 @@ const ItemContract = ({ item, onOpen, onOpenReview }) => {
                 className="max-w-[200px] bg-blue-500 hover:bg-blue-700 text-white font-normal py-2 px-4 rounded"
               >
                 Hủy
+              </button>
+            )}
+            {status === "progress" && !isMaintainPending &&(
+              <button
+                onClick={() =>
+                  onOpenMaintain({
+                    isOpen: true,
+                    contract: item,
+                  })
+                }
+                className="max-w-[200px] bg-blue-500 hover:bg-blue-700 text-white font-normal py-2 px-4 rounded"
+              >
+                Gia hạn
               </button>
             )}
             {status === "done" && !item.isRating && (

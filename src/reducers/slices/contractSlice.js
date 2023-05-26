@@ -4,6 +4,7 @@ import {
   getContractById,
   getContracts,
 } from "../actions/contractAction";
+import { createMaintain } from "../actions/maintainAction";
 
 const initialState = {
   listContract: [],
@@ -54,6 +55,13 @@ const contractSlice = createSlice({
       );
       state.listContract[index].status = "cancel";
       state.listContract[index].reason = reason;
+    },
+    [createMaintain.fulfilled]: (state, action) => {
+      const { contract } = action.payload.data;
+      const index = state.listContract.findIndex(
+        (item) => item._id === contract
+      );
+      state.listContract[index].maintains.push(action.payload.data);
     },
   },
 });
