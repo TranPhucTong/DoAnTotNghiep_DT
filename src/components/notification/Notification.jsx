@@ -2,8 +2,7 @@ import React from "react";
 import ListNotification from "./list-notification/ListNotification";
 import { typeNotification } from "../../common/typeNotification";
 import "./notification.scss";
-import { useSelector } from "react-redux";
-import { notifications } from "../../reducers/slices/customerSlice";
+
 const DATA = [
   {
     id: 1,
@@ -37,8 +36,7 @@ const DATA = [
     type: typeNotification.RATING,
   },
 ];
-const Notification = () => {
-  const listNotification = useSelector(notifications);
+const Notification = ({listNotification}) => {
   return (
     <div
       id="journal-scroll"

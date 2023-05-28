@@ -12,3 +12,15 @@ export const seenNotification = createAsyncThunk(
     }
   }
 );
+
+export const getNotificationsOfAdmin = createAsyncThunk(
+  "notifications",
+  async () => {
+    try {
+      const res = await notificationApi.getNotificationsOfAdmin();
+      return { data: res.data, status: res.status };
+    } catch (error) {
+      return error.response;
+    }
+  }
+);

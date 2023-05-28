@@ -10,6 +10,7 @@ import "tippy.js/themes/light.css";
 import { useDispatch, useSelector } from "react-redux";
 import {
   isLoggedIn,
+  notifications,
   selectCustomer,
   setLogout,
   totalNotificationNotSeen,
@@ -24,14 +25,12 @@ import { faBell } from "@fortawesome/free-solid-svg-icons";
 const Header = () => {
   const isLogin = useSelector(isLoggedIn);
   const customer = useSelector(selectCustomer);
-
-  if (!customer)
-    console.log("🚀 ~ file: Header.js:27 ~ Header ~ customer:", customer);
+  let listNotification = [];
   let totalNotification = 0;
-
-  customer
-    ? (totalNotification = customer.totalNotificationNotSeen)
-    : (totalNotification = 0);
+  if (customer) {
+    totalNotification = customer.totalNotificationNotSeen;
+    listNotification = customer.notifications;
+  }
   const searchRef = useRef(null);
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -148,7 +147,7 @@ const Header = () => {
               trigger="mouseenter focus"
               placement="left-end"
               theme="light"
-              content={<Notification />}
+              content={<Notification listNotification={listNotification} />}
             >
               <div className="relative">
                 <FontAwesomeIcon

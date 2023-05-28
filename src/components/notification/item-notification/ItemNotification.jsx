@@ -11,11 +11,17 @@ import { typeNotification } from "../../../common/typeNotification";
 import formatBirthDate from "../../../utils/convertDate";
 import { useDispatch } from "react-redux";
 import { seenNotification } from "../../../reducers/actions/notificationAction";
-const renderNotificationHandle = (type, sender) => {
+const renderNotificationHandle = (type, sender,isAdminReceiver) => {
   switch (type) {
     case typeNotification.CONTRACT:
+      if(isAdminReceiver){
+        return { icon: faFile, title: `Bạn có yêu cầu tạo hợp đồng` };
+      }
       return { icon: faFile, title: `${sender.name} gửi yêu cầu tạo hợp đồng` };
     case typeNotification.MAINTAIN:
+      if(isAdminReceiver){
+        return { icon: faFile, title: `Bạn có yêu cầu gia hạn` };
+      }
       return { icon: faRepeat, title: `${sender.name} gửi yêu cầu gia hạn` };
     case typeNotification.RATING:
       return { icon: faStar, title: `${sender.name} đã đánh giá` };
@@ -31,11 +37,12 @@ const renderNotificationHandle = (type, sender) => {
 };
 
 const ItemNotification = ({ item }) => {
-  const { isSeen, content, createdAt, type, customer } = item;
-  const noti = renderNotificationHandle(type, customer);
+  const { isSeen, content, createdAt, type, employee,isAdminReceiver } = item;
+  const noti =isAdminReceiver?renderNotificationHandle(type, employee, isAdminReceiver): renderNotificationHandle(type, employee)
   const { icon, title } = noti;
   const dispatch = useDispatch();
   const seenNotificationHandle = () => {
+    if(isSeen) return;
     dispatch(seenNotification(item._id));
   };
   return (

@@ -87,7 +87,7 @@ const customerSlice = createSlice({
 
 export const selectCustomer = (state) =>
   state.customer.customer ? state.customer.customer : null;
-export const notifications = (state) => state.customer.customer.notifications;
+
 export const isLoggedIn = (state) => state.customer.isLoggedIn;
 export const { setLogin, setLogout, changeCustomer } = customerSlice.actions;
 export default customerSlice;
