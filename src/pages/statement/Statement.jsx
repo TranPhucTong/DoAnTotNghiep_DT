@@ -8,38 +8,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { selectContract } from "../../reducers/slices/contractSlice";
 import statusContent from "../../utils/statusContent";
 import { getContractById } from "../../reducers/actions/contractAction";
-const DATA = [
-  {
-    id: 1,
-    status: "pending",
-    time: "25/05/2023",
-  },
-  {
-    id: 2,
-    status: "accepted",
-    time: "25/05/2023",
-  },
-  {
-    id: 3,
-    status: "progress",
-    time: "25/05/2023",
-  },
-  {
-    id: 4,
-    status: "maintain",
-    time: "25/05/2023",
-  },
-  {
-    id: 5,
-    status: "done",
-    time: "25/05/2023",
-  },
-  {
-    id: 6,
-    status: "cancel",
-    time: "25/05/2023",
-  },
-];
+
 const Statement = () => {
   const contract = useSelector(selectContract);
   const {statements} = contract

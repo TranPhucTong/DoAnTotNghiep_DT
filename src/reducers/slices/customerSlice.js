@@ -1,6 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { login, register, registerInfo } from "../actions/authAction";
 import { getCustomer } from "../actions/customerAction";
+import { seenNotification } from "../actions/notificationAction";
 let customer = {
   phone: "",
   name: "",
@@ -45,19 +46,19 @@ const customerSlice = createSlice({
       const { accessToken, customer } = action.payload.data;
       state.isLoggedIn = true;
       state.customer = customer;
+      state.customer.totalNotificationNotSeen = customer.notifications.filter(
+        (notification) => !notification.isSeen
+      ).length;
       localStorage.setItem("access_token", accessToken);
     },
-    [login.fulfilled]: (state, action) => {
-      if (!action.payload.data.customer) return;
-      const { accessToken, customer } = action.payload.data;
-      state.isLoggedIn = true;
-      state.customer = customer;
-      localStorage.setItem("access_token", accessToken);
-    },
+
     [getCustomer.fulfilled]: (state, action) => {
       if (!action.payload.data) return;
       const customer = action.payload.data;
       state.customer = customer;
+      state.customer.totalNotificationNotSeen = customer.notifications.filter(
+        (notification) => !notification.isSeen
+      ).length;
       state.isLoggedIn = true;
     },
     [registerInfo.fulfilled]: (state, action) => {
@@ -72,12 +73,21 @@ const customerSlice = createSlice({
       const { customer } = action.payload.data;
       state.customer = customer;
     },
+    [seenNotification.fulfilled]: (state, action) => {
+      if (!action.payload.data) return;
+      const { notificationId } = action.payload.data;
+      const notification = state.customer.notifications.findIndex(
+        (item) => item._id === notificationId
+      );
+      state.customer.notifications[notification].isSeen = true;
+      state.customer.totalNotificationNotSeen -= 1;
+    },
   },
 });
 
 export const selectCustomer = (state) =>
   state.customer.customer ? state.customer.customer : null;
-
+export const notifications = (state) => state.customer.customer.notifications;
 export const isLoggedIn = (state) => state.customer.isLoggedIn;
 export const { setLogin, setLogout, changeCustomer } = customerSlice.actions;
 export default customerSlice;
