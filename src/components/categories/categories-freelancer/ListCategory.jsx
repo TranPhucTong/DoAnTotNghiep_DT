@@ -40,7 +40,7 @@ const categories = [
   },
 ];
 
-const ListCategory = ({ onChangeCategory }) => {
+const ListCategory = ({ onChangeCategory,categoryActive }) => {
   return (
     <div className=" py-2 flex-col overflow-hidden">
       {categories.map((category) => (
@@ -48,6 +48,7 @@ const ListCategory = ({ onChangeCategory }) => {
           key={category.id}
           category={category}
           onChangeCategory={onChangeCategory}
+          categoryActive = {categoryActive}
         />
       ))}
     </div>

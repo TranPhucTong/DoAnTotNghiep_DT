@@ -70,7 +70,7 @@ const FreelancerPage = () => {
           <h3 className="text-left font-bold text-3xl text-primary mb-1">
             Danh mục
           </h3>
-          <ListCategory onChangeCategory={changeCategoryHandle} />
+          <ListCategory onChangeCategory={changeCategoryHandle} categoryActive = {category}/>
         </div>
         <div className="mt-10">
           <h3 className="text-left font-bold text-3xl text-primary mb-1">
