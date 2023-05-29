@@ -1,10 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
-import employeeApi from "../../api/employeeApi";
 import employeeApii from "../../api/employeeApii";
-import { useLocation } from "react-router-dom";
 import { toast } from "react-toastify";
 
 const CreatEmployee = (props) => {
@@ -55,9 +51,9 @@ const CreatEmployee = (props) => {
       console.log(response);
       console.log(name);
       navigate("/admin/list-employees");
-      toast.success("Tạo nhân viên thành công")
+      toast.success("Tạo nhân viên thành công");
     } catch (error) {
-      toast.error("Trùng số điện thoại. Vui lòng nhập lại!!!")
+      toast.error("Trùng số điện thoại. Vui lòng nhập lại!!!");
       console.log(error);
     }
   };

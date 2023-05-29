@@ -1,28 +1,27 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import logo from "../../../images/logoCompany.png";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
-  faRightLong,
-  faLeftLong,
-  faArrowLeft,
-  faCheckCircle,
-  faCode,
-  faUserTie,
   faChevronDown,
   faBars,
   faBell,
   faMaximize,
-  faSearch,
-  faList,
-  faBorderAll,
-  faPlus,
-  faPenToSquare,
-  faTrash,
 } from "@fortawesome/free-solid-svg-icons";
 import { useNavigate } from "react-router-dom";
 import avtAdmin from "../../../assests/imgs/avtAdmin.jpg";
+import Tippy from "@tippyjs/react";
+import Notification from "../../../components/notification/Notification";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  notifications,
+  totalNotificationNotSeen,
+} from "../../../reducers/slices/adminSlice";
+import { getNotificationsOfAdmin } from "../../../reducers/actions/notificationAction";
 
 const HeaderAdmin = (props) => {
+  const listNotification = useSelector(notifications);
+  const totalNotification = useSelector(totalNotificationNotSeen);
+  const dispatch = useDispatch();
   function handleClick() {
     props.onButtonClick();
   }
@@ -32,6 +31,9 @@ const HeaderAdmin = (props) => {
     setBars(!bars);
   };
   const navigator = useNavigate();
+  useEffect(() => {
+    dispatch(getNotificationsOfAdmin());
+  });
   return (
     <div className="fixed top-0 bg-white left-0 right-0 z-[999] flex h-header items-center justify-between bg-light">
       <div className="header-logo order-2 lg:order-1 flex-1 lg:flex-none px-0 lg:px-5 flex w-auto lg:w-sidebar justify-start transition-all duration-200 ease-in-out">
@@ -57,9 +59,24 @@ const HeaderAdmin = (props) => {
         </div>
       </div>
       <div className="h-full flex items-center px-6 order-3 relative select-none">
-        <button className="btn bg-gray-200 py-2 px-3 text-gray-500 icon secondary rounded-full border-transparent mr-2">
-          <FontAwesomeIcon icon={faBell} />
-        </button>
+        <Tippy
+          animateFill={false}
+          interactive={true}
+          hideOnClick={false}
+          trigger="mouseenter focus"
+          placement="left-end"
+          theme="light"
+          content={<Notification listNotification={listNotification} />}
+        >
+          <div className="relative btn bg-gray-200 py-2 px-3 text-gray-500 icon secondary rounded-full border-transparent mr-2">
+            <FontAwesomeIcon icon={faBell} />
+            {totalNotification === 0 ? null : (
+              <div className="absolute -top-[5px] -right-[5px] text-[10px] font-bold h-4 w-4 bg-red-500 text-white rounded-full flex justify-center items-center">
+                {totalNotification}
+              </div>
+            )}
+          </div>
+        </Tippy>
         <button className="btn bg-gray-200 py-2 px-3 text-gray-500 icon secondary rounded-full border-transparent mr-4 hidden lg:block">
           <FontAwesomeIcon icon={faMaximize} />
         </button>

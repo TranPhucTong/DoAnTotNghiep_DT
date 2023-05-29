@@ -9,7 +9,7 @@ import Modal from "../../../../components/modal/Modal";
 import noneContract from "../../../../assests/imgs/none-contract.png";
 import { cancelContract } from "../../../../reducers/actions/contractAction";
 
-const ListContract = ({ onOpenReview }) => {
+const ListContract = ({ onOpenReview,onOpenMaintain }) => {
   let listContract = useSelector(listContractStore);
   const listFilterContract = useSelector(listFilterContractStore);
   if (listFilterContract) {
@@ -29,6 +29,7 @@ const ListContract = ({ onOpenReview }) => {
         listContract.map((item) => (
           <ItemContract
             onOpen={openModalHandle}
+            onOpenMaintain = {onOpenMaintain}
             onOpenReview={onOpenReview}
             item={item}
             key={item._id}

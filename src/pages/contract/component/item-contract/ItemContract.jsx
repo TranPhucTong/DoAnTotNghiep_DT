@@ -16,25 +16,16 @@ import formatBirthDate from "../../../../utils/convertDate";
 import Modal from "../../../../components/modal/Modal";
 import { useDispatch } from "react-redux";
 import { setSelectContract } from "../../../../reducers/slices/contractSlice";
+import { Link, useNavigate } from "react-router-dom";
+import configRoutes from "../../../../config/configRouter";
+import statusContent from "../../../../utils/statusContent";
 const TypeExpiry = {
   NEW: "green",
   REGULAR: "yellow",
   EMERGENCY: "red",
 };
 
-const statusContent = (status) => {
-  switch (status) {
-    case "pending":
-      return "Chờ xác nhận";
-    case "progress":
-      return "Đang trong tiến độ";
-    case "done":
-      return "Hoàn thành";
-    case "cancel":
-      return "Đã hủy";
-  }
-};
-const ItemContract = ({ item, onOpen, onOpenReview }) => {
+const ItemContract = ({ item, onOpen, onOpenReview, onOpenMaintain }) => {
   const {
     employee,
     nameProject,
@@ -42,19 +33,26 @@ const ItemContract = ({ item, onOpen, onOpenReview }) => {
     endDate,
     budget,
     description,
-    createdDate,
     status,
+    maintains,
+    _id,
   } = item;
-
+  const navigate = useNavigate();
   const [active, setActive] = useState(false);
   const changeActiveHandle = () => setActive(!active);
   const dispatch = useDispatch();
   const statusRender = statusContent(status);
+  //Check haven’t maintain in pending
+  const isMaintainPending = maintains.some( (item) => item.status === "pending");
   const cancelHandle = () => {
     onOpen(true);
     dispatch(setSelectContract(item));
   };
 
+  const changeToStatementHandle = () => {
+    navigate(`${configRoutes.contract}/${_id}`);
+    dispatch(setSelectContract(item));
+  };
   return (
     <Card active={active}>
       <div
@@ -89,69 +87,99 @@ const ItemContract = ({ item, onOpen, onOpenReview }) => {
         </div>
       </div>
       {active ? (
-        <>
-          <div className="text-left">
-            <h3 className={"my-5 font-bold text-[#4069E5] text-lg"}>
-              {nameProject}
-            </h3>
-            <div className="flex items-center text-neutral-900 my-3">
-              <FontAwesomeIcon
-                icon={faDollarSign}
-                className=" mr-2 text-neutral-600"
-              />
-              <p className="font-normal text-sm">{budget}$</p>
+        <div className="flex">
+          <div className="flex-1">
+            <div className="text-left">
+              <h3 className={"my-5 font-bold text-[#4069E5] text-lg"}>
+                {nameProject}
+              </h3>
+              <div className="flex items-center text-neutral-900 my-3">
+                <FontAwesomeIcon
+                  icon={faDollarSign}
+                  className=" mr-2 text-neutral-600"
+                />
+                <p className="font-normal text-sm">{budget}$</p>
+              </div>
+              <div className="flex items-center text-neutral-900 my-3">
+                <FontAwesomeIcon
+                  icon={faCalendar}
+                  className=" mr-2 text-neutral-600"
+                />
+                <p className="font-normal text-sm">
+                  {formatBirthDate(startDate)} - {formatBirthDate(endDate)}
+                </p>
+              </div>
+              <div className="flex text-neutral-900 my-3">
+                <FontAwesomeIcon
+                  icon={faFileLines}
+                  className=" mr-2 text-neutral-600"
+                />
+                <p className="font-normal text-sm h-[100px] w-full">
+                  {description}
+                </p>
+              </div>
+              <div className=" text-neutral-900 my-3">
+                {status === "cancel" && (
+                  <>
+                    <p className="mr-2 w-20 text-neutral-600">Lí do:</p>
+                    <p className="mt-2 font-normal text-sm h-[100px] w-full">
+                      {item.reason}
+                    </p>
+                  </>
+                )}
+              </div>
             </div>
-            <div className="flex items-center text-neutral-900 my-3">
-              <FontAwesomeIcon
-                icon={faCalendar}
-                className=" mr-2 text-neutral-600"
-              />
-              <p className="font-normal text-sm">
-                {formatBirthDate(startDate)} - {formatBirthDate(endDate)}
+            <div className="flex justify-between items-center ">
+              <p className="text-left font-bold text-green-500">
+                {statusRender}
               </p>
-            </div>
-            <div className="flex text-neutral-900 my-3">
-              <FontAwesomeIcon
-                icon={faFileLines}
-                className=" mr-2 text-neutral-600"
-              />
-              <p className="font-normal text-sm h-[100px] w-full">
-                {description}
-              </p>
-            </div>
-            <div className=" text-neutral-900 my-3">
-              {status === "cancel" && (
-                <>
-                  <p className="mr-2 w-20 text-neutral-600">Lí do:</p>
-                  <p className="mt-2 font-normal text-sm h-[100px] w-full">
-                    {item.reason}
-                  </p>
-                </>
-              )}
             </div>
           </div>
-          <div className="flex justify-between items-center ">
-            <p className="text-left font-bold text-green-500">{statusRender}</p>
+          <div className="flex-1 flex justify-between pt-5 items-end flex-col ">
+            <p
+              onClick={changeToStatementHandle}
+              className="underline text-right text-slate-700 hover:text-primary transition-all"
+            >
+              Lịch sử giao dịch
+            </p>
+
             {status === "pending" && (
               <button
                 onClick={cancelHandle}
-                className="bg-blue-500 hover:bg-blue-700 text-white font-normal py-2 px-4 rounded"
+                className="max-w-[200px] bg-blue-500 hover:bg-blue-700 text-white font-normal py-2 px-4 rounded"
               >
                 Hủy
+              </button>
+            )}
+            {status === "progress" && !isMaintainPending &&(
+              <button
+                onClick={() =>
+                  onOpenMaintain({
+                    isOpen: true,
+                    contract: item,
+                  })
+                }
+                className="max-w-[200px] bg-blue-500 hover:bg-blue-700 text-white font-normal py-2 px-4 rounded"
+              >
+                Gia hạn
               </button>
             )}
             {status === "done" && !item.isRating && (
               <button
                 onClick={() =>
-                  onOpenReview({ isOpen: true, employee: employee._id, contract: item })
+                  onOpenReview({
+                    isOpen: true,
+                    employee: employee._id,
+                    contract: item,
+                  })
                 }
-                className="bg-blue-500 hover:bg-blue-700 text-white font-normal py-2 px-4 rounded"
+                className="max-w-[200px] bg-blue-500 hover:bg-blue-700 text-white font-normal py-2 px-4 rounded"
               >
                 Đánh giá
               </button>
             )}
           </div>
-        </>
+        </div>
       ) : (
         <></>
       )}

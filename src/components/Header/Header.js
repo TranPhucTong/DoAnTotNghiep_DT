@@ -6,19 +6,31 @@ import "tippy.js/dist/tippy.css";
 import "tippy.js/dist/backdrop.css";
 import "tippy.js/animations/shift-away.css";
 import "tippy.js/themes/light.css";
+
 import { useDispatch, useSelector } from "react-redux";
 import {
   isLoggedIn,
+  notifications,
   selectCustomer,
   setLogout,
+  totalNotificationNotSeen,
 } from "../../reducers/slices/customerSlice";
 import { Link } from "react-router-dom";
 import configRoutes from "../../config/configRouter";
 import { getFreelancerByPage } from "../../reducers/actions/employeeAction";
 import { changeTypeContract } from "../../reducers/slices/contractSlice";
+import Notification from "../../components/notification/Notification";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faBell } from "@fortawesome/free-solid-svg-icons";
 const Header = () => {
   const isLogin = useSelector(isLoggedIn);
   const customer = useSelector(selectCustomer);
+  let listNotification = [];
+  let totalNotification = 0;
+  if (customer) {
+    totalNotification = customer.totalNotificationNotSeen;
+    listNotification = customer.notifications;
+  }
   const searchRef = useRef(null);
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -117,16 +129,39 @@ const Header = () => {
             </button>
           </div>
         ) : (
-          <Tippy
-            interactive={true}
-            hideOnClick={false}
-            trigger="mouseenter focus"
-            animation="shift-away"
-            theme="light"
-            content={<Popover />}
-          >
-            <p>{customer.name}</p>
-          </Tippy>
+          <>
+            <Tippy
+              interactive={true}
+              hideOnClick={false}
+              trigger="mouseenter focus"
+              animation="shift-away"
+              theme="light"
+              content={<Popover />}
+            >
+              <p>{customer.name ? customer.name : "Customer"}</p>
+            </Tippy>
+            <Tippy
+              animateFill={false}
+              interactive={true}
+              hideOnClick={false}
+              trigger="mouseenter focus"
+              placement="left-end"
+              theme="light"
+              content={<Notification listNotification={listNotification} />}
+            >
+              <div className="relative">
+                <FontAwesomeIcon
+                  className="text-white text-xl hover:animate-[wiggle_1s_ease-in-out_infinite] cursor-pointer transition-all"
+                  icon={faBell}
+                />
+                {totalNotification === 0 ? null : (
+                  <div className="absolute -top-[5px] -right-[5px] text-[10px] font-bold h-4 w-4 bg-red-500 text-white rounded-full flex justify-center items-center">
+                    {totalNotification}
+                  </div>
+                )}
+              </div>
+            </Tippy>
+          </>
         )}
       </div>
     </div>

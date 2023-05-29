@@ -7,6 +7,7 @@ import updateEmployeeSlice from "../reducers/slices/updateEmployeeSlice";
 import updateTeamSlice from "../reducers/slices/updateTeamSlice";
 import contractSlice from "../reducers/slices/contractSlice";
 import orderSlice from "../reducers/slices/orderSlice";
+import adminSlice from "../reducers/slices/adminSlice";
 const store = configureStore({
   reducer: {
     customer: customerSlice.reducer,
@@ -17,6 +18,7 @@ const store = configureStore({
     hireTeam: hireTeamSlice.reducer,
     updateEmployee: updateEmployeeSlice.reducer,
     updateTeam: updateTeamSlice.reducer,
+    admin: adminSlice.reducer,
   },
 });
 export default store;

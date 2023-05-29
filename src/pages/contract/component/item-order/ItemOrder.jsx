@@ -23,24 +23,14 @@ import { setSelectContract } from "../../../../reducers/slices/contractSlice";
 import { useNavigate } from "react-router-dom";
 import mainTainOrderApi from "../../../../api/mainTainOrderApi";
 import { toast } from "react-toastify";
+import statusContent from "../../../../utils/statusContent";
 const TypeExpiry = {
   NEW: "green",
   REGULAR: "yellow",
   EMERGENCY: "red",
 };
 
-const statusContent = (status) => {
-  switch (status) {
-    case "pending":
-      return "Chờ xác nhận";
-    case "progress":
-      return "Đang trong tiến độ";
-    case "done":
-      return "Hoàn thành";
-    case "cancel":
-      return "Đã hủy";
-  }
-};
+
 const ItemOrder = ({ item, onOpen }) => {
   const {
     employee,

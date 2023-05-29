@@ -26,6 +26,7 @@ import ProfileCustomer from "../pages/profile/ProfileCustomer";
 import Contract from "../pages/contract/Contract";
 import ListOrderCustomer from "../components/admin/ListOrderCustomer";
 import HistoryOrder from "../components/admin/HistoryOrder";
+import Statement from "../pages/statement/Statement";
 const mainRoutes = [
   {
     path: configRoutes.home,
@@ -108,6 +109,11 @@ const mainRoutes = [
     path: configRoutes.adminHistoryOrder,
     component: HistoryOrder,
   },
+  {
+    path: configRoutes.statement,
+    component: Statement,
+  },
+
   // {
   //   path: configRoutes.homeAdmin,
   //   isLayout: true,
