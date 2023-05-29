@@ -42,7 +42,7 @@ const categories = [
 
 const ListCategory = ({ onChangeCategory }) => {
   return (
-    <div className="flex justify-around items-center py-10">
+    <div className=" py-2 flex-col overflow-hidden">
       {categories.map((category) => (
         <ItemCategory
           key={category.id}
