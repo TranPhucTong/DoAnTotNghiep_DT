@@ -21,9 +21,11 @@ const configRoutes = {
   adminListTeam: "/admin/list-team",
   adminUpdateEmployees: "/admin/update-employees",
   adminUpdateTeam: "/admin/update-team",
+  adminHistoryOrder : "/history-order",
   profileCustomer: "/profile",
   adminListOrder: "/admin/list-order",
   contract: "/contract",
+
 };
 
 export default configRoutes;

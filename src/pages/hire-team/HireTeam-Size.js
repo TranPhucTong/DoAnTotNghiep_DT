@@ -11,10 +11,10 @@ import { useDispatch } from "react-redux";
 const HireTeamSize = () => {
   const [selectedAnswer, setSelectedAnswer] = useState(null);
   const answers = [
-    { num: 10, text: "10 nhân sự" },
-    { num: 20, text: "20 nhân sự" },
-    { num: 30, text: "30 nhân sự" },
-    { num: 50, text: "50 nhân sự" },
+    { num: 10, text: "2 - 10 nhân sự" },
+    { num: 20, text: "10 - 20 nhân sự" },
+    { num: 30, text: "20 - 30 nhân sự" },
+
   ];
   const navigate = useNavigate();
   const dispatch = useDispatch();

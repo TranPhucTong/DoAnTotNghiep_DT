@@ -18,6 +18,7 @@ const ListOrder = () => {
   const cancelHandle = (orderId,reason)=>{
      dispatch(cancelOrder({ orderId, reason }));
   }
+  console.log(listOrder);
 
   return (
     <div>

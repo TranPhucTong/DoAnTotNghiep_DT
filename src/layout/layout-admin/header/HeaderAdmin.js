@@ -20,7 +20,7 @@ import {
   faTrash,
 } from "@fortawesome/free-solid-svg-icons";
 import { useNavigate } from "react-router-dom";
-import avtAdmin from "../../../assests/imgs/avtAdmin.jpg"
+import avtAdmin from "../../../assests/imgs/avtAdmin.jpg";
 
 const HeaderAdmin = (props) => {
   function handleClick() {
@@ -36,11 +36,15 @@ const HeaderAdmin = (props) => {
     <div className="fixed top-0 bg-white left-0 right-0 z-[999] flex h-header items-center justify-between bg-light">
       <div className="header-logo order-2 lg:order-1 flex-1 lg:flex-none px-0 lg:px-5 flex w-auto lg:w-sidebar justify-start transition-all duration-200 ease-in-out">
         <img
-          className="header-full-logo w-[120px] h-auto object-cover opacity-100 block"
+          onClick={() => navigator("/admin/home")}
+          className="header-full-logo w-[120px] h-auto object-cover opacity-100 block cursor-pointer"
           src={logo}
           alt=""
         />
-        <div className="flex justify-center items-center">
+        <div
+          onClick={() => navigator("/admin/home")}
+          className="flex justify-center items-center cursor-pointer"
+        >
           <h3 className="text-3xl font-semibold">CodeHire</h3>
         </div>
         <div
@@ -65,11 +69,7 @@ const HeaderAdmin = (props) => {
           className="h-full flex items-center cursor-pointer group"
         >
           <div className="w-[40px] h-[40px] rounded-full p-[0.125rem] border-2 border-secondary mr-0 md:mr-2 group-hover:border-primary transition duration-200 ease-in-out">
-            <img
-              className="rounded-full w-full h-full"
-              src={avtAdmin}
-              alt=""
-            />
+            <img className="rounded-full w-full h-full" src={avtAdmin} alt="" />
           </div>
           <div className="mr-2 hidden text-left lg:block">
             <p className="text-dark text-sm font-medium">Tran Phuc Tong</p>

@@ -11,12 +11,10 @@ const HireTeamLength = () => {
   const dispatch = useDispatch();
   const [selectedAnswer, setSelectedAnswer] = useState(null);
   const answers = [
-    "1 tháng",
     "6 tháng",
     "1 năm",
     "2 năm",
     "3 năm",
-    "Trên 3 năm",
   ];
   const navigate = useNavigate();
   const hireTeam = () => {

@@ -16,6 +16,7 @@ const UpdateEmployees = () => {
   const [birthday, setBirthday] = useState(
     new Date(transiData.birthday).toLocaleDateString("en-CA")
   );
+  const [phone , setPhone] = useState(transiData.phone);
 
   // const [position, setPosition] = useState("");
   const [isFormComplete, setIsFormComplete] = useState(false);
@@ -23,12 +24,12 @@ const UpdateEmployees = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (name !== "" && email !== "" && gender !== "" && birthday !== "") {
+    if (name !== "" && email !== "" && gender !== "" && birthday !== "" && phone !== "") {
       setIsFormComplete(true);
     } else {
       setIsFormComplete(false);
     }
-  }, [name, email, gender, birthday]);
+  }, [name, email, gender, birthday, phone]);
 
   const clickUpdateEmployee = async () => {
     const employeeUpdate = {
@@ -37,6 +38,7 @@ const UpdateEmployees = () => {
       gender: gender,
       birthDate: birthday,
       email: email,
+      phone : phone
     };
     try {
       const response = await employeeApii.updateEmployee(employeeUpdate);
@@ -111,6 +113,20 @@ const UpdateEmployees = () => {
               formControlName="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
+            />
+          </div>
+
+          {/* phone */}
+          <div className="h-[2.875rem] relative flex items-center justify-center border border-solid focus-within:border-blue-500 transition-all ease-linear border-gray-200 rounded-lg">
+            <label className="absolute -top-1/4 left-2 px-2 bg-white text-blue-500 text-sm">
+              Số điện thoại
+            </label>
+            <input
+              className="text-sm  w-full border border-none outline-none px-4 py-2"
+              type="text"
+              formControlName="phone"
+              value={phone}
+              onChange={(e) => setPhone(e.target.value)}
             />
           </div>
 

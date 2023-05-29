@@ -8,10 +8,18 @@ import {
   faSpinner,
   faBan,
   faCheck,
+  faCheckCircle,
+  faChevronCircleRight,
+  faBook,
+  faBarsProgress,
+  faFileCircleCheck,
+  faTrashCan,
+  faX,
 } from "@fortawesome/free-solid-svg-icons";
 import teamWorkApi from "../../api/teamWorkApi";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import mainTainOrderApi from "../../api/mainTainOrderApi";
 
 const OrderDetail = ({
   message,
@@ -33,10 +41,43 @@ const OrderDetail = ({
   cancel,
   team,
   done,
+  maintains,
 }) => {
   const [completeSelected, setCompleteSelected] = useState(noSelect);
   const [statusCancel, setStatusCancel] = useState(cancel);
   const [statusDone, setStatusDone] = useState(done);
+  const [showHistory, setShowHistory] = useState(false);
+  const [showInfoMaintain, setShowInfoMaintain] = useState(false);
+  const navigate = useNavigate();
+
+  // function getStatusClass(status) {
+  //   let className = "";
+
+  //   switch (status) {
+  //     case "pending":
+  //       className = "text-blue-500";
+  //       break;
+  //     case "accepted":
+  //       className = "text-yellow-500";
+  //       break;
+  //     case "progress":
+  //       className = "text-green-500";
+  //       break;
+  //     case "done":
+  //       className = "text-purple-500";
+  //       break;
+  //     case "maintain-pending":
+  //       className = "text-red-500";
+  //       break;
+  //     case "maintain-accepted":
+  //       className = "text-orange-500";
+  //       break;
+  //     default:
+  //       className = "";
+  //   }
+
+  //   return className;
+  // }
   return (
     <div className="fixed inset-0 z-[999] flex items-center justify-center">
       <div className="absolute inset-0 bg-gray-950 opacity-50"></div>
@@ -96,6 +137,18 @@ const OrderDetail = ({
                     {totalPersonnel}
                   </span>
                 </p>
+                {maintains.length > 0 && (
+                  <p className="text-lg font-semibold mb-2">
+                    Thông tin gia hạn:
+                    <div
+                      onClick={() => setShowInfoMaintain(true)}
+                      className="font-medium transition-colors duration-200 ease-linear text-blue-500 underline cursor-pointer hover:text-green-500"
+                    >
+                      Xem chi tiết{" "}
+                      <FontAwesomeIcon icon={faChevronCircleRight} />
+                    </div>
+                  </p>
+                )}
               </div>
               <div className="w-[60%] ml-10">
                 <p className="text-lg font-semibold mb-2">
@@ -140,7 +193,9 @@ const OrderDetail = ({
               </div>
             </div>
           ) : statusDone ? (
-            <div className="mt-8 text-green-600 text-xl font-bold">Dự án đã hoàn thành</div>
+            <div className="mt-8 text-green-600 text-xl font-bold">
+              Dự án đã hoàn thành
+            </div>
           ) : (
             <div className="mt-8 w-full flex">
               <span className="font-bold text-xl">Nhóm phụ trách dự án : </span>
@@ -159,6 +214,18 @@ const OrderDetail = ({
             </div>
           )}
         </div>
+        <div
+          onClick={() => {
+            setShowHistory(true);
+          }}
+          className=" father flex pr-3 mb-6 absolute left-6 bottom-2 justify-end cursor-pointer items-center hover:underline hover:text-blue-500 underline-thick"
+        >
+          <p className="mr-2 font-semibold text-lg">Lịch sử giao dịch</p>
+          <FontAwesomeIcon
+            icon={faChevronCircleRight}
+            className="icon text-green-500 text-xl  font-bold cursor-pointer"
+          />
+        </div>
         <button
           className="bg-gray-700 absolute right-6 bottom-4 hover:bg-gray-500 transition-colors duration-150 ease-in-out text-white px-4 py-2 rounded-lg"
           onClick={onClose}
@@ -166,6 +233,227 @@ const OrderDetail = ({
           Đóng
         </button>
       </div>
+      {showHistory && (
+        <div className="fixed inset-0 z-[999] flex items-center justify-center">
+          <div className="absolute inset-0 bg-gray-950 opacity-50"></div>
+          <div className="bg-white w-[1000px] h-[600px] overflow-auto flex flex-col relative z-30 shadow-xl rounded-lg p-6">
+            <div className="flex flex-col items-center">
+              {team.statements.map((sta, index) => (
+                <div
+                  key={index}
+                  // className={`text-lg ${getStatusClass(sta.status)}`}
+                >
+                  <div>
+                    {sta.status === "pending" && (
+                      <div className="flex w-[400px]">
+                        <div className="flex flex-col items-center w-[30%]">
+                          <FontAwesomeIcon
+                            icon={faBook}
+                            className="p-3 rounded-full text-green-500 border-green-500 border-[5px]"
+                          />
+                          <div className="h-16 w-1 bg-green-500"></div>
+                        </div>
+                        <div className="w-[70%]">
+                          <p className="text-lg font-medium text-blue-500">
+                            Đơn thuê đang chờ xác nhận
+                          </p>
+                          <p>
+                            {"Thời gian: "}
+                            {new Date(sta.time).toLocaleDateString("en-US")}
+                          </p>
+                        </div>
+                      </div>
+                    )}
+                    {sta.status === "accepted" && (
+                      <div className="flex w-[400px]">
+                        <div className="flex flex-col items-center w-[30%]">
+                          <FontAwesomeIcon
+                            icon={faCheck}
+                            className="p-3 rounded-full text-green-500 border-green-500 border-[5px]"
+                          />
+                          <div className="h-16 w-1 bg-green-500"></div>
+                        </div>
+                        <div className="w-[70%]">
+                          <p className="text-lg font-medium text-blue-500">
+                            Đơn thuê đã được xác nhận
+                          </p>
+                          <p>
+                            {"Thời gian: "}
+                            {new Date(sta.time).toLocaleDateString("en-US")}
+                          </p>
+                        </div>
+                      </div>
+                    )}
+                    {sta.status === "progress" && (
+                      <div className="flex w-[400px]">
+                        <div className="flex flex-col items-center w-[30%]">
+                          <FontAwesomeIcon
+                            icon={faBarsProgress}
+                            className="p-3 rounded-full text-green-500 border-green-500 border-[5px]"
+                          />
+                          <div className="h-16 w-1 bg-green-500"></div>
+                        </div>
+                        <div className="w-[70%]">
+                          <p className="text-lg font-medium text-blue-500">
+                            Đơn thuê đang trong tiến độ
+                          </p>
+                          <p>
+                            {"Thời gian: "}
+                            {new Date(sta.time).toLocaleDateString("en-US")}
+                          </p>
+                        </div>
+                      </div>
+                    )}
+                    {sta.status === "maintain-pending" && (
+                      <div className="flex w-[400px]">
+                        <div className="flex flex-col items-center w-[30%]">
+                          <FontAwesomeIcon
+                            icon={faSpinner}
+                            className="p-3 rounded-full text-green-500 border-green-500 border-[5px]"
+                          />
+                          <div className="h-16 w-1 bg-green-500"></div>
+                        </div>
+                        <div className="w-[70%]">
+                          <p className="text-lg font-medium text-blue-500">
+                            Đơn thuê đang chờ xác nhận gia hạn
+                          </p>
+                          <p>
+                            {"Thời gian: "}
+                            {new Date(sta.time).toLocaleDateString("en-US")}
+                          </p>
+                        </div>
+                      </div>
+                    )}
+                    {sta.status === "maintain-accepted" && (
+                      <div className="flex w-[400px]">
+                        <div className="flex flex-col items-center w-[30%]">
+                          <FontAwesomeIcon
+                            icon={faFileCircleCheck}
+                            className="p-3 rounded-full text-green-500 border-green-500 border-[5px]"
+                          />
+                          <div className="h-16 w-1 bg-green-500"></div>
+                        </div>
+                        <div className="w-[70%]">
+                          <p className="text-lg font-medium text-blue-500">
+                            Đơn thuê xác nhận gia hạn thành công
+                          </p>
+                          <p>
+                            {"Thời gian: "}
+                            {new Date(sta.time).toLocaleDateString("en-US")}
+                          </p>
+                        </div>
+                      </div>
+                    )}
+                    {sta.status === "maintain-rejected" && (
+                      <div className="flex w-[400px]">
+                        <div className="flex flex-col items-center w-[30%]">
+                          <FontAwesomeIcon
+                            icon={faX}
+                            className="p-3 rounded-full text-green-500 border-green-500 border-[5px]"
+                          />
+                          <div className="h-16 w-1 bg-green-500"></div>
+                        </div>
+                        <div className="w-[70%]">
+                          <p className="text-lg font-medium text-blue-500">
+                            Đơn thuê đã bị hủy gia hạn
+                          </p>
+                          <p>
+                            {"Thời gian: "}
+                            {new Date(sta.time).toLocaleDateString("en-US")}
+                          </p>
+                        </div>
+                      </div>
+                    )}
+                    {sta.status === "done" && (
+                      <div className="flex w-[400px]">
+                        <div className="flex flex-col items-center w-[30%]">
+                          <FontAwesomeIcon
+                            icon={faCheckCircle}
+                            className="p-3 rounded-full text-green-500 border-green-500 border-[5px]"
+                          />
+                        </div>
+                        <div className="w-[70%]">
+                          <p className="text-lg font-medium text-blue-500">
+                            Hoàn thành
+                          </p>
+                          <p>
+                            {"Thời gian: "}
+                            {new Date(sta.time).toLocaleDateString("en-US")}
+                          </p>
+                        </div>
+                      </div>
+                    )}
+                    {sta.status === "cancel" && (
+                      <div className="flex w-[400px]">
+                        <div className="flex flex-col items-center w-[30%]">
+                          <FontAwesomeIcon
+                            icon={faTrashCan}
+                            className="p-3 rounded-full text-green-500 border-green-500 border-[5px]"
+                          />
+                        </div>
+                        <div className="w-[70%]">
+                          <p className="text-lg font-medium text-blue-500">
+                            Đã hủy
+                          </p>
+                          <p>
+                            {"Thời gian: "}
+                            {new Date(sta.time).toLocaleDateString("en-US")}
+                          </p>
+                        </div>
+                      </div>
+                    )}
+                  </div>
+                </div>
+              ))}
+            </div>
+            <div
+              onClick={() => setShowHistory(false)}
+              className="absolute cursor-pointer top-6 right-6"
+            >
+              <FontAwesomeIcon
+                className="font-bold text-3xl hover:text-red-500"
+                icon={faXmark}
+              />
+            </div>
+          </div>
+        </div>
+      )}
+      {showInfoMaintain && (
+        <div className="fixed inset-0 z-[999] flex items-center justify-center">
+          <div className="absolute inset-0 bg-gray-950 opacity-50"></div>
+          <div className="bg-white flex flex-col w-[500px] h-[500px] relative justify-between items-center z-30 shadow-xl rounded-lg p-6">
+            <div>
+              <h1 className="text-3xl font-bold text-blue-500 mb-6">
+                Thông tin gia hạn
+              </h1>
+              <div className="h-[320px] w-full overflow-auto">
+                {maintains.map((item, index) => (
+                  <div className="my-4 text-left" key={item._id}>
+                    <h2 className="font-extrabold text-xl">
+                      Lần gia hạn thứ {index + 1}
+                    </h2>
+                    <p>Thời gian gia hạn thêm : {item.duration}</p>
+                    <p>Số tiền đáp ứng : {item.budget}</p>
+                    <p>
+                      Trạng thái :{" "}
+                      <span className="text-green-500 capitalize">
+                        {item.status}
+                      </span>
+                    </p>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            <button
+              className="py-3 px-5 bg-blue-500 text-white rounded-xl mt-3"
+              onClick={() => setShowInfoMaintain(false)}
+            >
+              Xong
+            </button>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
@@ -184,25 +472,8 @@ const ListOrderCustomer = () => {
   const [noSelect, setNoSelect] = useState(false);
   const [cancel, setCancel] = useState(false);
   const [done, setDone] = useState(false);
+  const [showInfoMaintain1, setShowInfoMaintain1] = useState(false);
   const navigate = useNavigate();
-  // useEffect(() => {
-  //   const fetchData = async () => {
-  //     try {
-  //       const resTeamNoActive = await teamWorkApi.getIsTeamActive(false);
-  //       setListTeamNoActive(resTeamNoActive.data);
-  //     } catch (error) {
-  //       console.log("Lỗi không get ra được list Team " + error);
-  //     }
-
-  //     try {
-  //       const res = await orderTeamApi.getListOrder();
-  //       setDataAxiosListOrder(res.data);
-  //     } catch (error) {
-  //       console.log("Lỗi không get ra được list Order " + error);
-  //     }
-  //   };
-  //   fetchData();
-  // }, [listTeamNoActive]);
 
   const fetchData = useCallback(async () => {
     try {
@@ -242,6 +513,44 @@ const ListOrderCustomer = () => {
     setShowOrderDetail(false);
     setShowSelectTeam(false);
   };
+  const clickAcceptMaintain = async (maintainId, duration, budget) => {
+    const maintainUpdate = {
+      orderId: selectedOrder._id,
+      maintainId: maintainId,
+      duration: duration,
+      budget: budget,
+    };
+    try {
+      const res = await mainTainOrderApi.acceptedMaintain(maintainUpdate);
+      console.log(res);
+      // alert("Thành công");
+      toast.success("Thành công");
+      setShowInfoMaintain1(false);
+      fetchData();
+    } catch (error) {
+      // alert("Thất bại" + error);
+      toast.error("Thất bại");
+    }
+  };
+
+  const rejectMaintain = async (maintainId) => {
+    const maintainReject = {
+      orderId: selectedOrder._id,
+      maintainId: maintainId,
+    };
+    console.log(maintainReject);
+    try {
+      const res = await mainTainOrderApi.rejectMaintain(maintainReject);
+      console.log(res);
+      // alert("Thành công");
+      toast.success("Đã hủy yêu cầu gia hạn của khách hàng.");
+      setShowInfoMaintain1(false);
+      fetchData();
+    } catch (error) {
+      // alert("Thất bại" + error);
+      toast.error("Hủy yêu cầu gia hạn thất bại. Xin hãy thử lại.");
+    }
+  };
 
   const hanldeOpenOrderDetail = (order) => {
     setShowOrderDetail(true);
@@ -258,8 +567,13 @@ const ListOrderCustomer = () => {
       setCancel(true);
     } else if (order.status === "done") {
       setDone(true);
-      setCancel(false)
+      setCancel(false);
     }
+  };
+
+  const hanldelOpenInfoMaintain = (order) => {
+    setSelectedOrder(order);
+    setShowInfoMaintain1(true);
   };
 
   const handleCloseOrderDetail = () => {
@@ -291,7 +605,7 @@ const ListOrderCustomer = () => {
       fetchData();
     } catch (error) {
       // alert("Thất bại");
-      toast.error("Thất bại!!!")
+      toast.error("Thất bại!!!");
       console.log("Lỗi : ", error);
     }
   };
@@ -311,17 +625,6 @@ const ListOrderCustomer = () => {
       console.log("Lỗi : ", error);
     }
   };
-
-  //Giả lập áp cứng
-  // const [completed, setCompleted] = useState(
-  //   Array(dataAxiosListOrder.length).fill(false)
-  // );
-
-  // const handleComplete = (index) => {
-  //   const updatedCompleted = [...completed];
-  //   updatedCompleted[index] = true;
-  //   setCompleted(updatedCompleted);
-  // };
 
   return (
     <div class="w-full min-h-screen-except-header">
@@ -433,69 +736,6 @@ const ListOrderCustomer = () => {
                     )}
                   </td>
 
-                  {/* <td className=" px-[16px] py-[20px] text-center min-w-[80px]">
-                    {completed[index] ? (
-                      <div>
-                        <span className="w-max inline-block font-bold capitalize text-lime-600">
-                          Done
-                        </span>
-                        <span className="ml-2 text-lime-600">
-                          <FontAwesomeIcon
-                            className="font-extrabold text-xl"
-                            icon={faCheck}
-                          />
-                        </span>
-                      </div>
-                    ) : (
-                      <div>
-                        <span
-                          className={`w-max inline-block font-bold capitalize ${
-                            dt.status === "pending"
-                              ? "text-yellow-600"
-                              : dt.status === "progress"
-                              ? "text-cyan-600"
-                              : dt.status === "cancel"
-                              ? "text-gray-400"
-                              : dt.status === "done"
-                              ? "text-lime-600"
-                              : ""
-                          }`}
-                        >
-                          {dt.status}
-                        </span>
-
-                        {dt.status === "pending" ? (
-                          <span className="ml-2 text-yellow-600">
-                            <FontAwesomeIcon icon={faWarning} />
-                          </span>
-                        ) : dt.status === "progress" ? (
-                          <span className="ml-2 text-green-600">
-                            <FontAwesomeIcon
-                              className="rotate-180 font-extrabold text-xl"
-                              icon={faSpinner}
-                            />
-                          </span>
-                        ) : dt.status === "cancel" ? (
-                          <span className="ml-2 text-gray-600">
-                            <FontAwesomeIcon
-                              className="font-extrabold text-xl"
-                              icon={faBan}
-                            />
-                          </span>
-                        ) : dt.status === "done" ? (
-                          <span className="ml-2 text-lime-600">
-                            <FontAwesomeIcon
-                              className="font-extrabold text-xl"
-                              icon={faCheck}
-                            />
-                          </span>
-                        ) : (
-                          ""
-                        )}
-                      </div>
-                    )}
-                  </td> */}
-
                   <td className=" px-[16px] py-[20px] text-center min-w-[80px]">
                     {dt.status === "pending" ? (
                       <div class="flex justify-center items-center gap-2">
@@ -505,7 +745,7 @@ const ListOrderCustomer = () => {
                             setIdOrder(dt._id);
                             setIsSure(false);
                           }}
-                          className="px-4 py-2 bg-blue-500 text-white rounded-xl hover:bg-sky-500 transition-all duration-150 ease-in-out"
+                          className=" animate-bounce px-4 py-2 bg-blue-500 text-white rounded-xl hover:bg-sky-500 transition-all duration-150 ease-in-out"
                         >
                           Xác nhận
                         </button>
@@ -520,28 +760,47 @@ const ListOrderCustomer = () => {
                         </button>
                       </div>
                     ) : dt.status === "progress" ? (
-                      <div class="flex justify-center items-center gap-2">
-                        <button
-                          onClick={() => {
-                            handleDoneOrder(dt._id);
-                          }}
-                          className="px-4 py-2 bg-pink-500 text-white rounded-xl hover:bg-slate-400 transition-all duration-150 ease-in-out"
-                        >
-                          Hoàn thành
-                        </button>
-                        <button
-                          onClick={() => {
-                            setShowReason(true);
-                            setIdOrder(dt._id);
-                          }}
-                          className="px-4 py-2 bg-gray-500 text-white rounded-xl hover:bg-slate-400 transition-all duration-150 ease-in-out"
-                        >
-                          Hủy
-                        </button>
-                        {/* {!completed[index] && (
-                          <div className="flex justify-center items-center gap-2">
+                      <div>
+                        {dt.maintains.length > 0 ? (
+                          <div key={dt.maintains[dt.maintains.length - 1]._id}>
+                            {dt.maintains[dt.maintains.length - 1].status ===
+                            "pending" ? (
+                              <div>
+                                <button
+                                  onClick={() => hanldelOpenInfoMaintain(dt)}
+                                  className="px-4 animate-pulse py-2 bg-orange-500 text-white rounded-xl hover:bg-slate-400 transition-all duration-150 ease-in-out"
+                                >
+                                  Yêu cầu gia hạn
+                                </button>
+                              </div>
+                            ) : (
+                              <div class="flex justify-center items-center gap-2">
+                                <button
+                                  onClick={() => {
+                                    handleDoneOrder(dt._id);
+                                  }}
+                                  className="px-4 py-2 bg-pink-500 text-white rounded-xl hover:bg-slate-400 transition-all duration-150 ease-in-out"
+                                >
+                                  Hoàn thành
+                                </button>
+                                <button
+                                  onClick={() => {
+                                    setShowReason(true);
+                                    setIdOrder(dt._id);
+                                  }}
+                                  className="px-4 py-2 bg-gray-500 text-white rounded-xl hover:bg-slate-400 transition-all duration-150 ease-in-out"
+                                >
+                                  Hủy
+                                </button>
+                              </div>
+                            )}
+                          </div>
+                        ) : (
+                          <div class="flex justify-center items-center gap-2">
                             <button
-                              onClick={() => handleComplete(index)}
+                              onClick={() => {
+                                handleDoneOrder(dt._id);
+                              }}
                               className="px-4 py-2 bg-pink-500 text-white rounded-xl hover:bg-slate-400 transition-all duration-150 ease-in-out"
                             >
                               Hoàn thành
@@ -556,7 +815,7 @@ const ListOrderCustomer = () => {
                               Hủy
                             </button>
                           </div>
-                        )} */}
+                        )}
                       </div>
                     ) : (
                       ""
@@ -585,6 +844,7 @@ const ListOrderCustomer = () => {
           startTime={selectedOrder.startTime}
           typeWork={selectedOrder.typeWork}
           budget={selectedOrder.budget}
+          maintains={selectedOrder.maintains}
           noSelect={noSelect}
           cancel={cancel}
           done={done}
@@ -753,6 +1013,66 @@ const ListOrderCustomer = () => {
               <FontAwesomeIcon
                 onClick={() => setShowReason(false)}
                 className="font-bold text-4xl text-gray-400 hover:text-red-400 cursor-pointer"
+                icon={faXmark}
+              />
+            </div>
+          </div>
+        </div>
+      )}
+      {showInfoMaintain1 && (
+        <div className="fixed inset-0 z-[999] flex items-center justify-center">
+          <div className="absolute inset-0 bg-gray-950 opacity-50"></div>
+          <div className="bg-white  flex flex-col w-[500px] h-auto relative justify-center items-center z-30 shadow-xl rounded-lg p-6">
+            <h1 className="text-3xl font-bold text-blue-500">
+              Thông tin gia hạn
+            </h1>
+            <h2>Mã đơn : {selectedOrder._id}</h2>
+            <h2>Khách hàng : {selectedOrder.customer.name}</h2>
+            {selectedOrder.maintains.map((item, index) => {
+              if (item.status === "pending") {
+                return (
+                  <div className="my-4 text-left" key={item._id}>
+                    <p className="text-xl font-bold">
+                      Thời gian gia hạn thêm:{" "}
+                      <span className="text-blue-700 ml-2">
+                        {item.duration}
+                      </span>
+                    </p>
+                    <p className="text-xl font-bold">
+                      Số tiền đáp ứng:
+                      <span className="text-blue-700 ml-2">{item.budget}$</span>
+                    </p>
+                    <div className="flex gap-6 mt-4">
+                      <button
+                        className="py-3 px-5 bg-blue-500 text-white rounded-xl"
+                        onClick={() =>
+                          clickAcceptMaintain(
+                            item._id,
+                            item.duration,
+                            item.budget
+                          )
+                        }
+                      >
+                        Xác nhận gia hạn
+                      </button>
+                      <button
+                        className="py-3 px-5 bg-red-500 text-white rounded-xl"
+                        onClick={() => rejectMaintain(item._id)}
+                      >
+                        Hủy gia hạn
+                      </button>
+                    </div>
+                  </div>
+                );
+              }
+
+              return null;
+            })}
+
+            <div className="absolute top-4 right-4 cursor-pointer">
+              <FontAwesomeIcon
+                onClick={() => setShowInfoMaintain1(false)}
+                className="text-3xl font-bold hover:text-red-500 cursor-pointer"
                 icon={faXmark}
               />
             </div>

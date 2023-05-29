@@ -6,6 +6,7 @@ const initialState = {
   gender : "",
   birthday : "",
   email : "",
+  phone : ""
 }
 
 const updateEmployeeSlice = createSlice({
@@ -18,8 +19,9 @@ const updateEmployeeSlice = createSlice({
       state.gender  = action.payload.gender
       state.birthday = action.payload.birthDate;
       state.email = action.payload.email;
+      state.phone = action.payload.phone;
       console.log("Action: ", action);
-      console.log("ID : ", state.id);
+      console.log("ID : ", state.phone);
     },
   },
 });

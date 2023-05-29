@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import logo from "../../images/logo.png";
 import TypingEffect from "../../components/TypingEffect/TypingEffect";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -12,7 +12,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { hireTeam, updateRequire8 } from "../../reducers/slices/hireTeamSlice";
 import orderTeamApi from "../../api/orderTeamApi";
 
-const NotificationSure = ({ send, onClose }) => {
+const NotificationSure = ({ send, onClose}) => {
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center">
       <div className="absolute inset-0 bg-gray-950 opacity-50"></div>
@@ -128,18 +128,96 @@ const HireTeamWage = () => {
       alert("Lỗi");
     }
   };
+
+  useEffect(() => {
+    if (
+      reduxDataHireTeam.totalPersonnel === 10 &&
+      reduxDataHireTeam.duration === "6 tháng"
+    ) {
+      setSelectedAnswer(20000);
+    } else if (
+      reduxDataHireTeam.totalPersonnel === 10 &&
+      reduxDataHireTeam.duration === "1 năm"
+    ) {
+      setSelectedAnswer(38000);
+    } else if (
+      reduxDataHireTeam.totalPersonnel === 10 &&
+      reduxDataHireTeam.duration === "2 năm"
+    ) {
+      setSelectedAnswer(72000);
+    } else if (
+      reduxDataHireTeam.totalPersonnel === 10 &&
+      reduxDataHireTeam.duration === "3 năm"
+    ) {
+      setSelectedAnswer(104000);
+    }
+    // 20 người
+    else if (
+      reduxDataHireTeam.totalPersonnel === 20 &&
+      reduxDataHireTeam.duration === "6 tháng"
+    ) {
+      setSelectedAnswer(40000);
+    } else if (
+      reduxDataHireTeam.totalPersonnel === 20 &&
+      reduxDataHireTeam.duration === "1 năm"
+    ) {
+      setSelectedAnswer(78000);
+    } else if (
+      reduxDataHireTeam.totalPersonnel === 20 &&
+      reduxDataHireTeam.duration === "2 năm"
+    ) {
+      setSelectedAnswer(152000);
+    } else if (
+      reduxDataHireTeam.totalPersonnel === 20 &&
+      reduxDataHireTeam.duration === "3 năm"
+    ) {
+      setSelectedAnswer(230000);
+    }
+    // 30 người
+    else if (
+      reduxDataHireTeam.totalPersonnel === 30 &&
+      reduxDataHireTeam.duration === "6 tháng"
+    ) {
+      setSelectedAnswer(60000);
+    } else if (
+      reduxDataHireTeam.totalPersonnel === 30 &&
+      reduxDataHireTeam.duration === "1 năm"
+    ) {
+      setSelectedAnswer(118000);
+    } else if (
+      reduxDataHireTeam.totalPersonnel === 30 &&
+      reduxDataHireTeam.duration === "2 năm"
+    ) {
+      setSelectedAnswer(232000);
+    } else if (
+      reduxDataHireTeam.totalPersonnel === 30 &&
+      reduxDataHireTeam.duration === "3 năm"
+    ) {
+      setSelectedAnswer(350000);
+    }
+  },[])
   return (
     <div className="flex flex-row items-center w-full h-[100vh]">
       <div className="p-16 w-[70%] h-full flex flex-col items-center justify-center">
         <img className="w-32 h-32 mb-6" src={logo} alt="" />
         <h2 className="text-3xl bg-[#edf1fd] p-3 rounded-lg font-medium mb-6">
-          Ngân sách của bạn làm việc với đội ngũ của chúng tôi ?
+          Dựa trên yêu cầu của bạn đây là giá thuê đề xuất của chúng tôi cho dự
+          án :{" "}
+          <span className="text-green-500">
+            {selectedAnswer &&
+              selectedAnswer.toLocaleString("en-US", {
+                style: "currency",
+                currency: "USD",
+              })}
+            
+          </span>
         </h2>
         <form
           className="w-full justify-center flex flex-col items-center"
           onSubmit={handleSubmit}
         >
-          <div className="mb-4 flex flex-col space-y-4">
+          <h2 className="text-blue-500 font-medium italic">*Nếu bạn đồng ý với giá thuê này hãy nhấn hoàn thành để gửi yếu cầu thuê !!!</h2>
+          {/* <div className="mb-4 flex flex-col space-y-4">
             {answers.map((answer, index) => (
               <label key={index} className="inline-flex items-center">
                 <input
@@ -155,7 +233,7 @@ const HireTeamWage = () => {
                 </span>
               </label>
             ))}
-          </div>
+          </div> */}
           <div className="border border-t w-[70%] my-6 border-gray-400"></div>
           <div className="flex flex-row justify-between w-[70%] items-center">
             <button
@@ -169,7 +247,7 @@ const HireTeamWage = () => {
 
             <button
               type="submit"
-              disabled={!selectedAnswer}
+              // disabled={!selectedAnswer}
               onClick={workLength}
               className="border-[1px] disabled:opacity-40 cursor-pointer shadow-xl px-10 py-2 hover:bg-blue-500 transition-colors duration-300 border-gray-400 bg-[#00bdd6] text-white rounded-xl "
             >
@@ -186,6 +264,7 @@ const HireTeamWage = () => {
               <NotificationSure
                 onClose={handleCloseNotificationSure}
                 send={sendInfo}
+                textTest={selectedAnswer}
               />
             )}
           </div>

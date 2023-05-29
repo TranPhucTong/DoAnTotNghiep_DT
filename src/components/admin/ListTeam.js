@@ -101,7 +101,7 @@ const ListTeam = () => {
     };
     try {
       const respon = await teamWorkApi.addMemberFromTeam(infoToAdd);
-      toast.success("Thêm thành công !!!")
+      toast.success("Thêm thành công !!!");
       const teamToUpdate = teams.find((team) => team.name === selectedTeam);
       const newMember = dataAxiosEmployeeAdd.find(
         (member) => member._id === employeeAdd
@@ -115,7 +115,7 @@ const ListTeam = () => {
       updatedTeams[index] = teamToUpdate; // cập nhật lại đối tượng nhóm trong mảng
       setTeams(updatedTeams); // cập nhật lại giá trị state của mảng `teams`
     } catch (erorr) {
-      toast.error("Thêm thất bại. Hãy kiểm tra lại !!!")
+      toast.error("Thêm thất bại. Hãy kiểm tra lại !!!");
       console.log("Lỗi :" + erorr);
     }
   };
@@ -126,14 +126,14 @@ const ListTeam = () => {
     try {
       const res = await teamWorkApi.deleteTeam(name);
       if (res.data.active === true) {
-        toast.error("Nhóm đang hoạt động. Không thể xóa!!!")
+        toast.error("Nhóm đang hoạt động. Không thể xóa!!!");
       } else {
-        toast.success("Xóa thành công")
+        toast.success("Xóa thành công");
         setSelectedTeam("");
       }
     } catch (error) {
       console.log(error);
-      toast.error("Xóa nhóm không thành công")
+      toast.error("Xóa nhóm không thành công");
     }
     // window.location.reload(false);
   };
