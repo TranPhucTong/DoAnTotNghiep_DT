@@ -69,6 +69,7 @@ const RenderStatement = (item) => {
   }
 };
 const ItemStatement = ({ item, isFinal }) => {
+  console.log("🚀 ~ file: ItemStatement.jsx:72 ~ ItemStatement ~ item:", item)
   const statement = RenderStatement(item);
   const isFinish = isFinal;
   return (

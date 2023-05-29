@@ -134,7 +134,7 @@ const ListFreelancer = ({ listFreelancer }) => {
   return (
     <>
       {listFreelancer.length ? (
-        <div className="grid grid-cols-4 grid-rows-1 gap-10 mb-8">
+        <div className="grid grid-cols-3 grid-rows-1 gap-10 mb-8">
           {listFreelancer.map((freelancer) => (
             <div  className="col-span-1 row-span-1">
               <FreelancerCard key={freelancer.id} freelancer={freelancer} />
