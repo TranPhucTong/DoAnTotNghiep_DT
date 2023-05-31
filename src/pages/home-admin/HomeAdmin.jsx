@@ -24,7 +24,7 @@ import { Switch } from "@headlessui/react";
 import { Link, Route, Routes, useNavigate } from "react-router-dom";
 import CreatEmployee from "../../components/admin/CreatEmployee";
 import imgDashIcon1 from "../../images/icon/dash-icon-01.svg";
-import imgDashIcon2 from "../../images/icon/trophy-icon.svg";
+import imgDashIcon2 from "../../images/icon/dash-icon-04.svg";
 import imgDashIcon3 from "../../images/icon/dash-icon-03.svg";
 import imgDashIcon4 from "../../images/icon/dash-icon-04.svg";
 import avtFB from "../../images/AVTFB.png";
